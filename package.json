@@ -24,6 +24,7 @@
   "homepage": "https://github.com/raoakanksh/461project#readme",
   "devDependencies": {
     "@eslint/js": "^9.10.0",
+    "@types/inquirer": "^9.0.7",
     "@types/node": "^22.5.3",
     "@typescript-eslint/eslint-plugin": "^8.4.0",
     "@typescript-eslint/parser": "^8.4.0",
@@ -35,7 +36,12 @@
     "typescript-eslint": "^8.4.0"
   },
   "dependencies": {
+    "@clack/prompts": "^0.7.0",
+    "axios": "^1.7.7",
+    "clack": "^0.1.0",
     "commander": "^12.1.0",
-    "nodemon": "^3.1.4"
+    "inquirer": "^10.2.2",
+    "nodemon": "^3.1.4",
+    "uuid": "^10.0.0"
   }
 }
