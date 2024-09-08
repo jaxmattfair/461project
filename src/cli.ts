@@ -9,6 +9,11 @@ program
     .description('description for this CLI for project phase 1')
     .version('1.0.0');
 
-program.parse(process.argv);
+program
+  .command('greet <name>')
+  .description('Greet a user by name')
+  .action((name) => {
+    console.log(`Hello, ${name}!`);
+  });
 
 export { program };
