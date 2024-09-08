@@ -1,6 +1,11 @@
 import inquirer from 'inquirer';
 import fs from 'fs';
 import path from 'path';
+//grab CLI from file
+import { program } from './cli';
+
+program.parse(process.argv);
+
 
 async function main() {
   // Check command-line arguments
