@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const commander_1 = require("commander");
-const program = new commander_1.Command();
+//grab CLI from file
+const cli_1 = require("./cli");
+cli_1.program.parse(process.argv);
 console.log("Test to see if npm start works");
