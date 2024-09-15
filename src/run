@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ "$1" == "install" ]; then
+  node ../dist/index.js install
+else
+  echo "Invalid command! Use 'install'."
+fi
+
