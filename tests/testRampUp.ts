@@ -1,9 +1,15 @@
+import { dirname } from 'path';
 import * as path from 'path';
+import { fileURLToPath } from 'url';
 import * as fs from 'fs';
-import { cloneRepository, getReadmeContent} from '../src/utils/gitUtils';
+import { cloneRepository, getReadmeContent, parseMarkdown } from '../src/utils/gitUtils.js';
+import { analyzeReadme } from '../src/metrics/rampUpScore.js';
+import { Root } from 'mdast';
 
-async function testCloneAndReadme() {
-    const repoUrl = 'https://github.com/xyflow/xyflow.git';
+async function testRampUp() {
+    const repoUrl = 'https://github.com/gojue/ecapture.git';
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = dirname(__filename);
     const tempDir = path.join(__dirname, 'temp-repo');
 
     //Clean up existing temp directory
@@ -19,11 +25,17 @@ async function testCloneAndReadme() {
         const readmeContent = getReadmeContent(tempDir);
 
         if (readmeContent !== null) {
+            //Fetch AST Root from readmeContent and parse it
             console.log('README Content:');
-            console.log(readmeContent);
+            const ast: Root = parseMarkdown(readmeContent);
+            console.log('Number of top-level nodes:', ast.children.length);
+            const metrics = analyzeReadme(ast);
+            console.log(metrics);
+            //console.log(ast);
         } else {
             console.log('No README file found in the repository.');
         }
+
     } catch (error) {
         console.error(`An error occurred: ${(error as Error).message}`);
     } finally {
@@ -33,6 +45,8 @@ async function testCloneAndReadme() {
             console.log('Cleaned up temporary directory.');
         }
     }
+
+
 }
 
-testCloneAndReadme();
+testRampUp();
