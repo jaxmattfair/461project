@@ -1,5 +1,13 @@
 import { toString } from 'mdast-util-to-string'; // Utility to convert MDAST nodes to plain text
 /**
+ * Type guard to check if a node is a Parent node (has children).
+ * @param node - The node to check.
+ * @returns True if the node has children, false otherwise.
+ */
+function isParent(node) {
+    return node.children !== undefined;
+}
+/**
  * Analyzes a README file's Markdown content to extract metrics.
  * @param content - The root node of the Markdown Abstract Syntax Tree (MDAST).
  * @returns An object containing metrics about essential sections, code blocks, and links.
@@ -54,7 +62,7 @@ export function analyzeReadme(content) {
             default:
                 break;
         }
-        if (node.children) {
+        if (isParent(node)) {
             for (const child of node.children) {
                 traverse(child);
             }

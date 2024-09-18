@@ -2,7 +2,7 @@ import git from 'isomorphic-git'; // Module for Git operations in JavaScript
 import * as fs from 'fs';          // Node.js File System module for file operations
 import * as path from 'path';      // Node.js Path module for handling file paths
 import { Root } from 'mdast';      // Type representing the root of an MDAST (Markdown Abstract Syntax Tree)
-import { Node } from 'unist';      // Type representing a generic Unist node
+import { Node, Parent } from 'unist';      // Type representing a generic Unist and parent node
 import { toString } from 'mdast-util-to-string'; // Utility to convert MDAST nodes to plain text
 
 // Define interfaces for metrics
@@ -21,6 +21,15 @@ interface EssentialSections {
     license: boolean;         // Indicates if the "License" section is present
     deployment: boolean;      // Indicates if the "Deployment" section is present
     versioning: boolean;      // Indicates if the "Versioning" section is present
+}
+
+/**
+ * Type guard to check if a node is a Parent node (has children).
+ * @param node - The node to check.
+ * @returns True if the node has children, false otherwise.
+ */
+function isParent(node: Node): node is Parent {
+  return (node as Parent).children !== undefined;
 }
 
 /**
@@ -75,7 +84,7 @@ export function analyzeReadme(content: Root): Metrics {
           break;
       }
   
-      if (node.children) {
+      if (isParent(node)) {
         for (const child of node.children) {
           traverse(child);
         }
