@@ -3,7 +3,7 @@ import * as path from 'path';
 import { fileURLToPath } from 'url';
 import * as fs from 'fs';
 import { cloneRepository, getReadmeContent, parseMarkdown } from '../src/utils/gitUtils.js';
-import { analyzeReadme } from '../src/metrics/rampUpScore.js';
+import { analyzeReadme, calculateRampUpScore } from '../src/metrics/rampUpScore.js';
 import { Root } from 'mdast';
 
 async function testRampUp() {
@@ -30,6 +30,8 @@ async function testRampUp() {
             const ast: Root = parseMarkdown(readmeContent);
             console.log('Number of top-level nodes:', ast.children.length);
             const metrics = analyzeReadme(ast);
+            const rampUpScore = calculateRampUpScore(metrics)
+            console.log("Ramp-Up score: ", rampUpScore);
             console.log(metrics);
             //console.log(ast);
         } else {

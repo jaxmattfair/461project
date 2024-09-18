@@ -3,9 +3,9 @@ import * as path from 'path';
 import { fileURLToPath } from 'url';
 import * as fs from 'fs';
 import { cloneRepository, getReadmeContent, parseMarkdown } from '../src/utils/gitUtils.js';
-import { analyzeReadme } from '../src/metrics/rampUpScore.js';
+import { analyzeReadme, calculateRampUpScore } from '../src/metrics/rampUpScore.js';
 async function testRampUp() {
-    const repoUrl = 'https://github.com/xyflow/xyflow.git';
+    const repoUrl = 'https://github.com/gojue/ecapture.git';
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = dirname(__filename);
     const tempDir = path.join(__dirname, 'temp-repo');
@@ -24,8 +24,10 @@ async function testRampUp() {
             const ast = parseMarkdown(readmeContent);
             console.log('Number of top-level nodes:', ast.children.length);
             const metrics = analyzeReadme(ast);
+            const rampUpScore = calculateRampUpScore(metrics);
+            console.log("Ramp-Up score: ", rampUpScore);
             console.log(metrics);
-            console.log(ast);
+            //console.log(ast);
         }
         else {
             console.log('No README file found in the repository.');
