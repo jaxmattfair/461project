@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 
 // Function to validate if license is LGPL v2.1
-function validateLicense(filePath: string): boolean {
+export function validateLicense(filePath: string): boolean {
     // Read package.json file
     const packageJson = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 
