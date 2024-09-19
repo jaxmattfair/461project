@@ -17,7 +17,7 @@ const owner = 'raoakanksh'; // Replace with the GitHub username
 const repo = '461project'; // Replace with the repository name
 
 // Helper function to fetch paginated data
-async function fetchPaginatedData(url, params = {}) {
+export async function fetchPaginatedData(url, params = {}) {
   let results = [];
   let page = 1;
   let hasMorePages = true;
@@ -40,7 +40,7 @@ async function fetchPaginatedData(url, params = {}) {
 }
 
 // Function to fetch metrics and calculate the metric score
-async function getMetricScore() {
+export async function getMetricScore() {
   try {
     // Fetch contributors (with pagination)
     const contributors = await fetchPaginatedData(`https://api.github.com/repos/${owner}/${repo}/contributors`);
