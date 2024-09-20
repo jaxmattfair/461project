@@ -13,8 +13,8 @@ if (!GITHUB_TOKEN) {
 const repoURL = 'https://github.com/raoakanksh/461project.git';
 // Define the GitHub repo details
 const parsed = parseGitHubRepoURL(repoURL);
-const owner = parsed.owner;
-const repo = parsed.repo;
+//const owner: string = parsed.owner;
+// const repo: string = parsed.repo;
 //const owner: string = 'raoakanksh'; // Replace with the GitHub username
 //const repo: string = '461project'; // Replace with the repository name
 // Define maximum expected values for normalization
@@ -23,7 +23,7 @@ const MAX_TOTAL_TESTS = 1000; // Example max CI/CD tests
 const MAX_TOTAL_PRS = 500; // Example max pull requests
 const MAX_TOTAL_ISSUES = 500; // Example max issues (open + closed)
 // Helper function to fetch paginated data
-export async function fetchPaginatedData(url, params = {}) {
+async function fetchPaginatedData(url, params = {}) {
     let results = [];
     let page = 1;
     let hasMorePages = true;
@@ -50,7 +50,7 @@ export async function fetchPaginatedData(url, params = {}) {
     return results;
 }
 // Function to fetch metrics and calculate the metric score
-export async function getMetricScore() {
+export async function getMetricScore(owner, repo) {
     try {
         // Fetch contributors (with pagination)
         const contributors = await fetchPaginatedData(`https://api.github.com/repos/${owner}/${repo}/contributors`);
@@ -104,5 +104,3 @@ export async function getMetricScore() {
         console.error('Error fetching data from GitHub:', error);
     }
 }
-// Call the function to fetch and calculate the metric score
-getMetricScore();

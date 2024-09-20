@@ -18,8 +18,8 @@ const repoURL: string = 'https://github.com/raoakanksh/461project.git'
 
 // Define the GitHub repo details
 const parsed = parseGitHubRepoURL(repoURL);
-const owner: string = parsed.owner;
-const repo: string = parsed.repo;
+//const owner: string = parsed.owner;
+// const repo: string = parsed.repo;
 //const owner: string = 'raoakanksh'; // Replace with the GitHub username
 //const repo: string = '461project'; // Replace with the repository name
 
@@ -64,7 +64,7 @@ interface FetchParams {
 }
 
 // Helper function to fetch paginated data
-export async function fetchPaginatedData<T>(url: string, params: FetchParams = {}): Promise<T[]> {
+async function fetchPaginatedData<T>(url: string, params: FetchParams = {}): Promise<T[]> {
   let results: T[] = [];
   let page: number = 1;
   let hasMorePages: boolean = true;
@@ -94,7 +94,7 @@ export async function fetchPaginatedData<T>(url: string, params: FetchParams = {
 }
 
 // Function to fetch metrics and calculate the metric score
-export async function getMetricScore(): Promise<void> {
+export async function getMetricScore(owner: string, repo: string): Promise<void> {
   try {
     // Fetch contributors (with pagination)
     const contributors: Contributor[] = await fetchPaginatedData<Contributor>(
@@ -171,5 +171,3 @@ export async function getMetricScore(): Promise<void> {
   }
 }
 
-// Call the function to fetch and calculate the metric score
-getMetricScore();
