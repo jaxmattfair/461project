@@ -54,3 +54,27 @@ export function getReadmeContent(repoDir) {
 export function parseMarkdown(content) {
     return unified().use(remarkParse).use(remarkGfm).parse(content);
 }
+// Function to parse GitHub repository URL
+export function parseGitHubRepoURL(repoURL) {
+    try {
+        const url = new URL(repoURL);
+        // Ensure the hostname is github.com
+        if (url.hostname !== 'github.com') {
+            throw new Error('Invalid GitHub repository URL.');
+        }
+        // Split the pathname and extract owner and repo
+        const pathSegments = url.pathname.split('/').filter(segment => segment.length > 0);
+        if (pathSegments.length < 2) {
+            throw new Error('Invalid GitHub repository URL format.');
+        }
+        const [owner, repoWithPossibleSuffix] = pathSegments;
+        // Remove possible '.git' suffix from repo name
+        const repo = repoWithPossibleSuffix.endsWith('.git')
+            ? repoWithPossibleSuffix.slice(0, -4)
+            : repoWithPossibleSuffix;
+        return { owner, repo };
+    }
+    catch (error) {
+        throw new Error('Failed to parse GitHub repository URL:');
+    }
+}

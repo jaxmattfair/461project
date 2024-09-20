@@ -1,33 +1,52 @@
+// src/metrics/busFactorScore.ts
 import axios from 'axios';
 import * as dotenv from 'dotenv';
 import { differenceInHours } from 'date-fns';
+import { parseGitHubRepoURL } from '../utils/gitUtils';
 // Load environment variables from .env
 dotenv.config();
-//const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const GITHUB_TOKEN = process.env.$GITHUB_TOKEN;
+// Access the GITHUB_TOKEN without the '$' prefix
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 if (!GITHUB_TOKEN) {
     console.error('Missing GitHub API token in environment variables');
     process.exit(1);
 }
+const repoURL = 'https://github.com/raoakanksh/461project.git';
 // Define the GitHub repo details
-const owner = 'voideditor'; // Replace with the GitHub username
-const repo = 'void'; // Replace with the repository name
+const parsed = parseGitHubRepoURL(repoURL);
+const owner = parsed.owner;
+const repo = parsed.repo;
+//const owner: string = 'raoakanksh'; // Replace with the GitHub username
+//const repo: string = '461project'; // Replace with the repository name
+// Define maximum expected values for normalization
+const MAX_UNIQUE_CONTRIBUTORS = 100; // Example max contributors
+const MAX_TOTAL_TESTS = 1000; // Example max CI/CD tests
+const MAX_TOTAL_PRS = 500; // Example max pull requests
+const MAX_TOTAL_ISSUES = 500; // Example max issues (open + closed)
 // Helper function to fetch paginated data
 export async function fetchPaginatedData(url, params = {}) {
     let results = [];
     let page = 1;
     let hasMorePages = true;
-    while (hasMorePages) {
-        const response = await axios.get(url, {
-            headers: {
-                Authorization: `Bearer ${GITHUB_TOKEN}`,
-                'Content-Type': 'application/json',
-            },
-            params: { ...params, page, per_page: 100 }, // 100 is the maximum allowed by GitHub
-        });
-        results = results.concat(response.data);
-        page += 1;
-        hasMorePages = response.data.length > 0; // If we get an empty array, we're done
+    try {
+        while (hasMorePages) {
+            const response = await axios.get(url, {
+                headers: {
+                    Authorization: `Bearer ${GITHUB_TOKEN}`,
+                    'Content-Type': 'application/json',
+                    Accept: 'application/vnd.github.v3+json', // Ensure using the correct GitHub API version
+                },
+                params: { ...params, page, per_page: 100 }, // 100 is the maximum allowed by GitHub
+            });
+            const data = response.data;
+            results = results.concat(data);
+            page += 1;
+            hasMorePages = data.length > 0; // If we get an empty array, we're done
+        }
+    }
+    catch (error) {
+        console.error(`Error fetching paginated data from ${url}:`, error);
+        throw error; // Re-throw the error after logging
     }
     return results;
 }
@@ -59,7 +78,9 @@ export async function getMetricScore() {
         // Calculate average response time for issues and PRs (in hours)
         let totalResponseTime = 0;
         let totalResponses = 0;
-        [...issues, ...pullRequests].forEach((item) => {
+        // Combine issues and pull requests for response time calculation
+        const combinedItems = [...issues, ...pullRequests];
+        combinedItems.forEach((item) => {
             if (item.created_at && item.updated_at) {
                 const createdAt = new Date(item.created_at);
                 const updatedAt = new Date(item.updated_at);
@@ -68,15 +89,16 @@ export async function getMetricScore() {
                 totalResponses++;
             }
         });
-        const avgResponseTime = totalResponses > 0 ? totalResponseTime / totalResponses : 0;
-        console.log(`Average Response Time (hours): ${avgResponseTime.toFixed(2)}`);
-        // Metric score setup
-        const activityScore = uniqueContributors * 0.4; // 40% weight for contributors
-        const ciCdScore = totalTests * 0.2; // 20% weight for CI/CD tests
-        const prScore = totalPRs * 0.1; // 10% weight for pull requests
-        const issueScore = (openIssues + closedIssues) * 0.2; // 20% weight for issues (open + closed)
-        const responseTimeScore = (avgResponseTime > 0 && avgResponseTime < 48) ? 0.1 : 0.05; // 10% for good response times (<48 hours)
-        const metricScore = activityScore + ciCdScore + prScore + issueScore + responseTimeScore;
+        const activityScore = uniqueContributors > MAX_UNIQUE_CONTRIBUTORS ? 0.4 : (uniqueContributors / MAX_UNIQUE_CONTRIBUTORS) * 0.4; // 40% weight for contributors
+        const ciCdScore = totalTests > MAX_TOTAL_TESTS ? 0.2 : (totalTests / MAX_TOTAL_TESTS) * 0.2; // 20% weight for CI/CD tests
+        const prScore = totalPRs > MAX_TOTAL_PRS ? 0.1 : (totalPRs / MAX_TOTAL_PRS) * 0.1; // 10% weight for pull requests
+        const issueScore = (closedIssues + openIssues) > MAX_TOTAL_ISSUES ? 0.2 : ((closedIssues + openIssues) / MAX_TOTAL_ISSUES) * 0.3; // 30% weight for issues (open + closed)
+        // Calculate the final metric score
+        let metricScore = activityScore + ciCdScore + prScore + issueScore;
+        // Ensure metricScore is capped at 1
+        if (metricScore > 1) {
+            metricScore = 1;
+        }
         console.log(`Metric Score: ${metricScore.toFixed(2)}`);
     }
     catch (error) {
