@@ -1,6 +1,12 @@
 import inquirer from 'inquirer';
 import fs from 'fs';
 import path from 'path';
+//grab CLI from file
+import { program } from './cli';
+
+program.parse(process.argv);
+
+console.log("Test to see if npm start works");  
 
 async function main() {
   // Check command-line arguments
@@ -41,3 +47,4 @@ async function main() {
 }
 
 main();
+

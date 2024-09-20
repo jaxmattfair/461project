@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -54,3 +55,9 @@ function main() {
     });
 }
 main();
+=======
+//grab CLI from file
+import { program } from './cli.js';
+program.parse(process.argv);
+console.log("Test to see if npm start works");
+>>>>>>> f4fc06c95711852b4afe6f7ce2e596701dafac88
