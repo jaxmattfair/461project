@@ -7,7 +7,7 @@ import { analyzeReadme, calculateRampUpScore } from '../src/metrics/rampUpScore.
 import { Root } from 'mdast';
 
 async function testRampUp() {
-    const repoUrl = 'https://github.com/gojue/ecapture.git';
+    const repoUrl = '';
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = dirname(__filename);
     const tempDir = path.join(__dirname, 'temp-repo');
