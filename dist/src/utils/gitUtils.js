@@ -78,3 +78,25 @@ export function parseGitHubRepoURL(repoURL) {
         throw new Error('Failed to parse GitHub repository URL:');
     }
 }
+// Function to check for a LICENSE file
+export function getLicenseFileContent(repoDir) {
+    const licenseFilenames = [
+        'LICENSE',
+        'LICENSE.txt',
+        'LICENSE.md',
+        'LICENSE.MD',
+    ];
+    for (const filename of licenseFilenames) {
+        const licensePath = path.join(repoDir, filename);
+        if (fs.existsSync(licensePath)) {
+            try {
+                return fs.readFileSync(licensePath, 'utf-8');
+            }
+            catch (error) {
+                console.error(`Error reading ${filename}: ${error.message}`);
+                return null;
+            }
+        }
+    }
+    return null;
+}

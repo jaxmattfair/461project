@@ -1,23 +1,32 @@
-import * as fs from 'fs';
+import { cloneRepository, getReadmeContent, parseGitHubRepoURL, getLicenseFileContent } from '../utils/gitUtils';
 
-// Function to validate if license is LGPL v2.1
-function validateLicense(filePath: string): boolean {
-    // Read package.json file
-    const packageJson = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-
-    // Regex pattern to match LGPL v2.1 (it allows variations like 'LGPL-2.1' or 'LGPL-2.1-only')
-    const lgplRegex = /^LGPL-2\.1(\.0|(\-only|\-or\-later)?)?$/i;
-
-    // Check if the license field matches LGPL v2.1
-    if (packageJson.license && lgplRegex.test(packageJson.license)) {
-        console.log('The module’s license is compatible with LGPL v2.1.');
-        return true;
-    } else {
-        console.log('The module’s license is NOT compatible with LGPL v2.1.');
-        return false;
+// Function to extract license section from README using regex
+export function extractLicenseFromReadme(content: string): string | null {
+    const licenseRegex = /##?\s*License[\s\S]*?(?=##|$)/i; // Matches "License" section until next heading or end of file
+    const match = content.match(licenseRegex);
+    return match ? match[0].trim() : null;
+  }
+  
+// Main function to extract license info from a cloned repository
+export async function extractLicenseInfo(dir: string, readmeContent: string | null): Promise<string | null> {
+    // Step 2: Check README file for a license section
+    if (readmeContent) {
+        const licenseInReadme = extractLicenseFromReadme(readmeContent);
+        if (licenseInReadme) {
+            console.log('License found in README:');
+            console.log(licenseInReadme);
+            return licenseInReadme;
+        }
     }
-}
 
-// Example usage
-const packageJsonPath = './package.json';
-validateLicense(packageJsonPath);
+    // Step 3: Check for LICENSE file in the root directory
+    const licenseFileContent = getLicenseFileContent(dir);
+    if (licenseFileContent) {
+        console.log('License found in LICENSE file:');
+        console.log(licenseFileContent);
+        return licenseFileContent;
+    }
+
+    console.log('No license information found.');
+    return null;
+    }

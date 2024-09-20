@@ -1,4 +1,3 @@
-// src/metrics/busFactorScore.ts
 import axios from 'axios';
 import * as dotenv from 'dotenv';
 import { differenceInHours } from 'date-fns';

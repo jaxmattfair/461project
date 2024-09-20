@@ -4,10 +4,11 @@ import { fileURLToPath } from 'url';
 import * as fs from 'fs';
 import { cloneRepository, getReadmeContent, parseMarkdown } from '../src/utils/gitUtils.js';
 import { analyzeReadme, calculateRampUpScore } from '../src/metrics/rampUpScore.js';
+import { extractLicenseInfo } from '../src/metrics/license.js';
 import { Root } from 'mdast';
 
 async function testRampUp() {
-    const repoUrl = '';
+    const repoUrl = 'https://github.com/voideditor/void.git';
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = dirname(__filename);
     const tempDir = path.join(__dirname, 'temp-repo');
@@ -23,6 +24,9 @@ async function testRampUp() {
 
         //Read the ReadMe content
         const readmeContent = getReadmeContent(tempDir);
+
+        // Test extract license info 
+        const licenseInfo = await extractLicenseInfo(tempDir, readmeContent);
 
         if (readmeContent !== null) {
             //Fetch AST Root from readmeContent and parse it
