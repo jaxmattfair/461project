@@ -1,9 +1,11 @@
 import axios from 'axios';
 
 // Set GitHub token, repo owner, and repo name (these could be passed in via environment variables or as function arguments)
-const GITHUB_TOKEN = 'your-github-token';
-const REPO_OWNER = 'your-repo-owner';
-const REPO_NAME = 'your-repo-name';
+dotenv.config();
+
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const REPO_OWNER = 'raoakanksh';
+const REPO_NAME = '461project';
 
 axios.defaults.headers.common['Authorization'] = `token ${GITHUB_TOKEN}`;
 
