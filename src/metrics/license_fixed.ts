@@ -10,6 +10,17 @@ import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
 import { Root } from 'mdast';
 
+
+//Cloning the Repository:
+//The script clones the repository from the given URL into a local directory.
+//Searching for License in README:
+//The script then searches for a README file in the cloned repository. If a README is found, it tries to extract the "License" section using a regex.
+//Checking for LICENSE File:
+//If no license is found in the README, it checks for a LICENSE file in the root of the repository.
+//Returning License Information:
+//If license information is found in either the README or the LICENSE file, it is returned and printed to the console. If not, the script logs a message indicating that no license was found.
+
+
 // Awaits git clone of repository 
 export async function cloneRepository(repoUrl: string, dir: string): Promise<void> {
     try {
