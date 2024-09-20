@@ -12,78 +12,100 @@ import { Root } from 'mdast';
 
 //Awaits git clone of repository 
 export async function cloneRepository(repoUrl: string, dir: string): Promise<void> {
-    try {
-        await git.clone({
-        fs,
-        http,
-        dir,
-        url: repoUrl,
-        singleBranch: true,
-        depth: 1,
-        });
-        console.log(`Repository cloned to ${dir}`);
-    } catch (error) {
-        console.error(`Failed to clone repository: ${(error as Error).message}`);
-        throw error;
-    }
+  try {
+      await git.clone({
+      fs,
+      http,
+      dir,
+      url: repoUrl,
+      singleBranch: true,
+      depth: 1,
+      });
+      console.log(`Repository cloned to ${dir}`);
+  } catch (error) {
+      console.error(`Failed to clone repository: ${(error as Error).message}`);
+      throw error;
+  }
 }
 
 //Function used to getReadMeContent from path, parses markdown document (md) into AST that can be analyzed
 export function getReadmeContent(repoDir: string): string | null {
-    const readMePath = path.join(repoDir, 'README.md'); 
-    const readMeFilenames = [
-        'README.md',
-        'README.MD',
-        'Readme.md',
-        'ReadMe.md',
-        'README',
-        'readme.md',
-        'readme',
-    ];
-    for (const filename of readMeFilenames) {
-        const readmePath = path.join(repoDir, filename);
-        if (fs.existsSync(readmePath)) {
-            try {
-                return fs.readFileSync(readmePath, 'utf-8');
-            } catch (error) {
-                console.error(`Error reading ${filename}: ${(error as Error).message}`);
-                return null;
-            }
-        }
-    }
-    return null;
+  const readMePath = path.join(repoDir, 'README.md'); 
+  const readMeFilenames = [
+      'README.md',
+      'README.MD',
+      'Readme.md',
+      'ReadMe.md',
+      'README',
+      'readme.md',
+      'readme',
+  ];
+  for (const filename of readMeFilenames) {
+      const readmePath = path.join(repoDir, filename);
+      if (fs.existsSync(readmePath)) {
+          try {
+              return fs.readFileSync(readmePath, 'utf-8');
+          } catch (error) {
+              console.error(`Error reading ${filename}: ${(error as Error).message}`);
+              return null;
+          }
+      }
+  }
+  return null;
 }
 
 export function parseMarkdown(content: string): Root {
-    return unified().use(remarkParse).use(remarkGfm).parse(content);
+  return unified().use(remarkParse).use(remarkGfm).parse(content);
 }
 
 // Function to parse GitHub repository URL
 export function parseGitHubRepoURL(repoURL: string): { owner: string; repo: string } {
-    try {
-      const url = new URL(repoURL);
-  
-      // Ensure the hostname is github.com
-      if (url.hostname !== 'github.com') {
-        throw new Error('Invalid GitHub repository URL.');
-      }
-  
-      // Split the pathname and extract owner and repo
-      const pathSegments = url.pathname.split('/').filter(segment => segment.length > 0);
-  
-      if (pathSegments.length < 2) {
-        throw new Error('Invalid GitHub repository URL format.');
-      }
-  
-      const [owner, repoWithPossibleSuffix] = pathSegments;
-  
-      // Remove possible '.git' suffix from repo name
-      const repo = repoWithPossibleSuffix.endsWith('.git')
-        ? repoWithPossibleSuffix.slice(0, -4)
-        : repoWithPossibleSuffix;
-  
-      return { owner, repo };
-    } catch (error) {
-      throw new Error('Failed to parse GitHub repository URL:');
+  try {
+    const url = new URL(repoURL);
+
+    // Ensure the hostname is github.com
+    if (url.hostname !== 'github.com') {
+      throw new Error('Invalid GitHub repository URL.');
     }
+
+    // Split the pathname and extract owner and repo
+    const pathSegments = url.pathname.split('/').filter(segment => segment.length > 0);
+
+    if (pathSegments.length < 2) {
+      throw new Error('Invalid GitHub repository URL format.');
+    }
+
+    const [owner, repoWithPossibleSuffix] = pathSegments;
+
+    // Remove possible '.git' suffix from repo name
+    const repo = repoWithPossibleSuffix.endsWith('.git')
+      ? repoWithPossibleSuffix.slice(0, -4)
+      : repoWithPossibleSuffix;
+
+    return { owner, repo };
+  } catch (error) {
+    throw new Error('Failed to parse GitHub repository URL:');
   }
+}
+
+// Function to check for a LICENSE file
+export function getLicenseFileContent(repoDir: string): string | null {
+  const licenseFilenames = [
+      'LICENSE',
+      'LICENSE.txt',
+      'LICENSE.md',
+      'LICENSE.MD',
+  ];
+  for (const filename of licenseFilenames) {
+      const licensePath = path.join(repoDir, filename);
+      if (fs.existsSync(licensePath)) {
+          try {
+              return fs.readFileSync(licensePath, 'utf-8');
+          } catch (error) {
+              console.error(`Error reading ${filename}: ${(error as Error).message}`);
+              return null;
+          }
+      }
+  }
+  return null;
+}

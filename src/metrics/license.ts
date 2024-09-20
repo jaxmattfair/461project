@@ -1,23 +1,42 @@
-import * as fs from 'fs';
+import { cloneRepository, getReadmeContent, parseGitHubRepoURL, getLicenseFileContent } from '../utils/gitUtils';
 
-// Function to validate if license is LGPL v2.1
-function validateLicense(filePath: string): boolean {
-    // Read package.json file
-    const packageJson = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-
-    // Regex pattern to match LGPL v2.1 (it allows variations like 'LGPL-2.1' or 'LGPL-2.1-only')
-    const lgplRegex = /^LGPL-2\.1(\.0|(\-only|\-or\-later)?)?$/i;
-
-    // Check if the license field matches LGPL v2.1
-    if (packageJson.license && lgplRegex.test(packageJson.license)) {
-        console.log('The module’s license is compatible with LGPL v2.1.');
-        return true;
-    } else {
-        console.log('The module’s license is NOT compatible with LGPL v2.1.');
-        return false;
+// Function to extract license section from README using regex
+export function extractLicenseFromReadme(content: string): string | null {
+    const licenseRegex = /##?\s*License[\s\S]*?(?=##|$)/i; // Matches "License" section until next heading or end of file
+    const match = content.match(licenseRegex);
+    return match ? match[0].trim() : null;
+  }
+  
+// Main function to extract license info from a cloned repository
+export async function extractLicenseInfo(dir: string, readmeContent: string | null): Promise<string | null> {
+    // Step 2: Check README file for a license section
+    if (readmeContent) {
+        const licenseInReadme = extractLicenseFromReadme(readmeContent);
+        if (licenseInReadme) {
+            console.log('License found in README:');
+            console.log(licenseInReadme);
+            return licenseInReadme;
+        }
     }
+
+    // Step 3: Check for LICENSE file in the root directory
+    const licenseFileContent = getLicenseFileContent(dir);
+    if (licenseFileContent) {
+        console.log('License found in LICENSE file:');
+        console.log(licenseFileContent);
+        return licenseFileContent;
+    }
+
+    console.log('No license information found.');
+    return null;
 }
 
-// Example usage
-const packageJsonPath = './package.json';
-validateLicense(packageJsonPath);
+/**
+ * Checks if the provided license text matches GNU LGPL v2.1.
+ * @param licenseText The text of the license to verify.
+ * @returns 1 if LGPLv2.1 is found, 0 otherwise.
+ */
+export function isLGPLv21(licenseText: string): number {
+    const lgplRegex = /\bGNU\s+Lesser\s+General\s+Public\s+License(?:\s+\(LGPL\))?(?:\s+version)?\s+2\.1(?:\s+or\s+later)?\b|\bLGPL(?:\s+version)?\s+2\.1(?:\s+or\s+later)?\b|https?:\/\/www\.gnu\.org\/licenses\/old-licenses\/lgpl-2\.1\.html\b/i;
+    return lgplRegex.test(licenseText) ? 1 : 0;
+}

@@ -4,10 +4,11 @@ import { fileURLToPath } from 'url';
 import * as fs from 'fs';
 import { cloneRepository, getReadmeContent, parseMarkdown } from '../src/utils/gitUtils.js';
 import { analyzeReadme, calculateRampUpScore } from '../src/metrics/rampUpScore.js';
+import { extractLicenseInfo, isLGPLv21 } from '../src/metrics/license.js';
 import { Root } from 'mdast';
 
 async function testRampUp() {
-    const repoUrl = '';
+    const repoUrl = 'https://github.com/gnutls/gnutls';
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = dirname(__filename);
     const tempDir = path.join(__dirname, 'temp-repo');
@@ -24,6 +25,14 @@ async function testRampUp() {
         //Read the ReadMe content
         const readmeContent = getReadmeContent(tempDir);
 
+        // Test extract license info 
+        const licenseInfo = await extractLicenseInfo(tempDir, readmeContent);
+        
+        if (licenseInfo != null) {
+            const licenseScore = isLGPLv21(licenseInfo);
+            console.log('License Score: ', licenseScore);
+        }
+        /*
         if (readmeContent !== null) {
             //Fetch AST Root from readmeContent and parse it
             console.log('README Content:');
@@ -36,7 +45,7 @@ async function testRampUp() {
             //console.log(ast);
         } else {
             console.log('No README file found in the repository.');
-        }
+        }*/
 
     } catch (error) {
         console.error(`An error occurred: ${(error as Error).message}`);
