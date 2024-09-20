@@ -13,16 +13,9 @@ if (!GITHUB_TOKEN) {
 }
 
 const repoURL: string = 'https://github.com/raoakanksh/461project.git';
-
 const parsed = parseGitHubRepoURL(repoURL);
 const owner: string = 'raoakanksh'; 
 const repo: string = '461project'; 
-
-const MAX_UNIQUE_CONTRIBUTORS: number = 100; // Example max contributors
-const MAX_TOTAL_TESTS: number = 1000; // Example max CI/CD tests
-const MAX_TOTAL_PRS: number = 500; // Example max pull requests
-const MAX_TOTAL_ISSUES: number = 500; // Example max issues (open + closed)
-
 
 interface Contributor {
   id: number;
@@ -82,7 +75,9 @@ export async function fetchPaginatedData<T>(url: string, params: FetchParams = {
 
 export async function getMetricScore(): Promise<void> {
   try {
-    // Fetch all data in parallel
+    // Fetch all data in parallel and track latency
+    const startFetchTime = Date.now();
+    
     const [contributors, workflowRuns, pullRequests, issues] = await Promise.all([
       fetchPaginatedData<Contributor>(`https://api.github.com/repos/${owner}/${repo}/contributors`),
       fetchPaginatedData<WorkflowRun>(`https://api.github.com/repos/${owner}/${repo}/actions/runs`),
@@ -90,20 +85,26 @@ export async function getMetricScore(): Promise<void> {
       fetchPaginatedData<Issue>(`https://api.github.com/repos/${owner}/${repo}/issues`, { state: 'all' }),
     ]);
 
+    const fetchLatency = Date.now() - startFetchTime;
+
     const uniqueContributors: number = contributors.length;
     console.log(`Total Unique Contributors: ${uniqueContributors}`);
+    console.log(`Fetch Latency for Unique Contributors: ${fetchLatency} ms`);
 
     const totalTests: number = workflowRuns.length;
     console.log(`Total CI/CD Tests: ${totalTests}`);
+    console.log(`Fetch Latency for Total Tests: ${fetchLatency} ms`);
 
     const totalPRs: number = pullRequests.length;
     console.log(`Total Pull Requests: ${totalPRs}`);
-
+    
     const openIssues: number = issues.filter((issue) => issue.state === 'open').length;
     const closedIssues: number = issues.filter((issue) => issue.state === 'closed').length;
+    
     console.log(`Open Issues: ${openIssues}`);
     console.log(`Closed Issues: ${closedIssues}`);
 
+    // Calculate latencies for response times
     let totalResponseTime: number = 0;
     let totalResponses: number = 0;
 
@@ -119,21 +120,21 @@ export async function getMetricScore(): Promise<void> {
       }
     });
 
-    const activityScore: number =
-        uniqueContributors > MAX_UNIQUE_CONTRIBUTORS ? 0.4 : (uniqueContributors / MAX_UNIQUE_CONTRIBUTORS) * 0.4;
-    const ciCdScore: number =
-      totalTests > MAX_TOTAL_TESTS ? 0.2 : (totalTests / MAX_TOTAL_TESTS) * 0.2;
-    const prScore: number =
-      totalPRs > MAX_TOTAL_PRS ? 0.1 : (totalPRs / MAX_TOTAL_PRS) * 0.1;
-    const issueScore: number =
-      (closedIssues + openIssues) > MAX_TOTAL_ISSUES ? 0.2 : ((closedIssues + openIssues) / MAX_TOTAL_ISSUES) * 0.3;
+    const latencyForResponseTimes = (totalResponses > 0) ? totalResponseTime / totalResponses : 0;
+
+    const activityScore: number = uniqueContributors > 100 ? 0.4 : (uniqueContributors / 100) * 0.4;
+    const ciCdScore: number = totalTests > 1000 ? 0.2 : (totalTests / 1000) * 0.2;
+    const prScore: number = totalPRs > 500 ? 0.1 : (totalPRs / 500) * 0.1;
+    const issueScore: number = (closedIssues + openIssues) > 500 ? 0.2 : ((closedIssues + openIssues) / 500) * 0.3;
 
     let metricScore: number = activityScore + ciCdScore + prScore + issueScore;
 
     if (metricScore > 1) {
       metricScore = 1;
     }
+
     console.log(`Metric Score: ${metricScore.toFixed(2)}`);
+    console.log(`Latency for Response Times: ${latencyForResponseTimes.toFixed(2)} hours`);
   } catch (error) {
     console.error('Error fetching data from GitHub:', error);
   }
