@@ -1,7 +1,6 @@
 import { dirname } from 'path';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
-import rimraf from 'rimraf';
 import * as fs from 'fs';
 import { cloneRepository, getReadmeContent, parseMarkdown } from '../src/utils/gitUtils.js';
 import { analyzeReadme, calculateRampUpScore } from '../src/metrics/rampUpScore.js';
