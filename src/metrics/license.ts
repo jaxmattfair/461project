@@ -7,15 +7,15 @@ export function extractLicenseFromReadme(content: string): string | null {
     return match ? match[0].trim() : null;
   }
   
-// Main function to extract license info from a cloned repository
-export async function extractLicenseInfo(dir: string, readmeContent: string | null): Promise<string | null> {
+// Main function to extract license info from a cloned repository, return 1 if found
+export async function extractLicenseInfo(dir: string, readmeContent: string | null): Promise<number> {
     // Step 2: Check README file for a license section
     if (readmeContent) {
         const licenseInReadme = extractLicenseFromReadme(readmeContent);
         if (licenseInReadme) {
             console.log('License found in README:');
             console.log(licenseInReadme);
-            return licenseInReadme;
+            return isLGPLv21(licenseInReadme);
         }
     }
 
@@ -24,11 +24,11 @@ export async function extractLicenseInfo(dir: string, readmeContent: string | nu
     if (licenseFileContent) {
         console.log('License found in LICENSE file:');
         console.log(licenseFileContent);
-        return licenseFileContent;
+        return isLGPLv21(licenseFileContent);
     }
 
     console.log('No license information found.');
-    return null;
+    return 0;
 }
 
 /**

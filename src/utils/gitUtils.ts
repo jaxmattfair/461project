@@ -13,18 +13,18 @@ import { Root } from 'mdast';
 //Awaits git clone of repository 
 export async function cloneRepository(repoUrl: string, dir: string): Promise<void> {
   try {
-      await git.clone({
+    await git.clone({
       fs,
       http,
       dir,
       url: repoUrl,
       singleBranch: true,
       depth: 1,
-      });
-      console.log(`Repository cloned to ${dir}`);
+    });
+    console.log(`Repository cloned to ${dir}`);
   } catch (error) {
-      console.error(`Failed to clone repository: ${(error as Error).message}`);
-      throw error;
+    console.error(`Failed to clone repository: ${(error as Error).message}`);
+    throw error;
   }
 }
 

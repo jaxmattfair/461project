@@ -94,7 +94,7 @@ async function fetchPaginatedData<T>(url: string, params: FetchParams = {}): Pro
 }
 
 // Function to fetch metrics and calculate the metric score
-export async function getMetricScore(owner: string, repo: string): Promise<void> {
+export async function getMetricScore(owner: string, repo: string): Promise<number> {
   try {
     // Fetch contributors (with pagination)
     const contributors: Contributor[] = await fetchPaginatedData<Contributor>(
@@ -132,23 +132,6 @@ export async function getMetricScore(owner: string, repo: string): Promise<void>
     console.log(`Open Issues: ${openIssues}`);
     console.log(`Closed Issues: ${closedIssues}`);
 
-    // Calculate average response time for issues and PRs (in hours)
-    let totalResponseTime: number = 0;
-    let totalResponses: number = 0;
-
-    // Combine issues and pull requests for response time calculation
-    const combinedItems: Array<Issue | PullRequest> = [...issues, ...pullRequests];
-
-    combinedItems.forEach((item) => {
-      if (item.created_at && item.updated_at) {
-        const createdAt: Date = new Date(item.created_at);
-        const updatedAt: Date = new Date(item.updated_at);
-        const responseTime: number = differenceInHours(updatedAt, createdAt);
-        totalResponseTime += responseTime;
-        totalResponses++;
-      }
-    });
-
     const activityScore: number =
         uniqueContributors > MAX_UNIQUE_CONTRIBUTORS ? 0.4 : (uniqueContributors / MAX_UNIQUE_CONTRIBUTORS) * 0.4; // 40% weight for contributors
     const ciCdScore: number =
@@ -166,8 +149,10 @@ export async function getMetricScore(owner: string, repo: string): Promise<void>
       metricScore = 1;
     }
     console.log(`Metric Score: ${metricScore.toFixed(2)}`);
+    return metricScore;
   } catch (error) {
     console.error('Error fetching data from GitHub:', error);
+    return -1;
   }
 }
 
