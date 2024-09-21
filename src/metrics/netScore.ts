@@ -1,4 +1,4 @@
-import { cloneRepository, getReadmeContent, parseGitHubRepoURL, parseMarkdown, measureExecutionTime } from "../utils/gitUtils";
+import { cloneRepository, getReadmeContent, parseGitHubRepoURL, parseMarkdown, measureExecutionTime, cleanUpDirectory } from "../utils/gitUtils";
 import { getMetricScore } from "./busFactorScore";
 import { computeCorrectnessMetric } from "./correctnessScore";
 import { extractLicenseInfo } from "./license";
@@ -19,15 +19,16 @@ export async function calculateNetScore(repoURL: string, tempDir: string): Promi
         console.log(`Duration: ${duration} seconds`); // Outputs: Duration: 2.00 seconds
     } catch (error) {
         console.error("An error occurred:", error);
-    }
+    } //Result is undefined in this case
 
     //Read the ReadMe content
     const readmeContent = getReadmeContent(tempDir);
-    if (readmeContent == null) {
+    if (readmeContent == 'null') {
         //handle exceptions
         //try other tasks
+        return -500;
     }
-    /*
+
     const ast: Root = parseMarkdown(readmeContent);
     const metrics = analyzeReadme(ast);
 
@@ -44,6 +45,14 @@ export async function calculateNetScore(repoURL: string, tempDir: string): Promi
                                                                                                       computeCorrectnessMetric(tempDir)]);
     
     const weighted_score = busFactorScore * 0.2 + licenseScore * 0.2 + responsiveMaintainerScore * 0.2  + rampUpScore * 0.2 + correctnessScore * 0.2;
+
+    try {
+        await cleanUpDirectory(tempDir);
+        console.log(`Cleaned up temporary directory: ${tempDir}`);
+    } catch (cleanupError: any) {
+        console.error(`Error during cleanup: ${cleanupError.message}`);
+    }
+
     if (weighted_score < 0) {
         return 0;
     }
@@ -51,22 +60,13 @@ export async function calculateNetScore(repoURL: string, tempDir: string): Promi
         return 1;
     }
     return weighted_score;
-    */
-    return -1;
+    
+    //return -1;
 }
 
-const repoURL = 'https://github.com/raoakanksh/461project';
+const repoURL = 'https://github.com/voideditor/void';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const tempDir = path.join(__dirname, 'temp-repo');
-
-//Clean up existing temp directory
-if (fs.existsSync(tempDir)) {
-    fs.rmSync(tempDir, { recursive: true, force: true});
-}
+const tempDir = path.join(process.cwd(), '/temp-repos', '461project')
 
 console.log(await calculateNetScore(repoURL, tempDir));
-
-if (fs.existsSync(tempDir)) {
-    fs.rmSync(tempDir, { recursive: true, force: true});
-}
