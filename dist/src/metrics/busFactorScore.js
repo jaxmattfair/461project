@@ -1,6 +1,5 @@
 import axios from 'axios';
 import * as dotenv from 'dotenv';
-import { differenceInHours } from 'date-fns';
 import { parseGitHubRepoURL } from '../utils/gitUtils';
 // Load environment variables from .env
 dotenv.config();
@@ -74,20 +73,6 @@ export async function getMetricScore(owner, repo) {
         const closedIssues = issues.filter((issue) => issue.state === 'closed').length;
         console.log(`Open Issues: ${openIssues}`);
         console.log(`Closed Issues: ${closedIssues}`);
-        // Calculate average response time for issues and PRs (in hours)
-        let totalResponseTime = 0;
-        let totalResponses = 0;
-        // Combine issues and pull requests for response time calculation
-        const combinedItems = [...issues, ...pullRequests];
-        combinedItems.forEach((item) => {
-            if (item.created_at && item.updated_at) {
-                const createdAt = new Date(item.created_at);
-                const updatedAt = new Date(item.updated_at);
-                const responseTime = differenceInHours(updatedAt, createdAt);
-                totalResponseTime += responseTime;
-                totalResponses++;
-            }
-        });
         const activityScore = uniqueContributors > MAX_UNIQUE_CONTRIBUTORS ? 0.4 : (uniqueContributors / MAX_UNIQUE_CONTRIBUTORS) * 0.4; // 40% weight for contributors
         const ciCdScore = totalTests > MAX_TOTAL_TESTS ? 0.2 : (totalTests / MAX_TOTAL_TESTS) * 0.2; // 20% weight for CI/CD tests
         const prScore = totalPRs > MAX_TOTAL_PRS ? 0.1 : (totalPRs / MAX_TOTAL_PRS) * 0.1; // 10% weight for pull requests
@@ -99,8 +84,10 @@ export async function getMetricScore(owner, repo) {
             metricScore = 1;
         }
         console.log(`Metric Score: ${metricScore.toFixed(2)}`);
+        return metricScore;
     }
     catch (error) {
         console.error('Error fetching data from GitHub:', error);
+        return -1;
     }
 }

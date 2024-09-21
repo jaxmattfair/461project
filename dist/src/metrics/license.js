@@ -5,7 +5,7 @@ export function extractLicenseFromReadme(content) {
     const match = content.match(licenseRegex);
     return match ? match[0].trim() : null;
 }
-// Main function to extract license info from a cloned repository
+// Main function to extract license info from a cloned repository, return 1 if found
 export async function extractLicenseInfo(dir, readmeContent) {
     // Step 2: Check README file for a license section
     if (readmeContent) {
@@ -13,7 +13,7 @@ export async function extractLicenseInfo(dir, readmeContent) {
         if (licenseInReadme) {
             console.log('License found in README:');
             console.log(licenseInReadme);
-            return licenseInReadme;
+            return isLGPLv21(licenseInReadme);
         }
     }
     // Step 3: Check for LICENSE file in the root directory
@@ -21,10 +21,10 @@ export async function extractLicenseInfo(dir, readmeContent) {
     if (licenseFileContent) {
         console.log('License found in LICENSE file:');
         console.log(licenseFileContent);
-        return licenseFileContent;
+        return isLGPLv21(licenseFileContent);
     }
     console.log('No license information found.');
-    return null;
+    return 0;
 }
 /**
  * Checks if the provided license text matches GNU LGPL v2.1.
