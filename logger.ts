@@ -1,49 +1,49 @@
 import fs from 'fs';
 import path from 'path';
 
-// Retrieve the log file path and log level from environment variables
-const LOG_FILE = process.env.LOG_FILE || 'default.log'; // Default log file if not specified
-const LOG_LEVEL = parseInt(process.env.LOG_LEVEL || '0', 10); // Default log level is 0 (silent)
+// Retrieve environment variables
+const LOG_FILE = process.env.LOG_FILE || 'application.log'; // Default log file if none specified
+const LOG_LEVEL = process.env.LOG_LEVEL ? parseInt(process.env.LOG_LEVEL, 10) : 0; // Default level 0 (silent)
 
-// Ensure the log directory exists
-const logDirectory = path.dirname(LOG_FILE);
-if (!fs.existsSync(logDirectory)) {
-    fs.mkdirSync(logDirectory, { recursive: true });
+// Ensure that the log directory exists
+const logDir = path.dirname(LOG_FILE);
+if (!fs.existsSync(logDir)) {
+    fs.mkdirSync(logDir, { recursive: true });
 }
 
-// Enum for log levels
+// Log levels
 enum LogLevel {
-    SILENT = 0,       // No logging
-    INFO = 1,         // Informational messages
-    DEBUG = 2         // Detailed debug messages
+    SILENT = 0, // No logging
+    INFO = 1,   // Informational messages
+    DEBUG = 2,  // Debug messages
 }
 
-// Function to write a log message to the log file
-function writeLog(message: string): void {
-    fs.appendFileSync(LOG_FILE, message + '\n', { encoding: 'utf-8' });
-}
+// Function to write log messages to a file
+const writeLog = (message: string) => {
+    const logMessage = `${new Date().toISOString()} - ${message}\n`;
+    fs.appendFileSync(LOG_FILE, logMessage, 'utf8');
+};
 
-// Log an informational message
-export function info(message: string): void {
+// Logger functions
+export const info = (message: string) => {
     if (LOG_LEVEL >= LogLevel.INFO) {
-        const logMessage = `[INFO] ${new Date().toISOString()} - ${message}`;
-        writeLog(logMessage);
-        console.log(logMessage); // Optional: Display on the console
+        writeLog(`INFO: ${message}`);
+        console.log(message); // Also output to the console for convenience
     }
-}
+};
 
-// Log a debug message
-export function debug(message: string): void {
+export const debug = (message: string) => {
     if (LOG_LEVEL >= LogLevel.DEBUG) {
-        const logMessage = `[DEBUG] ${new Date().toISOString()} - ${message}`;
-        writeLog(logMessage);
-        console.log(logMessage); // Optional: Display on the console
+        writeLog(`DEBUG: ${message}`);
+        console.debug(message); // Also output to the console for convenience
     }
-}
+};
 
-// Log an error message
-export function error(message: string): void {
-    const logMessage = `[ERROR] ${new Date().toISOString()} - ${message}`;
-    writeLog(logMessage);
-    console.error(logMessage); // Display errors on the console
-}
+
+
+export const error = (message: string | Error, err?: Error) => {
+    const errorMessage = err ? `${message}: ${err.message}` : message;
+    writeLog(`ERROR: ${errorMessage}`);
+    console.error(errorMessage); // Always log errors to console
+};
+//

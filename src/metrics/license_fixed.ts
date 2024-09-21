@@ -8,11 +8,11 @@ import * as path from 'path';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
-import { Root } from 'mdast';
+import { Root } from 'mdast';pu
 
 
 //Cloning the Repository:
-//The script clones the repository from the given URL into a local directory.
+//The script clones the repaository from the given URL into a local directory.
 //Searching for License in README:
 //The script then searches for a README file in the cloned repository. If a README is found, it tries to extract the "License" section using a regex.
 //Checking for LICENSE File:
