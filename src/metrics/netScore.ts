@@ -13,8 +13,14 @@ import fs from 'fs';
 
 export async function calculateNetScore(repoURL: string, tempDir: string): Promise<number> {
     //Clone repo
-    const time = await measureExecutionTime(() => cloneRepository(repoURL, tempDir), 'cloneRepository');
-    console.log(time);
+    try {
+        const { result, duration } = await measureExecutionTime(() => cloneRepository(repoURL, tempDir), 'cloneRepository');
+        console.log(`Result: ${result}`); // Outputs: Result: Data fetched
+        console.log(`Duration: ${duration} seconds`); // Outputs: Duration: 2.00 seconds
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+
     //Read the ReadMe content
     const readmeContent = getReadmeContent(tempDir);
     if (readmeContent == null) {
