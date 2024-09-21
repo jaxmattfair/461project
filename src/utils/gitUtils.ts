@@ -10,6 +10,21 @@ import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
 import { Root } from 'mdast';
 
+// Subfunction to measure how long an async function takes
+export async function measureExecutionTime<T>(asyncFunction: () => Promise<T>, functionName: string): Promise<T> {
+  const start = Date.now(); // Start time
+  try {
+      const result = await asyncFunction(); // Execute the async function
+      const end = Date.now(); // End time
+      const duration = (end - start) / 1000; // Calculate duration in seconds
+      //console.log(Execution time for ${functionName}: ${duration.toFixed(2)} seconds);
+      return result; // Return the result of the async function
+  } catch (error) {
+      //console.error(Error executing ${functionName}:, error);
+      throw error; // Rethrow the error for further handling
+  }
+}
+
 //Awaits git clone of repository 
 export async function cloneRepository(repoUrl: string, dir: string): Promise<void> {
   try {

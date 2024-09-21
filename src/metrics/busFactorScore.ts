@@ -95,6 +95,7 @@ async function fetchPaginatedData<T>(url: string, params: FetchParams = {}): Pro
 
 // Function to fetch metrics and calculate the metric score
 export async function getMetricScore(owner: string, repo: string): Promise<number> {
+  
   try {
     // Fetch contributors (with pagination)
     const contributors: Contributor[] = await fetchPaginatedData<Contributor>(

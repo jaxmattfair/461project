@@ -1,4 +1,4 @@
-import { cloneRepository, getReadmeContent, parseGitHubRepoURL, parseMarkdown } from "../utils/gitUtils";
+import { cloneRepository, getReadmeContent, parseGitHubRepoURL, parseMarkdown, measureExecutionTime } from "../utils/gitUtils";
 import { getMetricScore } from "./busFactorScore";
 import { computeCorrectnessMetric } from "./correctnessScore";
 import { extractLicenseInfo } from "./license";
@@ -13,13 +13,15 @@ import fs from 'fs';
 
 export async function calculateNetScore(repoURL: string, tempDir: string): Promise<number> {
     //Clone repo
-    await cloneRepository(repoURL, tempDir);
+    const time = await measureExecutionTime(() => cloneRepository(repoURL, tempDir), 'cloneRepository');
+    console.log(time);
     //Read the ReadMe content
     const readmeContent = getReadmeContent(tempDir);
     if (readmeContent == null) {
         //handle exceptions
         //try other tasks
     }
+    /*
     const ast: Root = parseMarkdown(readmeContent);
     const metrics = analyzeReadme(ast);
 
@@ -43,6 +45,8 @@ export async function calculateNetScore(repoURL: string, tempDir: string): Promi
         return 1;
     }
     return weighted_score;
+    */
+    return -1;
 }
 
 const repoURL = 'https://github.com/raoakanksh/461project';
