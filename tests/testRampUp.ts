@@ -7,9 +7,10 @@ import { analyzeReadme, calculateRampUpScore } from '../src/metrics/rampUpScore.
 import { extractLicenseInfo, isLGPLv21 } from '../src/metrics/license.js';
 import { Root } from 'mdast';
 import { calculateResponsiveness } from '../src/metrics/responsiveMaintainer.js';
+import { computeCorrectnessMetric } from '../src/metrics/correctnessScore.js';
 
 async function testRampUp() {
-    const repoUrl = 'https://github.com/voideditor/void';
+    const repoUrl = 'https://github.com/raoakanksh/461project';
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = dirname(__filename);
     const tempDir = path.join(__dirname, 'temp-repo');
@@ -40,7 +41,9 @@ async function testRampUp() {
             console.log("Responsive score: ", responsive);
         }
 
-
+        //Test correctness
+        const correctness = await computeCorrectnessMetric(tempDir);
+        console.log(correctness);
         /*
         if (readmeContent !== null) {
             //Fetch AST Root from readmeContent and parse it
