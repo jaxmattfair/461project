@@ -64,6 +64,7 @@ install_dependencies() {
 }
 
 # Function to rank modules
+# Function to rank modules
 rank_modules() {
     local url_file="$1"
     log "Starting module ranking for URLs in $url_file"
@@ -71,70 +72,91 @@ rank_modules() {
     while IFS= read -r url || [[ -n "$url" ]]; do
         log "Processing URL: $url"
 
-        # Create a temporary directory for cloning the repository
-        temp_dir=$(mktemp -d)
-        log "Created temporary directory: $temp_dir"
-
-        log "Calculating metrics for $url"
-
-        # Run the calculateNetScore.js script via Node.js
+        # Check if the URL is a valid GitHub or npm URL
         result=$(node -e "
+            //process.stdout.write('Hello');
             (async () => {
                 try {
-                    // Print a test message to stderr for debugging purposes
-                    // process.stderr.write('Starting async function...\\n');
+                    const { getGitHubUrlFromNpm, isGitHubUrl } = await import('./dist/src/utils/npmUtils.js');
+                    const { URL } = await import('url');
 
-                    // Dynamically import modules
-                    const { calculateNetScore } = await import('./dist/src/metrics/netScore.js');
-                    const { dirname } = await import('path');
-                    const { fileURLToPath } = await import('url');
-                    const path = await import('path');
+                    const inputUrl = '$url';
+                    let repoUrl = inputUrl;
+                    // Check if it's an npm URL (assumes npm URLs contain 'npmjs.com/package')
+                    if (inputUrl.includes('npmjs.com/package')) {
+                        const gitHubUrl = await getGitHubUrlFromNpm(inputUrl);
+                        if (!gitHubUrl || gitHubUrl == 'null') {
+                            console.error('Invalid npm package or no GitHub repository found');
+                            process.exit(1);
+                        }
+                        repoUrl = gitHubUrl;
+                    } else {
+                        // If the URL is not from npm, check if it’s a valid GitHub URL
+                        if (!isGitHubUrl(repoUrl)) {
+                            console.error('Not a valid github url?')
+                            console.error('Error: Invalid URL. Must be a valid npm package URL or GitHub repository URL.');
+                            process.exit(1);
+                        }
+                    }
 
-                    // Test if imports were successful
-                    // process.stderr.write('Modules imported successfully...\\n');
-
-                    // Variables and paths
-                    const __filename = fileURLToPath(import.meta.url);
-                    const __dirname = dirname(__filename);
-
-                    const tempDir = '${temp_dir}';
-                    const repoURL = '${url}';
-
-                    // Log repository cloning to stderr
-                    // process.stderr.write('Starting clone operation for ' + repoURL + ' into ' + tempDir + '\\n');
-
-                    // Calculate the net score asynchronously
-                    const result = await calculateNetScore(repoURL, tempDir);
-
-                    // Output the result as a JSON string to stdout
-                    console.log(JSON.stringify(result));
+                    // Output the valid GitHub URL for further processing
+                    console.error(repoUrl);
                 } catch (error) {
-                    // Log any errors to stderr
-                    process.stderr.write('Error in processing: ' + error.message + '\\n');
+                    console.error('Error processing URL:', error.message);
+                    process.exit(1);
                 }
             })();
         " 2>&1)
 
-        log "Result: $result"
+        #if [[ $? -ne 0 ]]; then
+        #    log "Error: Invalid URL or no GitHub repository found for $url"
+        #    exit 1
+        #fi
+
+        log "Valid GitHub URL: $result"
+
+        # Create a temporary directory for cloning the repository
+        temp_dir=$(mktemp -d)
+        log "Created temporary directory: $temp_dir"
+
+        log "Calculating metrics for $result"
+
+        # Run the calculateNetScore.js script via Node.js
+        metrics=$(node -e "
+            (async () => {
+                try {
+                    const { calculateNetScore } = await import('./dist/src/metrics/netScore.js');
+                    const tempDir = '${temp_dir}';
+                    const repoURL = '$result';
+
+                    const result = await calculateNetScore(repoURL, tempDir);
+                    process.stdout.write(JSON.stringify(result));
+                } catch (error) {
+                    process.stderr.write('Error calculating metrics: ' + error.message + '\\n');
+                }
+            })();
+        " 2>&1)
+
+        log "Result: $metrics"
         # Check if result is empty
-        if [[ -z "$result" ]]; then
+        if [[ -z "$metrics" ]]; then
             log "Error calculating scores for URL: $url"
             exit 1
         fi
 
         # Parse the JSON result and extract individual fields
-        net_score=$(echo "$result" | jq -r '.NetScore // -1')
-        net_score_latency=$(echo "$result" | jq -r '.NetScore_Latency // -1')
-        ramp_up=$(echo "$result" | jq -r '.RampUp // -1')
-        ramp_up_latency=$(echo "$result" | jq -r '.RampUp_Latency // -1')
-        correctness=$(echo "$result" | jq -r '.Correctness // -1')
-        correctness_latency=$(echo "$result" | jq -r '.Correctness_Latency // -1')
-        bus_factor=$(echo "$result" | jq -r '.BusFactor // -1')
-        bus_factor_latency=$(echo "$result" | jq -r '.BusFactor_Latency // -1')
-        responsive_maintainer=$(echo "$result" | jq -r '.ResponsiveMaintainer // -1')
-        responsive_maintainer_latency=$(echo "$result" | jq -r '.ResponsiveMaintainer_Latency // -1')
-        license=$(echo "$result" | jq -r '.License // -1')
-        license_latency=$(echo "$result" | jq -r '.License_Latency // -1')
+        net_score=$(echo "$metrics" | jq -r '.NetScore // -1')
+        net_score_latency=$(echo "$metrics" | jq -r '.NetScore_Latency // -1')
+        ramp_up=$(echo "$metrics" | jq -r '.RampUp // -1')
+        ramp_up_latency=$(echo "$metrics" | jq -r '.RampUp_Latency // -1')
+        correctness=$(echo "$metrics" | jq -r '.Correctness // -1')
+        correctness_latency=$(echo "$metrics" | jq -r '.Correctness_Latency // -1')
+        bus_factor=$(echo "$metrics" | jq -r '.BusFactor // -1')
+        bus_factor_latency=$(echo "$metrics" | jq -r '.BusFactor_Latency // -1')
+        responsive_maintainer=$(echo "$metrics" | jq -r '.ResponsiveMaintainer // -1')
+        responsive_maintainer_latency=$(echo "$metrics" | jq -r '.ResponsiveMaintainer_Latency // -1')
+        license=$(echo "$metrics" | jq -r '.License // -1')
+        license_latency=$(echo "$metrics" | jq -r '.License_Latency // -1')
 
         # Output the extracted values for debugging
         log "NetScore: $net_score"
@@ -152,12 +174,13 @@ rank_modules() {
 
         # Clean up the temporary directory
         rm -rf "$temp_dir"
-        log "Removed temporary directory: $temp_dir"    
+        log "Removed temporary directory: $temp_dir"
 
     done < "$url_file"
 
     log "Finished module ranking."
 }
+
 
 
 

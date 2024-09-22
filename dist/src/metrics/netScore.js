@@ -36,7 +36,7 @@ export async function calculateNetScore(repoURL, tempDir) {
         [rampUpScore, rampUpDuration] = calculateRampUpScore(metrics);
     }
     else {
-        console.warn("README not found. Skipping metrics that require README.");
+        //console.warn("README not found. Skipping metrics that require README.");
         // If README is not found, set RampUp score and latency to 0
         rampUpScore = 0;
         rampUpDuration = 0;

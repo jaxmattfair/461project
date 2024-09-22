@@ -48,7 +48,7 @@ export async function calculateNetScore(repoURL: string, tempDir: string): Promi
         // Calculate ramp-up score and duration (since it depends on the README)
         [rampUpScore, rampUpDuration] = calculateRampUpScore(metrics);
     } else {
-        console.warn("README not found. Skipping metrics that require README.");
+        //console.warn("README not found. Skipping metrics that require README.");
         // If README is not found, set RampUp score and latency to 0
         rampUpScore = 0;
         rampUpDuration = 0;

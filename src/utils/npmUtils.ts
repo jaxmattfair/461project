@@ -97,7 +97,12 @@ function cleanRepositoryUrl(repoUrl: string): string {
   
     return cleanedUrl;
 };
-  
+
+
+//console.log(cleanRepositoryUrl('https://github.com/voideditor/void'));
+//console.log()
+
+
 
 /**
  * Determines if the repository URL is a GitHub URL.
@@ -105,7 +110,7 @@ function cleanRepositoryUrl(repoUrl: string): string {
  * @param repoUrl - The cleaned repository URL.
  * @returns True if it's a GitHub URL, false otherwise.
  */
-function isGitHubUrl(repoUrl: string): boolean {
+export function isGitHubUrl(repoUrl: string): boolean {
     try {
         const parsedUrl = new url.URL(repoUrl);
         return parsedUrl.hostname.toLowerCase() === 'github.com';
@@ -119,29 +124,33 @@ function isGitHubUrl(repoUrl: string): boolean {
  *
  * @param packageUrl - The npm package URL.
  */
-export async function getGitHubUrlFromNpm(packageUrl: string): Promise<void> {
+export async function getGitHubUrlFromNpm(packageUrl: string): Promise<string> {
   try {
     const packageName = extractPackageName(packageUrl);
-    console.log(`Package Name: ${packageName}`);
+    //console.log(`Package Name: ${packageName}`);
 
     const repositoryUrl = await fetchRepositoryUrl(packageName);
 
     if (!repositoryUrl) {
-      console.log('No repository information found for this package.');
-      return;
+      console.error('No repository information found for this package.');
+      return "null";
     }
 
     const cleanedUrl = cleanRepositoryUrl(repositoryUrl);
-    console.log(`Repository URL: ${cleanedUrl}`);
+    //console.log(`Repository URL: ${cleanedUrl}`);
 
     if (isGitHubUrl(cleanedUrl)) {
-      console.log(`GitHub URL: ${cleanedUrl}`);
+      return cleanedUrl;
+      //console.log(`GitHub URL: ${cleanedUrl}`);
     } else {
-      console.log('The repository URL is not a GitHub URL.');
+      console.error('The repository URL is not a GitHub URL.');
+      process.exit(1);
     }
   } catch (error: any) {
     console.error(`Error: ${error.message}`);
   }
+  return 'null';
 };
 
-await getGitHubUrlFromNpm('https://www.npmjs.com/package/browserify');
+//const githubLink = await getGitHubUrlFromNpm('https://www.npmjs.com/package/browserify');
+//console.log(githubLink);
