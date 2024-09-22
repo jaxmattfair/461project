@@ -7,7 +7,7 @@ import path from 'path';
  * @returns Score [0,1]
  */
 const hasTestSuite = async (repoPath: string): Promise<number> => {
-    console.log('Checking for test suite...');
+    //console.log('Checking for test suite...');
     const testDirs = ['test', 'tests', '__tests__'];
     try {
         for (const dir of testDirs) {
@@ -15,7 +15,7 @@ const hasTestSuite = async (repoPath: string): Promise<number> => {
             try {
                 const stats = await fs.lstat(fullPath);
                 if (stats.isDirectory()) {
-                    console.log(`Test suite directory found: ${dir}`);
+                    //console.log(`Test suite directory found: ${dir}`);
                     return 1.0;
                 }
             } catch (error: any) {
@@ -33,7 +33,7 @@ const hasTestSuite = async (repoPath: string): Promise<number> => {
             if (packageStats.isFile()) {
                 const packageJson = await fs.readJson(packageJsonPath);
                 if (packageJson.scripts && packageJson.scripts.test) {
-                    console.log('Test script found in package.json');
+                    //console.log('Test script found in package.json');
                     return 1.0;
                 }
             }
@@ -44,7 +44,7 @@ const hasTestSuite = async (repoPath: string): Promise<number> => {
             // If package.json doesn't exist, continue
         }
 
-        console.log('No test suite found.');
+        //console.log('No test suite found.');
         return 0.0;
     } catch (error) {
         console.error('Unexpected error in hasTestSuite:', error);
@@ -52,7 +52,10 @@ const hasTestSuite = async (repoPath: string): Promise<number> => {
     }
 };
 
-export const computeCorrectnessMetric = async (repoPath: string): Promise<number> => {
+export const computeCorrectnessMetric = async (repoPath: string): Promise<[number, number]> => {
+    const start = Date.now();
     const testSuite = await hasTestSuite(repoPath);
-    return testSuite;
+    const end = Date.now();
+    const duration = (end - start) / 1000;
+    return [testSuite, duration];
 };

@@ -36,17 +36,17 @@ export async function measureExecutionTime<T>(asyncFunction: () => Promise<T>, f
 async function createDirectory(dir: string): Promise<void> {
   try {
       await fsPromises.mkdir(dir, { recursive: true });
-      console.log(`Created directory: ${dir}`);
+      //console.log(`Created directory: ${dir}`);
 
       // Attempt to set permissions (works on Unix-based systems)
-      
+      /*
       try {
           await fsPromises.chmod(dir, 0o755);
           console.log(`Set permissions to writable for directory: ${dir}`);
       } catch (chmodError: any) {
           console.warn(`Could not set permissions for ${dir}: ${chmodError.message}`);
           // On Windows, chmod might not have the desired effect
-      }
+      }*/
   } catch (error: any) {
       console.error(`Error creating directory ${dir}: ${error.message}`);
       throw error;
@@ -62,7 +62,7 @@ export async function cleanUpDirectory(dir: string): Promise<void> {
   if (exists) {
       try {
           await fsPromises.rm(dir, { recursive: true, force: true });
-          console.log(`Removed existing directory: ${dir}`);
+          //console.log(`Removed existing directory: ${dir}`);
       } catch (error: any) {
           console.error(`Error removing directory ${dir}: ${error.message}`);
           throw error;
@@ -85,15 +85,28 @@ async function directoryExists(dir: string): Promise<boolean> {
 }
 
 //Awaits git clone of repository 
-export async function cloneRepository(repoUrl: string, dir: string): Promise<number> {
-  const start = Date.now(); 
+export async function cloneRepository(repoUrl: string, dir: string): Promise<void> {
+  //console.log(`Starting clone operation for ${repoUrl} into ${dir}`);
+  //console.time('Total Clone Time');
+
+  // Step 1: Clean up the directory
+  //console.time('Clean Up Directory Time');
   await cleanUpDirectory(dir);
+  //console.timeEnd('Clean Up Directory Time');
+
+  // Step 2: Create the directory
+  //console.time('Create Directory Time');
+  //await createDirectory(dir);
+  //console.timeEnd('Create Directory Time');
+
+  //await cleanUpDirectory(dir);
 
   // Step 2: Create temp directory
-  await createDirectory(dir);
+  //await createDirectory(dir);
 
   try {
-    await git.clone(repoUrl, dir);
+    //await git.clone(repoUrl, dir);
+    await git.clone(repoUrl, dir, ['--single-branch', '--depth', '1']);
     //await git.clone({
     //  fs,
     //  http,
@@ -102,13 +115,10 @@ export async function cloneRepository(repoUrl: string, dir: string): Promise<num
     //  singleBranch: true,
     //  depth: 1,
     //});
-    const end = Date.now(); // End time
-    const duration = (end - start) / 1000; // Calculate duration in seconds
-    console.log(`Repository cloned to ${dir}`);
-    return duration;
+    //console.log(`Repository cloned to ${dir}`);
   } catch (error) {
     console.error(`Failed to clone repository: ${(error as Error).message}`);
-    return -1;
+    throw error;
   }
 }
 

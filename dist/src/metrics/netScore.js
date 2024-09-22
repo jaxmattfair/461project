@@ -1,60 +1,95 @@
-import { cloneRepository, getReadmeContent, measureExecutionTime } from "../utils/gitUtils";
-import { fileURLToPath } from 'url';
-import * as path from 'path';
-import { dirname } from 'path';
-import fs from 'fs';
+import { cloneRepository, getReadmeContent, parseGitHubRepoURL, parseMarkdown } from "../utils/gitUtils.js";
+import { getMetricScore } from "./busFactorScore.js";
+import { computeCorrectnessMetric } from "./correctnessScore.js";
+import { extractLicenseInfo } from "./license.js";
+import { calculateRampUpScore, analyzeReadme } from "./rampUpScore.js";
+import { calculateResponsiveness } from "./responsiveMaintainer.js";
 export async function calculateNetScore(repoURL, tempDir) {
-    //Clone repo
+    //console.log("returning early w net score");
+    //return {NetScore: 1};
+    const start = Date.now();
+    let weighted_score = -1; // Default in case of an error
+    // Initialize durations to track metric calculation times
+    let busFactorDuration = 0, licenseDuration = 0, responsiveDuration = 0, correctnessDuration = 0, rampUpDuration = 0;
+    // Initialize scores to handle cases where README is missing
+    let busFactorScore = 0, licenseScore = 0, responsiveMaintainerScore = 0, correctnessScore = 0, rampUpScore = 0;
+    // Try to clone the repository
     try {
-        const { result, duration } = await measureExecutionTime(() => cloneRepository(repoURL, tempDir), 'cloneRepository');
-        console.log(`Result: ${result}`); // Outputs: Result: Data fetched
-        console.log(`Duration: ${duration} seconds`); // Outputs: Duration: 2.00 seconds
+        await cloneRepository(repoURL, tempDir);
     }
     catch (error) {
-        console.error("An error occurred:", error);
+        console.error("An error occurred during cloning:", error);
+        // Return null if cloning fails
+        return null;
     }
-    //Read the ReadMe content
+    // Read the README content
     const readmeContent = getReadmeContent(tempDir);
-    if (readmeContent == null) {
-        //handle exceptions
-        //try other tasks
+    let metrics, parsed, owner, repo;
+    parsed = parseGitHubRepoURL(repoURL);
+    owner = parsed.owner;
+    repo = parsed.repo;
+    // If README is found, parse it and calculate RampUp
+    if (readmeContent !== 'null') {
+        const ast = parseMarkdown(readmeContent);
+        metrics = analyzeReadme(ast);
+        // Calculate ramp-up score and duration (since it depends on the README)
+        [rampUpScore, rampUpDuration] = calculateRampUpScore(metrics);
     }
+    else {
+        console.warn("README not found. Skipping metrics that require README.");
+        // If README is not found, set RampUp score and latency to 0
+        rampUpScore = 0;
+        rampUpDuration = 0;
+    }
+    // Proceed with the other metric calculations that don't require README
+    try {
+        [[busFactorScore, busFactorDuration], [licenseScore, licenseDuration], [responsiveMaintainerScore, responsiveDuration],
+            [correctnessScore, correctnessDuration]] = await Promise.all([
+            getMetricScore(owner, repo),
+            extractLicenseInfo(tempDir, readmeContent),
+            calculateResponsiveness(repoURL),
+            computeCorrectnessMetric(tempDir)
+        ]);
+    }
+    catch (error) {
+        console.error("Error calculating other metrics:", error);
+    }
+    // Calculate the weighted net score
+    weighted_score = busFactorScore * 0.1 + licenseScore * 0.3 + responsiveMaintainerScore * 0.4 + rampUpScore * 0.1 + correctnessScore * 0.1;
+    // Ensure the score is within the valid range [0, 1]
+    if (weighted_score < 0)
+        weighted_score = 0;
+    if (weighted_score > 1)
+        weighted_score = 1;
+    // Calculate the total time for net score calculation
+    const end = Date.now();
+    const netScoreDuration = (end - start) / 1000; // Convert to seconds
+    // Clean up the temporary directory
     /*
-    const ast: Root = parseMarkdown(readmeContent);
-    const metrics = analyzeReadme(ast);
-
-
-    const parsed = parseGitHubRepoURL(repoURL);
-    const owner = parsed.owner;
-    const repo = parsed.repo;
-
-    //const busFactorScore = await getMetricScore(owner, repo);
-    const [busFactorScore, licenseScore, responsiveMaintainerScore, rampUpScore, correctnessScore] = await Promise.all([getMetricScore(owner, repo),
-                                                                                                      extractLicenseInfo(tempDir, readmeContent),
-                                                                                                      calculateResponsiveness(repoURL),
-                                                                                                      calculateRampUpScore(metrics),
-                                                                                                      computeCorrectnessMetric(tempDir)]);
-    
-    const weighted_score = busFactorScore * 0.2 + licenseScore * 0.2 + responsiveMaintainerScore * 0.2  + rampUpScore * 0.2 + correctnessScore * 0.2;
-    if (weighted_score < 0) {
-        return 0;
-    }
-    if (weighted_score > 1) {
-        return 1;
-    }
-    return weighted_score;
-    */
-    return -1;
+    try {
+        await cleanUpDirectory(tempDir);
+    } catch (cleanupError: any) {
+        console.error(`Error during cleanup: ${cleanupError.message}`);
+    }*/
+    // Return all the scores and their latencies in a JSON-compatible object
+    return {
+        NetScore: weighted_score,
+        NetScore_Latency: netScoreDuration,
+        RampUp: rampUpScore,
+        RampUp_Latency: rampUpDuration,
+        Correctness: correctnessScore,
+        Correctness_Latency: correctnessDuration,
+        BusFactor: busFactorScore,
+        BusFactor_Latency: busFactorDuration,
+        ResponsiveMaintainer: responsiveMaintainerScore,
+        ResponsiveMaintainer_Latency: responsiveDuration,
+        License: licenseScore,
+        License_Latency: licenseDuration
+    };
 }
-const repoURL = 'https://github.com/raoakanksh/461project';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const tempDir = path.join(__dirname, 'temp-repo');
-//Clean up existing temp directory
-if (fs.existsSync(tempDir)) {
-    fs.rmSync(tempDir, { recursive: true, force: true });
-}
-console.log(await calculateNetScore(repoURL, tempDir));
-if (fs.existsSync(tempDir)) {
-    fs.rmSync(tempDir, { recursive: true, force: true });
-}
+;
+//const repoURL = 'https://github.com/raoakanksh/461project/';
+//const __filename = fileURLToPath(import.meta.url);
+//const __dirname = dirname(__filename);
+//const tempDir = path.join(process.cwd(), '/temp-repos', '461project')
+//console.log(await calculateNetScore(repoURL, tempDir));

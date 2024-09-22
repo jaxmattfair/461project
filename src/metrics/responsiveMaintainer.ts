@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as dotenv from 'dotenv';
-import { parseGitHubRepoURL } from '../utils/gitUtils';
+import { parseGitHubRepoURL } from '../utils/gitUtils.js';
 
 dotenv.config();
 
@@ -111,7 +111,8 @@ const normalizeResponseTime = (avgResponseTime: number): number => {
 };
 
 // Main function to calculate responsiveness
-export const calculateResponsiveness = async (repoURL: string): Promise<number> => {
+export const calculateResponsiveness = async (repoURL: string): Promise<[number, number]> => {
+    const start = Date.now();
     try {
         const parsed = parseGitHubRepoURL(repoURL);
         const owner: string = parsed.owner;
@@ -122,8 +123,8 @@ export const calculateResponsiveness = async (repoURL: string): Promise<number> 
             fetchAllClosedPullRequests(owner, repo)
         ]);
 
-        console.log(`Fetched ${issues.length} closed issues.`);
-        console.log(`Fetched ${pullRequests.length} closed pull requests.`);
+        //console.log(`Fetched ${issues.length} closed issues.`);
+        //console.log(`Fetched ${pullRequests.length} closed pull requests.`);
 
         // Calculate response times for issues
         const issueResponseTimes = issues
@@ -146,14 +147,16 @@ export const calculateResponsiveness = async (repoURL: string): Promise<number> 
         const responsiveScore: number = normalizeResponseTime(overallAvgResponseTime);
 
         // Output the results
-        console.log('\n--- Responsiveness Metrics ---');
-        console.log(`Average Issue Response Time: ${avgIssueResponseTime.toFixed(2)} hours`);
-        console.log(`Average Pull Request Response Time: ${avgPRResponseTime.toFixed(2)} hours`);
-        console.log(`Overall Average Response Time: ${overallAvgResponseTime.toFixed(2)} hours`);
-        console.log(`\nResponsive Score: ${responsiveScore} / 1`);
-        return responsiveScore;
+        //console.log('\n--- Responsiveness Metrics ---');
+        //console.log(`Average Issue Response Time: ${avgIssueResponseTime.toFixed(2)} hours`);
+        //console.log(`Average Pull Request Response Time: ${avgPRResponseTime.toFixed(2)} hours`);
+        //console.log(`Overall Average Response Time: ${overallAvgResponseTime.toFixed(2)} hours`);
+        //console.log(`\nResponsive Score: ${responsiveScore} / 1`);
+        const end = Date.now();
+        const duration = (end - start) / 1000;
+        return [responsiveScore, duration];
     } catch (error) {
         console.error('Error calculating responsiveness:', error);
     }
-    return -1;
+    return [-1, -1];
 };

@@ -1,4 +1,4 @@
-import { getLicenseFileContent } from '../utils/gitUtils';
+import { getLicenseFileContent } from '../utils/gitUtils.js';
 // Function to extract license section from README using regex
 export function extractLicenseFromReadme(content) {
     const licenseRegex = /##?\s*License[\s\S]*?(?=##|$)/i; // Matches "License" section until next heading or end of file
@@ -7,24 +7,31 @@ export function extractLicenseFromReadme(content) {
 }
 // Main function to extract license info from a cloned repository, return 1 if found
 export async function extractLicenseInfo(dir, readmeContent) {
+    const start = Date.now();
     // Step 2: Check README file for a license section
     if (readmeContent) {
         const licenseInReadme = extractLicenseFromReadme(readmeContent);
         if (licenseInReadme) {
-            console.log('License found in README:');
-            console.log(licenseInReadme);
-            return isLGPLv21(licenseInReadme);
+            //console.log('License found in README:');
+            //console.log(licenseInReadme);
+            const licenseScore = isLGPLv21(licenseInReadme);
+            const end = Date.now();
+            const duration = (end - start) / 1000;
+            return [licenseScore, duration];
         }
     }
     // Step 3: Check for LICENSE file in the root directory
     const licenseFileContent = getLicenseFileContent(dir);
     if (licenseFileContent) {
-        console.log('License found in LICENSE file:');
-        console.log(licenseFileContent);
-        return isLGPLv21(licenseFileContent);
+        //console.log('License found in LICENSE file:');
+        //console.log(licenseFileContent);
+        const licenseScore = isLGPLv21(licenseFileContent);
+        const end = Date.now();
+        const duration = (end - start) / 1000;
+        return [licenseScore, duration];
     }
-    console.log('No license information found.');
-    return 0;
+    //console.log('No license information found.');
+    return [0, 0];
 }
 /**
  * Checks if the provided license text matches GNU LGPL v2.1.

@@ -43,7 +43,7 @@ async function fetchRepositoryUrl(packageName: string): Promise<string | null> {
       throw new Error(`Failed to fetch package data: ${response.status} ${response.statusText}`);
     }
 
-    const data = await response.json();
+    const data: any = await response.json();
 
     // The 'repository' field can be a string or an object
     let repository: any = data.repository;

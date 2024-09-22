@@ -28,9 +28,9 @@ async function testRampUp() {
         //}
         //Test responsive maintainer
         const responsive = await calculateResponsiveness(repoUrl);
-        if (responsive != -1) {
-            console.log("Responsive score: ", responsive);
-        }
+        //if (responsive != -1) {
+        //    console.log("Responsive score: ", responsive);
+        //}
         //Test correctness
         const correctness = await computeCorrectnessMetric(tempDir);
         console.log(correctness);

@@ -1,12 +1,15 @@
-import git from 'isomorphic-git';
-import * as fs from 'fs';
+//import git from 'isomorphic-git';
+import fs from 'fs';
+import fsPromises from 'fs/promises';
 import { createRequire } from 'module';
 const requires = createRequire(import.meta.url);
-const http = requires('isomorphic-git/http/node'); // Import CommonJS module
+//const http = requires('isomorphic-git/http/node'); // Import CommonJS module
 import * as path from 'path';
+import simpleGit from 'simple-git';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
+const git = simpleGit();
 // Subfunction to measure how long an async function takes
 export async function measureExecutionTime(asyncFunction, functionName) {
     const start = Date.now(); // Start time
@@ -22,18 +25,87 @@ export async function measureExecutionTime(asyncFunction, functionName) {
         throw error; // Rethrow the error for further handling
     }
 }
+/**
+ * Creates a directory with writable permissions.
+ * @param dir - The directory path to create.
+ */
+async function createDirectory(dir) {
+    try {
+        await fsPromises.mkdir(dir, { recursive: true });
+        //console.log(`Created directory: ${dir}`);
+        // Attempt to set permissions (works on Unix-based systems)
+        /*
+        try {
+            await fsPromises.chmod(dir, 0o755);
+            console.log(`Set permissions to writable for directory: ${dir}`);
+        } catch (chmodError: any) {
+            console.warn(`Could not set permissions for ${dir}: ${chmodError.message}`);
+            // On Windows, chmod might not have the desired effect
+        }*/
+    }
+    catch (error) {
+        console.error(`Error creating directory ${dir}: ${error.message}`);
+        throw error;
+    }
+}
+/**
+ * Removes a directory if it exists.
+ * @param dir - The directory path to remove.
+ */
+export async function cleanUpDirectory(dir) {
+    const exists = await directoryExists(dir);
+    if (exists) {
+        try {
+            await fsPromises.rm(dir, { recursive: true, force: true });
+            //console.log(`Removed existing directory: ${dir}`);
+        }
+        catch (error) {
+            console.error(`Error removing directory ${dir}: ${error.message}`);
+            throw error;
+        }
+    }
+}
+/**
+ * Checks if a directory exists.
+ * @param dir - The directory path to check.
+ * @returns A promise that resolves to `true` if the directory exists, `false` otherwise.
+ */
+async function directoryExists(dir) {
+    try {
+        await fsPromises.access(dir);
+        return true;
+    }
+    catch {
+        return false;
+    }
+}
 //Awaits git clone of repository 
 export async function cloneRepository(repoUrl, dir) {
+    //console.log(`Starting clone operation for ${repoUrl} into ${dir}`);
+    //console.time('Total Clone Time');
+    // Step 1: Clean up the directory
+    //console.time('Clean Up Directory Time');
+    await cleanUpDirectory(dir);
+    //console.timeEnd('Clean Up Directory Time');
+    // Step 2: Create the directory
+    //console.time('Create Directory Time');
+    //await createDirectory(dir);
+    //console.timeEnd('Create Directory Time');
+    //await cleanUpDirectory(dir);
+    // Step 2: Create temp directory
+    //await createDirectory(dir);
     try {
-        await git.clone({
-            fs,
-            http,
-            dir,
-            url: repoUrl,
-            singleBranch: true,
-            depth: 1,
-        });
-        console.log(`Repository cloned to ${dir}`);
+        //await git.clone(repoUrl, dir);
+        await git.clone(repoUrl, dir, ['--single-branch', '--depth', '1']);
+        //await git.clone({
+        //  fs,
+        //  http,
+        //  dir,
+        //  url: repoUrl,
+        //  singleBranch: true,
+        //  depth: 1,
+        //});
+        //console.log(`Repository cloned to ${dir}`);
     }
     catch (error) {
         console.error(`Failed to clone repository: ${error.message}`);
@@ -60,11 +132,11 @@ export function getReadmeContent(repoDir) {
             }
             catch (error) {
                 console.error(`Error reading ${filename}: ${error.message}`);
-                return null;
+                return "null";
             }
         }
     }
-    return null;
+    return "null";
 }
 export function parseMarkdown(content) {
     return unified().use(remarkParse).use(remarkGfm).parse(content);

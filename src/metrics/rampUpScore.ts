@@ -1,4 +1,3 @@
-import git from 'isomorphic-git'; // Module for Git operations in JavaScript
 import * as fs from 'fs';          // Node.js File System module for file operations
 import * as path from 'path';      // Node.js Path module for handling file paths
 import { Root } from 'mdast';      // Type representing the root of an MDAST (Markdown Abstract Syntax Tree)
@@ -61,7 +60,7 @@ export function analyzeReadme(content: Root): Metrics {
       switch (node.type) {
         case 'heading':
           const title = toString(node).toLowerCase();
-          console.log(title);
+          //console.log(title);
           if (title.includes('introduction')) metrics.essentialSections.introduction = true;
           if (title.includes('getting started')) metrics.essentialSections.gettingStarted = true;
           if (title.includes('installation')) metrics.essentialSections.installation = true;
@@ -101,7 +100,8 @@ export function analyzeReadme(content: Root): Metrics {
  * @param metrics - The metrics extracted from the README.
  * @returns A number between 0 and 1 representing the normalized score.
  */
-export function calculateRampUpScore(metrics: Metrics): number {
+export function calculateRampUpScore(metrics: Metrics): [number, number] {
+  const start = Date.now();
   // Define maximum expected values for normalization
   const MAX_CODE_BLOCKS = 50; 
   const MAX_LINKS = 50;        
@@ -116,6 +116,15 @@ export function calculateRampUpScore(metrics: Metrics): number {
   const linksScore = Math.min(metrics.links / MAX_LINKS, 1);
 
   //Calculate and return arithmetic mean score [0, 1]
-  const finalScore = (essentialScore + codeBlocksScore + linksScore) / 3;
-  return finalScore;
+  let finalScore: number = (essentialScore + codeBlocksScore + linksScore) / 3;
+  if (finalScore < 0) {
+    finalScore = 0;
+  }
+  if (finalScore > 1) {
+    finalScore = 1;
+  }
+  const end = Date.now();
+  const duration = (end - start) / 1000;
+
+  return [finalScore, duration];
 }

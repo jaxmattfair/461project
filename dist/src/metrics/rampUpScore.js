@@ -35,7 +35,7 @@ export function analyzeReadme(content) {
         switch (node.type) {
             case 'heading':
                 const title = toString(node).toLowerCase();
-                console.log(title);
+                //console.log(title);
                 if (title.includes('introduction'))
                     metrics.essentialSections.introduction = true;
                 if (title.includes('getting started'))
@@ -77,6 +77,7 @@ export function analyzeReadme(content) {
  * @returns A number between 0 and 1 representing the normalized score.
  */
 export function calculateRampUpScore(metrics) {
+    const start = Date.now();
     // Define maximum expected values for normalization
     const MAX_CODE_BLOCKS = 50;
     const MAX_LINKS = 50;
@@ -88,6 +89,14 @@ export function calculateRampUpScore(metrics) {
     const codeBlocksScore = Math.min(metrics.codeBlocks / MAX_CODE_BLOCKS, 1);
     const linksScore = Math.min(metrics.links / MAX_LINKS, 1);
     //Calculate and return arithmetic mean score [0, 1]
-    const finalScore = (essentialScore + codeBlocksScore + linksScore) / 3;
-    return finalScore;
+    let finalScore = (essentialScore + codeBlocksScore + linksScore) / 3;
+    if (finalScore < 0) {
+        finalScore = 0;
+    }
+    if (finalScore > 1) {
+        finalScore = 1;
+    }
+    const end = Date.now();
+    const duration = (end - start) / 1000;
+    return [finalScore, duration];
 }

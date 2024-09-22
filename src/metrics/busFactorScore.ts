@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import * as dotenv from 'dotenv';
 import { differenceInHours } from 'date-fns';
-import { parseGitHubRepoURL } from '../utils/gitUtils';
+import { parseGitHubRepoURL } from '../utils/gitUtils.js';
 
 // Load environment variables from .env
 dotenv.config();
@@ -94,22 +94,22 @@ async function fetchPaginatedData<T>(url: string, params: FetchParams = {}): Pro
 }
 
 // Function to fetch metrics and calculate the metric score
-export async function getMetricScore(owner: string, repo: string): Promise<number> {
-  
+export async function getMetricScore(owner: string, repo: string): Promise<[number, number]> {
+  const start = Date.now(); 
   try {
     // Fetch contributors (with pagination)
     const contributors: Contributor[] = await fetchPaginatedData<Contributor>(
       `https://api.github.com/repos/${owner}/${repo}/contributors`
     );
     const uniqueContributors: number = contributors.length;
-    console.log(`Total Unique Contributors: ${uniqueContributors}`);
+    //console.log(`Total Unique Contributors: ${uniqueContributors}`);
 
     // Fetch CI/CD workflow runs (with pagination)
     const workflowRuns: WorkflowRun[] = await fetchPaginatedData<WorkflowRun>(
       `https://api.github.com/repos/${owner}/${repo}/actions/runs`
     );
     const totalTests: number = workflowRuns.length;
-    console.log(`Total CI/CD Tests: ${totalTests}`);
+    //console.log(`Total CI/CD Tests: ${totalTests}`);
 
     // Fetch pull requests (with pagination)
     const pullRequests: PullRequest[] = await fetchPaginatedData<PullRequest>(
@@ -119,7 +119,7 @@ export async function getMetricScore(owner: string, repo: string): Promise<numbe
       }
     );
     const totalPRs: number = pullRequests.length;
-    console.log(`Total Pull Requests: ${totalPRs}`);
+    //console.log(`Total Pull Requests: ${totalPRs}`);
 
     // Fetch issues (with pagination)
     const issues: Issue[] = await fetchPaginatedData<Issue>(
@@ -130,8 +130,8 @@ export async function getMetricScore(owner: string, repo: string): Promise<numbe
     );
     const openIssues: number = issues.filter((issue) => issue.state === 'open').length;
     const closedIssues: number = issues.filter((issue) => issue.state === 'closed').length;
-    console.log(`Open Issues: ${openIssues}`);
-    console.log(`Closed Issues: ${closedIssues}`);
+    //console.log(`Open Issues: ${openIssues}`);
+    //console.log(`Closed Issues: ${closedIssues}`);
 
     const activityScore: number =
         uniqueContributors > MAX_UNIQUE_CONTRIBUTORS ? 0.4 : (uniqueContributors / MAX_UNIQUE_CONTRIBUTORS) * 0.4; // 40% weight for contributors
@@ -149,11 +149,13 @@ export async function getMetricScore(owner: string, repo: string): Promise<numbe
     if (metricScore > 1) {
       metricScore = 1;
     }
-    console.log(`Metric Score: ${metricScore.toFixed(2)}`);
-    return metricScore;
+    const end = Date.now();
+    const duration = (end - start) / 1000; // Calculate duration in seconds
+    //console.log(`Metric Score: ${metricScore.toFixed(2)}`);
+    return [metricScore, duration];
   } catch (error) {
     console.error('Error fetching data from GitHub:', error);
-    return -1;
+    return [-1, -1];
   }
 }
 
