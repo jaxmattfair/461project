@@ -2627,3 +2627,41 @@ Node.js v22.8.0]:
 2024-09-22 14:40:34 [Error: Invalid URL or no GitHub repository found for https://invalidrepo.com/invalidrepo]: 
 2024-09-22 14:40:34 [Node.js error: Error: Invalid URL. Must be a valid npm package URL or GitHub repository URL.]: 
 2024-09-22 14:40:35 [Finished module ranking.]: 
+2024-09-22 14:45:50 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 14:45:50 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 14:45:51 [Valid GitHub URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 14:45:51 [Created temporary directory: /tmp/tmp.77T4effMAy]: 
+2024-09-22 14:45:51 [Calculating metrics for https://github.com/raoakanksh/461project]: 
+2024-09-22 14:46:10 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 14:46:10 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 14:46:11 [Valid GitHub URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 14:46:11 [Created temporary directory: /tmp/tmp.iEDLgs88qU]: 
+2024-09-22 14:46:11 [Calculating metrics for https://github.com/raoakanksh/461project]: 
+2024-09-22 14:46:25 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 14:46:25 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 14:46:26 [Valid GitHub URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 14:46:26 [Created temporary directory: /tmp/tmp.FXdYUFk0oK]: 
+2024-09-22 14:46:26 [Calculating metrics for https://github.com/raoakanksh/461project]: 
+2024-09-22 14:46:44 [Result: {"URL":"https://github.com/raoakanksh/461project","NetScore":0.301,"NetScore_Latency":17.039,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.002,"BusFactor":0.014,"BusFactor_Latency":2.077,"ResponsiveMaintainer":0.5,"ResponsiveMaintainer_Latency":0.414,"License":0,"License_Latency":0}]: 
+2024-09-22 14:46:44 [Removed temporary directory: /tmp/tmp.FXdYUFk0oK]: 
+2024-09-22 14:46:44 [Processing URL: https://github.com/browserify/browserify]: 
+2024-09-22 14:46:45 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 14:46:45 [Created temporary directory: /tmp/tmp.LN5WBicuv4]: 
+2024-09-22 14:46:45 [Calculating metrics for https://github.com/browserify/browserify]: 
+2024-09-22 14:47:08 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 14:47:08 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 14:47:08 [Valid GitHub URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 14:47:09 [Created temporary directory: /tmp/tmp.NSx5ir3UYu]: 
+2024-09-22 14:47:09 [Calculating metrics for https://github.com/raoakanksh/461project]: 
+2024-09-22 14:47:30 [Result: {"URL":"https://github.com/raoakanksh/461project","NetScore":0.301,"NetScore_Latency":20.436,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.002,"BusFactor":0.014,"BusFactor_Latency":1.592,"ResponsiveMaintainer":0.5,"ResponsiveMaintainer_Latency":0.578,"License":0,"License_Latency":0}]: 
+2024-09-22 14:47:30 [Removed temporary directory: /tmp/tmp.NSx5ir3UYu]: 
+2024-09-22 14:47:30 [Processing URL: https://github.com/browserify/browserify]: 
+2024-09-22 14:47:31 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 14:47:31 [Created temporary directory: /tmp/tmp.z1102Lgrig]: 
+2024-09-22 14:47:31 [Calculating metrics for https://github.com/browserify/browserify]: 
+2024-09-22 14:48:10 [Result: {"URL":"https://github.com/browserify/browserify","NetScore":0.17,"NetScore_Latency":37.834,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.003,"BusFactor":0.7,"BusFactor_Latency":36.375,"ResponsiveMaintainer":0,"ResponsiveMaintainer_Latency":14.215,"License":0,"License_Latency":0.001}]: 
+2024-09-22 14:48:10 [Removed temporary directory: /tmp/tmp.z1102Lgrig]: 
+2024-09-22 14:48:10 [Processing URL: https://invalidrepo.com/invalidrepo]: 
+2024-09-22 14:48:11 [Error: Invalid URL or no GitHub repository found for https://invalidrepo.com/invalidrepo]: 
+2024-09-22 14:48:11 [Node.js error: Error: Invalid URL. Must be a valid npm package URL or GitHub repository URL.]: 
+2024-09-22 14:48:11 [Finished module ranking.]: 
