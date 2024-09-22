@@ -5,7 +5,7 @@ const program = new Command();
 
 //Set CLI details
 program
-    .name('run')
+    .name('runner')
     .description('description for this CLI for project phase 1')
     .version('1.0.0');
 
