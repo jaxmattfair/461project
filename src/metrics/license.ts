@@ -5,7 +5,7 @@ export function extractLicenseFromReadme(content: string): string | null {
     const licenseRegex = /##?\s*License[\s\S]*?(?=##|$)/i; // Matches "License" section until next heading or end of file
     const match = content.match(licenseRegex);
     return match ? match[0].trim() : null;
-  }
+}
   
 // Main function to extract license info from a cloned repository, return 1 if found
 export async function extractLicenseInfo(dir: string, readmeContent: string | null): Promise<[number, number]> {

@@ -195,9 +195,12 @@ rank_modules() {
 run_tests() {
     log "Starting test execution"
     test_output=$(npm test 2>&1)
-    total_tests=$(echo "$test_output" | grep -oP 'Total: \K\d+' || echo "N/A")
-    passed_tests=$(echo "$test_output" | grep -oP 'Passed: \K\d+' || echo "N/A")
-    coverage=$(echo "$test_output" | grep -oP 'Coverage: \K\d+' || echo "N/A")
+    # Extract total tests
+    total_tests=$(echo "$test_output" | grep -oP 'Tests:\s+\d+\s+failed,\s+\d+\s+passed,\s+\K\d+' || echo "N/A")
+    # Extract passed tests
+    passed_tests=$(echo "$test_output" | grep -oP 'Tests:\s+\d+\s+failed,\s+\K\d+' || echo "N/A")
+    # Extract coverage percentage
+    coverage=$(echo "$test_output" | grep -oP 'Coverage:\s+\K\d+%' || echo "N/A")
     echo "Total: $total_tests"
     echo "Passed: $passed_tests"
     echo "Coverage: $coverage%"

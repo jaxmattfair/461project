@@ -2665,3 +2665,32 @@ Node.js v22.8.0]:
 2024-09-22 14:48:11 [Error: Invalid URL or no GitHub repository found for https://invalidrepo.com/invalidrepo]: 
 2024-09-22 14:48:11 [Node.js error: Error: Invalid URL. Must be a valid npm package URL or GitHub repository URL.]: 
 2024-09-22 14:48:11 [Finished module ranking.]: 
+2024-09-22 15:13:33 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 15:13:33 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 15:13:34 [Valid GitHub URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 15:13:34 [Created temporary directory: /tmp/tmp.SU1pbHSnNg]: 
+2024-09-22 15:13:34 [Calculating metrics for https://github.com/raoakanksh/461project]: 
+2024-09-22 15:13:51 [Result: {"URL":"https://github.com/raoakanksh/461project","NetScore":0.301,"NetScore_Latency":15.854,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.002,"BusFactor":0.014,"BusFactor_Latency":2.118,"ResponsiveMaintainer":0.5,"ResponsiveMaintainer_Latency":0.444,"License":0,"License_Latency":0}]: 
+2024-09-22 15:13:52 [Removed temporary directory: /tmp/tmp.SU1pbHSnNg]: 
+2024-09-22 15:13:52 [Processing URL: https://github.com/browserify/browserify]: 
+2024-09-22 15:13:52 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 15:13:52 [Created temporary directory: /tmp/tmp.ShBk2kzF0w]: 
+2024-09-22 15:13:53 [Calculating metrics for https://github.com/browserify/browserify]: 
+2024-09-22 15:14:28 [Result: {"URL":"https://github.com/browserify/browserify","NetScore":0.17,"NetScore_Latency":34.502,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.003,"BusFactor":0.7,"BusFactor_Latency":33.053,"ResponsiveMaintainer":0,"ResponsiveMaintainer_Latency":16.263,"License":0,"License_Latency":0.001}]: 
+2024-09-22 15:14:28 [Removed temporary directory: /tmp/tmp.ShBk2kzF0w]: 
+2024-09-22 15:14:28 [Processing URL: https://invalidrepo.com/invalidrepo]: 
+2024-09-22 15:14:29 [Error: Invalid URL or no GitHub repository found for https://invalidrepo.com/invalidrepo]: 
+2024-09-22 15:14:29 [Node.js error: Error: Invalid URL. Must be a valid npm package URL or GitHub repository URL.]: 
+2024-09-22 15:14:29 [Finished module ranking.]: 
+2024-09-22 15:42:19 [Starting test execution]: 
+2024-09-22 15:42:23 [Finished test execution]: 
+2024-09-22 16:13:13 [Starting test execution]: 
+2024-09-22 16:13:16 [Finished test execution]: 
+2024-09-22 16:17:16 [Starting test execution]: 
+2024-09-22 16:17:18 [Finished test execution]: 
+2024-09-22 16:17:59 [Starting test execution]: 
+2024-09-22 16:18:08 [Finished test execution]: 
+2024-09-22 16:23:35 [Starting test execution]: 
+2024-09-22 16:23:44 [Finished test execution]: 
+2024-09-22 16:25:31 [Starting test execution]: 
+2024-09-22 16:25:40 [Finished test execution]: 
