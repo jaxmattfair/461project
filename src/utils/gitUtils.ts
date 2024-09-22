@@ -85,7 +85,8 @@ async function directoryExists(dir: string): Promise<boolean> {
 }
 
 //Awaits git clone of repository 
-export async function cloneRepository(repoUrl: string, dir: string): Promise<void> {
+export async function cloneRepository(repoUrl: string, dir: string): Promise<number> {
+  const start = Date.now(); 
   await cleanUpDirectory(dir);
 
   // Step 2: Create temp directory
@@ -101,10 +102,13 @@ export async function cloneRepository(repoUrl: string, dir: string): Promise<voi
     //  singleBranch: true,
     //  depth: 1,
     //});
+    const end = Date.now(); // End time
+    const duration = (end - start) / 1000; // Calculate duration in seconds
     console.log(`Repository cloned to ${dir}`);
+    return duration;
   } catch (error) {
     console.error(`Failed to clone repository: ${(error as Error).message}`);
-    throw error;
+    return -1;
   }
 }
 

@@ -14,9 +14,8 @@ import fs from 'fs';
 export async function calculateNetScore(repoURL: string, tempDir: string): Promise<number> {
     //Clone repo
     try {
-        const { result, duration } = await measureExecutionTime(() => cloneRepository(repoURL, tempDir), 'cloneRepository');
-        console.log(`Result: ${result}`); // Outputs: Result: Data fetched
-        console.log(`Duration: ${duration} seconds`); // Outputs: Duration: 2.00 seconds
+        const cloneDuration = await cloneRepository(repoURL, tempDir);
+        console.log(`Duration: ${cloneDuration} seconds`); // Outputs: Duration: 2.00 seconds
     } catch (error) {
         console.error("An error occurred:", error);
     } //Result is undefined in this case
