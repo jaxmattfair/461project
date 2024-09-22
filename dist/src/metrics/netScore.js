@@ -4,7 +4,7 @@ import { computeCorrectnessMetric } from "./correctnessScore.js";
 import { extractLicenseInfo } from "./license.js";
 import { calculateRampUpScore, analyzeReadme } from "./rampUpScore.js";
 import { calculateResponsiveness } from "./responsiveMaintainer.js";
-export async function calculateNetScore(repoURL, tempDir) {
+export async function calculateNetScore(repoURL, tempDir, tempURL) {
     //console.log("returning early w net score");
     //return {NetScore: 1};
     const start = Date.now();
@@ -73,6 +73,7 @@ export async function calculateNetScore(repoURL, tempDir) {
     }*/
     // Return all the scores and their latencies in a JSON-compatible object
     return {
+        URL: tempURL,
         NetScore: weighted_score,
         NetScore_Latency: netScoreDuration,
         RampUp: rampUpScore,

@@ -11,7 +11,7 @@ import { dirname } from 'path';
 import fs from 'fs';
 
 
-export async function calculateNetScore(repoURL: string, tempDir: string): Promise<any | null> {
+export async function calculateNetScore(repoURL: string, tempDir: string, tempURL: string): Promise<any | null> {
     //console.log("returning early w net score");
     //return {NetScore: 1};
     
@@ -88,6 +88,7 @@ export async function calculateNetScore(repoURL: string, tempDir: string): Promi
 
     // Return all the scores and their latencies in a JSON-compatible object
     return {
+        URL: tempURL,
         NetScore: weighted_score,
         NetScore_Latency: netScoreDuration,
         RampUp: rampUpScore,
