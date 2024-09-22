@@ -2355,3 +2355,275 @@ Node.js v22.8.0]:
 2024-09-22 13:47:34 [License_Latency: 0]: 
 2024-09-22 13:47:34 [Removed temporary directory: /tmp/tmp.kcltyDkYP2]: 
 2024-09-22 13:47:34 [Finished module ranking.]: 
+2024-09-22 13:53:31 [Starting module ranking for URLs in test_urls.txt]: 
+2024-09-22 13:53:31 [Processing URL: https://github.com/facebook/react]: 
+2024-09-22 13:53:32 [Error: Invalid URL or no GitHub repository found for https://github.com/facebook/react]: 
+2024-09-22 13:53:32 [Node.js error: file:///C:/Users/Arnav%20Naval/Downloads/461project/[eval1]:7
+                    const inputUrl = 'https://github.com/facebook/react
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+SyntaxError: Invalid or unexpected token
+    at compileSourceTextModule (node:internal/modules/esm/utils:337:16)
+    at ModuleLoader.evalInstance (node:internal/modules/esm/loader:210:14)
+    at new ModuleJob (node:internal/modules/esm/module_job:76:27)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:214:19)
+    at TracingChannel.tracePromise (node:diagnostics_channel:337:14)
+    at ModuleLoader.eval (node:internal/modules/esm/loader:213:35)
+    at node:internal/process/execution:68:24
+    at asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:11)
+    at Object.runEntryPointWithESMLoader (node:internal/modules/run_main:139:19)
+    at evalModuleEntryPoint (node:internal/process/execution:67:47)
+
+Node.js v22.8.0]: 
+2024-09-22 13:53:32 [Processing URL: https://www.npmjs.com/package/lodash]: 
+2024-09-22 13:53:33 [Error: Invalid URL or no GitHub repository found for https://www.npmjs.com/package/lodash]: 
+2024-09-22 13:53:33 [Node.js error: file:///C:/Users/Arnav%20Naval/Downloads/461project/[eval1]:7
+                    const inputUrl = 'https://www.npmjs.com/package/lodash
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+SyntaxError: Invalid or unexpected token
+    at compileSourceTextModule (node:internal/modules/esm/utils:337:16)
+    at ModuleLoader.evalInstance (node:internal/modules/esm/loader:210:14)
+    at new ModuleJob (node:internal/modules/esm/module_job:76:27)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:214:19)
+    at TracingChannel.tracePromise (node:diagnostics_channel:337:14)
+    at ModuleLoader.eval (node:internal/modules/esm/loader:213:35)
+    at node:internal/process/execution:68:24
+    at asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:11)
+    at Object.runEntryPointWithESMLoader (node:internal/modules/run_main:139:19)
+    at evalModuleEntryPoint (node:internal/process/execution:67:47)
+
+Node.js v22.8.0]: 
+2024-09-22 13:53:33 [Processing URL: https://invalidurl.com/repo]: 
+2024-09-22 13:53:33 [Error: Invalid URL or no GitHub repository found for https://invalidurl.com/repo]: 
+2024-09-22 13:53:34 [Node.js error: file:///C:/Users/Arnav%20Naval/Downloads/461project/[eval1]:7
+                    const inputUrl = 'https://invalidurl.com/repo
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+SyntaxError: Invalid or unexpected token
+    at compileSourceTextModule (node:internal/modules/esm/utils:337:16)
+    at ModuleLoader.evalInstance (node:internal/modules/esm/loader:210:14)
+    at new ModuleJob (node:internal/modules/esm/module_job:76:27)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:214:19)
+    at TracingChannel.tracePromise (node:diagnostics_channel:337:14)
+    at ModuleLoader.eval (node:internal/modules/esm/loader:213:35)
+    at node:internal/process/execution:68:24
+    at asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:11)
+    at Object.runEntryPointWithESMLoader (node:internal/modules/run_main:139:19)
+    at evalModuleEntryPoint (node:internal/process/execution:67:47)
+
+Node.js v22.8.0]: 
+2024-09-22 13:53:34 [Processing URL: https://www.npmjs.com/package/nonexistent-package]: 
+2024-09-22 13:53:34 [Error: Invalid URL or no GitHub repository found for https://www.npmjs.com/package/nonexistent-package]: 
+2024-09-22 13:53:34 [Node.js error: file:///C:/Users/Arnav%20Naval/Downloads/461project/[eval1]:7
+                    const inputUrl = 'https://www.npmjs.com/package/nonexistent-package
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+SyntaxError: Invalid or unexpected token
+    at compileSourceTextModule (node:internal/modules/esm/utils:337:16)
+    at ModuleLoader.evalInstance (node:internal/modules/esm/loader:210:14)
+    at new ModuleJob (node:internal/modules/esm/module_job:76:27)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:214:19)
+    at TracingChannel.tracePromise (node:diagnostics_channel:337:14)
+    at ModuleLoader.eval (node:internal/modules/esm/loader:213:35)
+    at node:internal/process/execution:68:24
+    at asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:11)
+    at Object.runEntryPointWithESMLoader (node:internal/modules/run_main:139:19)
+    at evalModuleEntryPoint (node:internal/process/execution:67:47)
+
+Node.js v22.8.0]: 
+2024-09-22 13:53:34 [Processing URL: https://github.com/nodejs/node]: 
+2024-09-22 13:53:35 [Valid GitHub URL: https://github.com/nodejs/node]: 
+2024-09-22 13:53:35 [Created temporary directory: /tmp/tmp.oFSv88UCHT]: 
+2024-09-22 13:53:35 [Calculating metrics for https://github.com/nodejs/node]: 
+2024-09-22 13:54:50 [Result: null]: 
+2024-09-22 13:54:52 [NetScore: -1]: 
+2024-09-22 13:54:52 [NetScore_Latency: -1]: 
+2024-09-22 13:54:52 [RampUp: -1]: 
+2024-09-22 13:54:52 [RampUp_Latency: -1]: 
+2024-09-22 13:54:52 [Correctness: -1]: 
+2024-09-22 13:54:52 [Correctness_Latency: -1]: 
+2024-09-22 13:54:53 [BusFactor: -1]: 
+2024-09-22 13:54:53 [BusFactor_Latency: -1]: 
+2024-09-22 13:54:53 [ResponsiveMaintainer: -1]: 
+2024-09-22 13:54:53 [ResponsiveMaintainer_Latency: -1]: 
+2024-09-22 13:54:53 [License: -1]: 
+2024-09-22 13:54:53 [License_Latency: -1]: 
+2024-09-22 13:54:53 [Removed temporary directory: /tmp/tmp.oFSv88UCHT]: 
+2024-09-22 13:54:53 [Finished module ranking.]: 
+2024-09-22 14:02:37 [Starting module ranking for URLs in test_urls.txt]: 
+2024-09-22 14:02:37 [Processing URL: https://github.com/facebook/react]: 
+2024-09-22 14:02:38 [Valid GitHub URL: https://github.com/facebook/react]: 
+2024-09-22 14:02:38 [Created temporary directory: /tmp/tmp.918ugEDshu]: 
+2024-09-22 14:02:38 [Calculating metrics for https://github.com/facebook/react]: 
+2024-09-22 14:08:14 [Starting module ranking for URLs in test_urls.txt]: 
+2024-09-22 14:08:14 [Processing URL: https://www.npmjs.com/package/lodash]: 
+2024-09-22 14:08:15 [Valid GitHub URL: https://github.com/lodash/lodash]: 
+2024-09-22 14:08:15 [Created temporary directory: /tmp/tmp.Zax8Z4nL3X]: 
+2024-09-22 14:08:15 [Calculating metrics for https://github.com/lodash/lodash]: 
+2024-09-22 14:10:24 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 14:10:24 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 14:10:25 [Valid GitHub URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 14:10:25 [Created temporary directory: /tmp/tmp.YDdGtznCKx]: 
+2024-09-22 14:10:25 [Calculating metrics for https://github.com/raoakanksh/461project]: 
+2024-09-22 14:10:46 [Result: {"URL":"https://github.com/raoakanksh/461project","NetScore":0.30138,"NetScore_Latency":19.73,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.002,"BusFactor":0.0138,"BusFactor_Latency":1.786,"ResponsiveMaintainer":0.5,"ResponsiveMaintainer_Latency":0.408,"License":0,"License_Latency":0}]: 
+2024-09-22 14:10:48 [NetScore: 0.30138]: 
+2024-09-22 14:10:48 [NetScore_Latency: 19.73]: 
+2024-09-22 14:10:48 [RampUp: 0]: 
+2024-09-22 14:10:49 [RampUp_Latency: 0]: 
+2024-09-22 14:10:49 [Correctness: 1]: 
+2024-09-22 14:10:49 [Correctness_Latency: 0.002]: 
+2024-09-22 14:10:49 [BusFactor: 0.0138]: 
+2024-09-22 14:10:49 [BusFactor_Latency: 1.786]: 
+2024-09-22 14:10:49 [ResponsiveMaintainer: 0.5]: 
+2024-09-22 14:10:49 [ResponsiveMaintainer_Latency: 0.408]: 
+2024-09-22 14:10:49 [License: 0]: 
+2024-09-22 14:10:49 [License_Latency: 0]: 
+2024-09-22 14:10:49 [Removed temporary directory: /tmp/tmp.YDdGtznCKx]: 
+2024-09-22 14:10:49 [Processing URL: https://github.com/browserify/browserify]: 
+2024-09-22 14:10:50 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 14:10:50 [Created temporary directory: /tmp/tmp.ZCRCDAVB5e]: 
+2024-09-22 14:10:50 [Calculating metrics for https://github.com/browserify/browserify]: 
+2024-09-22 14:11:20 [Result: {"URL":"https://github.com/browserify/browserify","NetScore":0.17002,"NetScore_Latency":28.577,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.003,"BusFactor":0.7001999999999999,"BusFactor_Latency":26.687,"ResponsiveMaintainer":0,"ResponsiveMaintainer_Latency":15.486,"License":0,"License_Latency":0.001}]: 
+2024-09-22 14:11:22 [NetScore: 0.17002]: 
+2024-09-22 14:11:22 [NetScore_Latency: 28.577]: 
+2024-09-22 14:11:22 [RampUp: 0]: 
+2024-09-22 14:11:22 [RampUp_Latency: 0]: 
+2024-09-22 14:11:22 [Correctness: 1]: 
+2024-09-22 14:11:22 [Correctness_Latency: 0.003]: 
+2024-09-22 14:11:22 [BusFactor: 0.7001999999999999]: 
+2024-09-22 14:11:22 [BusFactor_Latency: 26.687]: 
+2024-09-22 14:11:22 [ResponsiveMaintainer: 0]: 
+2024-09-22 14:11:22 [ResponsiveMaintainer_Latency: 15.486]: 
+2024-09-22 14:11:22 [License: 0]: 
+2024-09-22 14:11:22 [License_Latency: 0.001]: 
+2024-09-22 14:11:23 [Removed temporary directory: /tmp/tmp.ZCRCDAVB5e]: 
+2024-09-22 14:11:23 [Finished module ranking.]: 
+2024-09-22 14:11:38 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 14:11:38 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 14:11:39 [Valid GitHub URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 14:11:39 [Created temporary directory: /tmp/tmp.tSFxOOWtIe]: 
+2024-09-22 14:11:39 [Calculating metrics for https://github.com/raoakanksh/461project]: 
+2024-09-22 14:12:01 [Result: {"URL":"https://github.com/raoakanksh/461project","NetScore":0.30138,"NetScore_Latency":20.835,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.002,"BusFactor":0.0138,"BusFactor_Latency":1.731,"ResponsiveMaintainer":0.5,"ResponsiveMaintainer_Latency":0.39,"License":0,"License_Latency":0}]: 
+2024-09-22 14:12:03 [NetScore: 0.30138]: 
+2024-09-22 14:12:03 [NetScore_Latency: 20.835]: 
+2024-09-22 14:12:03 [RampUp: 0]: 
+2024-09-22 14:12:03 [RampUp_Latency: 0]: 
+2024-09-22 14:12:04 [Correctness: 1]: 
+2024-09-22 14:12:04 [Correctness_Latency: 0.002]: 
+2024-09-22 14:12:04 [BusFactor: 0.0138]: 
+2024-09-22 14:12:04 [BusFactor_Latency: 1.731]: 
+2024-09-22 14:12:04 [ResponsiveMaintainer: 0.5]: 
+2024-09-22 14:12:04 [ResponsiveMaintainer_Latency: 0.39]: 
+2024-09-22 14:12:04 [License: 0]: 
+2024-09-22 14:12:04 [License_Latency: 0]: 
+2024-09-22 14:12:04 [Removed temporary directory: /tmp/tmp.tSFxOOWtIe]: 
+2024-09-22 14:12:04 [Processing URL: https://github.com/browserify/browserify]: 
+2024-09-22 14:12:05 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 14:12:05 [Created temporary directory: /tmp/tmp.Gp6ab92g1E]: 
+2024-09-22 14:12:05 [Calculating metrics for https://github.com/browserify/browserify]: 
+2024-09-22 14:12:32 [Result: {"URL":"https://github.com/browserify/browserify","NetScore":0.17002,"NetScore_Latency":26.333,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.004,"BusFactor":0.7001999999999999,"BusFactor_Latency":24.848,"ResponsiveMaintainer":0,"ResponsiveMaintainer_Latency":14.99,"License":0,"License_Latency":0.001}]: 
+2024-09-22 14:12:34 [NetScore: 0.17002]: 
+2024-09-22 14:12:34 [NetScore_Latency: 26.333]: 
+2024-09-22 14:12:35 [RampUp: 0]: 
+2024-09-22 14:12:35 [RampUp_Latency: 0]: 
+2024-09-22 14:12:35 [Correctness: 1]: 
+2024-09-22 14:12:35 [Correctness_Latency: 0.004]: 
+2024-09-22 14:12:35 [BusFactor: 0.7001999999999999]: 
+2024-09-22 14:12:35 [BusFactor_Latency: 24.848]: 
+2024-09-22 14:12:35 [ResponsiveMaintainer: 0]: 
+2024-09-22 14:12:35 [ResponsiveMaintainer_Latency: 14.99]: 
+2024-09-22 14:12:35 [License: 0]: 
+2024-09-22 14:12:35 [License_Latency: 0.001]: 
+2024-09-22 14:12:35 [Removed temporary directory: /tmp/tmp.Gp6ab92g1E]: 
+2024-09-22 14:12:35 [Processing URL: https://invalidurl.com/repo]: 
+2024-09-22 14:12:36 [Error: Invalid URL or no GitHub repository found for https://invalidurl.com/repo]: 
+2024-09-22 14:12:36 [Node.js error: Error: Invalid URL. Must be a valid npm package URL or GitHub repository URL.]: 
+2024-09-22 14:12:36 [Finished module ranking.]: 
+ [Starting module ranking for URLs in sample_urls.txt]: 
+ [Processing URL: https://github.com/raoakanksh/461project]: 
+ [Valid GitHub URL: https://github.com/raoakanksh/461project]: 
+ [Created temporary directory: /tmp/tmp.9ShPTpSrN9]: 
+ [Calculating metrics for https://github.com/raoakanksh/461project]: 
+2024-09-22 14:22:09 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 14:22:09 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 14:22:10 [Valid GitHub URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 14:22:10 [Created temporary directory: /tmp/tmp.ii6swGl0Jx]: 
+2024-09-22 14:22:10 [Calculating metrics for https://github.com/raoakanksh/461project]: 
+2024-09-22 14:23:27 [Result: null]: 
+2024-09-22 14:23:27 [Removed temporary directory: /tmp/tmp.ii6swGl0Jx]: 
+2024-09-22 14:23:27 [Processing URL: https://github.com/browserify/browserify]: 
+2024-09-22 14:23:28 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 14:23:28 [Created temporary directory: /tmp/tmp.1XekZ7YHbR]: 
+2024-09-22 14:23:28 [Calculating metrics for https://github.com/browserify/browserify]: 
+2024-09-22 14:24:02 [Result: {"URL":"https://github.com/browserify/browserify","NetScore":0.17002,"NetScore_Latency":33.392,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.002,"BusFactor":0.7001999999999999,"BusFactor_Latency":31.76,"ResponsiveMaintainer":0,"ResponsiveMaintainer_Latency":14.504,"License":0,"License_Latency":0.001}]: 
+2024-09-22 14:24:03 [Removed temporary directory: /tmp/tmp.1XekZ7YHbR]: 
+2024-09-22 14:24:03 [Processing URL: https://invalidurl.com/repo]: 
+2024-09-22 14:24:03 [Error: Invalid URL or no GitHub repository found for https://invalidurl.com/repo]: 
+2024-09-22 14:24:03 [Node.js error: Error: Invalid URL. Must be a valid npm package URL or GitHub repository URL.]: 
+2024-09-22 14:24:04 [Finished module ranking.]: 
+2024-09-22 14:24:07 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 14:24:07 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 14:24:08 [Valid GitHub URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 14:24:08 [Created temporary directory: /tmp/tmp.8znWrMeEIV]: 
+2024-09-22 14:24:08 [Calculating metrics for https://github.com/raoakanksh/461project]: 
+2024-09-22 14:25:20 [Result: null]: 
+2024-09-22 14:25:20 [Removed temporary directory: /tmp/tmp.8znWrMeEIV]: 
+2024-09-22 14:25:20 [Processing URL: https://github.com/browserify/browserify]: 
+2024-09-22 14:25:21 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 14:25:21 [Created temporary directory: /tmp/tmp.7kLzFqYhlA]: 
+2024-09-22 14:25:21 [Calculating metrics for https://github.com/browserify/browserify]: 
+2024-09-22 14:25:49 [Result: {"URL":"https://github.com/browserify/browserify","NetScore":0.17002,"NetScore_Latency":26.33,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.002,"BusFactor":0.7001999999999999,"BusFactor_Latency":24.779,"ResponsiveMaintainer":0,"ResponsiveMaintainer_Latency":17.314,"License":0,"License_Latency":0}]: 
+2024-09-22 14:25:49 [Removed temporary directory: /tmp/tmp.7kLzFqYhlA]: 
+2024-09-22 14:25:49 [Processing URL: https://invalidurl.com/repo]: 
+2024-09-22 14:25:50 [Error: Invalid URL or no GitHub repository found for https://invalidurl.com/repo]: 
+2024-09-22 14:25:50 [Node.js error: Error: Invalid URL. Must be a valid npm package URL or GitHub repository URL.]: 
+2024-09-22 14:25:50 [Finished module ranking.]: 
+2024-09-22 14:26:38 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 14:26:38 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 14:26:39 [Valid GitHub URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 14:26:39 [Created temporary directory: /tmp/tmp.Z5nroRIIB1]: 
+2024-09-22 14:26:39 [Calculating metrics for https://github.com/raoakanksh/461project]: 
+2024-09-22 14:26:59 [Result: {"URL":"https://github.com/raoakanksh/461project","NetScore":0.30138,"NetScore_Latency":19.001,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.002,"BusFactor":0.0138,"BusFactor_Latency":2.46,"ResponsiveMaintainer":0.5,"ResponsiveMaintainer_Latency":0.499,"License":0,"License_Latency":0}]: 
+2024-09-22 14:26:59 [Removed temporary directory: /tmp/tmp.Z5nroRIIB1]: 
+2024-09-22 14:26:59 [Processing URL: https://github.com/browserify/browserify]: 
+2024-09-22 14:27:00 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 14:27:00 [Created temporary directory: /tmp/tmp.wwgqElApoG]: 
+2024-09-22 14:27:00 [Calculating metrics for https://github.com/browserify/browserify]: 
+2024-09-22 14:27:31 [Result: {"URL":"https://github.com/browserify/browserify","NetScore":0.17002,"NetScore_Latency":29.477,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.002,"BusFactor":0.7001999999999999,"BusFactor_Latency":27.602,"ResponsiveMaintainer":0,"ResponsiveMaintainer_Latency":15.288,"License":0,"License_Latency":0}]: 
+2024-09-22 14:27:31 [Removed temporary directory: /tmp/tmp.wwgqElApoG]: 
+2024-09-22 14:27:31 [Finished module ranking.]: 
+2024-09-22 14:28:10 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 14:28:10 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 14:28:10 [Valid GitHub URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 14:28:10 [Created temporary directory: /tmp/tmp.0s8mblHUqE]: 
+2024-09-22 14:28:10 [Calculating metrics for https://github.com/raoakanksh/461project]: 
+2024-09-22 14:28:29 [Result: {"URL":"https://github.com/raoakanksh/461project","NetScore":0.30138,"NetScore_Latency":17.763,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.002,"BusFactor":0.0138,"BusFactor_Latency":1.756,"ResponsiveMaintainer":0.5,"ResponsiveMaintainer_Latency":0.404,"License":0,"License_Latency":0}]: 
+2024-09-22 14:28:29 [Removed temporary directory: /tmp/tmp.0s8mblHUqE]: 
+2024-09-22 14:28:30 [Processing URL: https://github.com/browserify/browserify]: 
+2024-09-22 14:28:30 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 14:28:30 [Created temporary directory: /tmp/tmp.UOubQKMv63]: 
+2024-09-22 14:28:30 [Calculating metrics for https://github.com/browserify/browserify]: 
+2024-09-22 14:28:59 [Result: {"URL":"https://github.com/browserify/browserify","NetScore":0.17002,"NetScore_Latency":27.407,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.003,"BusFactor":0.7001999999999999,"BusFactor_Latency":25.12,"ResponsiveMaintainer":0,"ResponsiveMaintainer_Latency":15.072,"License":0,"License_Latency":0}]: 
+2024-09-22 14:28:59 [Removed temporary directory: /tmp/tmp.UOubQKMv63]: 
+2024-09-22 14:28:59 [Processing URL: https://invalidrepo.com/invalidrepo]: 
+2024-09-22 14:29:00 [Error: Invalid URL or no GitHub repository found for https://invalidrepo.com/invalidrepo]: 
+2024-09-22 14:29:00 [Node.js error: Error: Invalid URL. Must be a valid npm package URL or GitHub repository URL.]: 
+2024-09-22 14:29:00 [Finished module ranking.]: 
+2024-09-22 14:39:45 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 14:39:45 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 14:39:46 [Valid GitHub URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 14:39:46 [Created temporary directory: /tmp/tmp.OI63pSvBaQ]: 
+2024-09-22 14:39:46 [Calculating metrics for https://github.com/raoakanksh/461project]: 
+2024-09-22 14:40:06 [Result: {"URL":"https://github.com/raoakanksh/461project","NetScore":0.301,"NetScore_Latency":19.331,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.002,"BusFactor":0.014,"BusFactor_Latency":1.589,"ResponsiveMaintainer":0.5,"ResponsiveMaintainer_Latency":0.522,"License":0,"License_Latency":0}]: 
+2024-09-22 14:40:06 [Removed temporary directory: /tmp/tmp.OI63pSvBaQ]: 
+2024-09-22 14:40:07 [Processing URL: https://github.com/browserify/browserify]: 
+2024-09-22 14:40:07 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 14:40:07 [Created temporary directory: /tmp/tmp.QdhPIwLmpx]: 
+2024-09-22 14:40:07 [Calculating metrics for https://github.com/browserify/browserify]: 
+2024-09-22 14:40:34 [Result: {"URL":"https://github.com/browserify/browserify","NetScore":0.17,"NetScore_Latency":25.001,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.002,"BusFactor":0.7,"BusFactor_Latency":23.487,"ResponsiveMaintainer":0,"ResponsiveMaintainer_Latency":15.929,"License":0,"License_Latency":0}]: 
+2024-09-22 14:40:34 [Removed temporary directory: /tmp/tmp.QdhPIwLmpx]: 
+2024-09-22 14:40:34 [Processing URL: https://invalidrepo.com/invalidrepo]: 
+2024-09-22 14:40:34 [Error: Invalid URL or no GitHub repository found for https://invalidrepo.com/invalidrepo]: 
+2024-09-22 14:40:34 [Node.js error: Error: Invalid URL. Must be a valid npm package URL or GitHub repository URL.]: 
+2024-09-22 14:40:35 [Finished module ranking.]: 

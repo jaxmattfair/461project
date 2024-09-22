@@ -10,6 +10,9 @@ import * as path from 'path';
 import { dirname } from 'path';
 import fs from 'fs';
 
+const roundToThree = (num: number): number => {
+    return Math.round(num * 1000) / 1000;
+};
 
 export async function calculateNetScore(repoURL: string, tempDir: string, tempURL: string): Promise<any | null> {
     //console.log("returning early w net score");
@@ -89,20 +92,19 @@ export async function calculateNetScore(repoURL: string, tempDir: string, tempUR
     // Return all the scores and their latencies in a JSON-compatible object
     return {
         URL: tempURL,
-        NetScore: weighted_score,
-        NetScore_Latency: netScoreDuration,
-        RampUp: rampUpScore,
-        RampUp_Latency: rampUpDuration,
-        Correctness: correctnessScore,
-        Correctness_Latency: correctnessDuration,
-        BusFactor: busFactorScore,
-        BusFactor_Latency: busFactorDuration,
-        ResponsiveMaintainer: responsiveMaintainerScore,
-        ResponsiveMaintainer_Latency: responsiveDuration,
-        License: licenseScore,
-        License_Latency: licenseDuration
-    };
-    
+        NetScore: roundToThree(weighted_score),
+        NetScore_Latency: roundToThree(netScoreDuration),
+        RampUp: roundToThree(rampUpScore),
+        RampUp_Latency: roundToThree(rampUpDuration),
+        Correctness: roundToThree(correctnessScore),
+        Correctness_Latency: roundToThree(correctnessDuration),
+        BusFactor: roundToThree(busFactorScore),
+        BusFactor_Latency: roundToThree(busFactorDuration),
+        ResponsiveMaintainer: roundToThree(responsiveMaintainerScore),
+        ResponsiveMaintainer_Latency: roundToThree(responsiveDuration),
+        License: roundToThree(licenseScore),
+        License_Latency: roundToThree(licenseDuration)
+    }
 };
 
 

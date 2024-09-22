@@ -1,0 +1,4 @@
+https://www.npmjs.com/package/lodash
+https://invalidurl.com/repo
+https://www.npmjs.com/package/nonexistent-package
+https://github.com/nodejs/node

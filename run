@@ -184,35 +184,6 @@ rank_modules() {
         # Clean up temporary files
         rm -f "$metrics_stdout" "$metrics_stderr"
 
-        # Parse the JSON result and extract individual fields
-        url=$(echo "$metrics_json" | jq -r '.URL // -1')
-        net_score=$(echo "$metrics_json" | jq -r '.NetScore // -1')
-        net_score_latency=$(echo "$metrics_json" | jq -r '.NetScore_Latency // -1')
-        ramp_up=$(echo "$metrics_json" | jq -r '.RampUp // -1')
-        ramp_up_latency=$(echo "$metrics_json" | jq -r '.RampUp_Latency // -1')
-        correctness=$(echo "$metrics_json" | jq -r '.Correctness // -1')
-        correctness_latency=$(echo "$metrics_json" | jq -r '.Correctness_Latency // -1')
-        bus_factor=$(echo "$metrics_json" | jq -r '.BusFactor // -1')
-        bus_factor_latency=$(echo "$metrics_json" | jq -r '.BusFactor_Latency // -1')
-        responsive_maintainer=$(echo "$metrics_json" | jq -r '.ResponsiveMaintainer // -1')
-        responsive_maintainer_latency=$(echo "$metrics_json" | jq -r '.ResponsiveMaintainer_Latency // -1')
-        license=$(echo "$metrics_json" | jq -r '.License // -1')
-        license_latency=$(echo "$metrics_json" | jq -r '.License_Latency // -1')
-
-        # Output the extracted values for debugging
-        log "NetScore: $net_score"
-        log "NetScore_Latency: $net_score_latency"
-        log "RampUp: $ramp_up"
-        log "RampUp_Latency: $ramp_up_latency"
-        log "Correctness: $correctness"
-        log "Correctness_Latency: $correctness_latency"
-        log "BusFactor: $bus_factor"
-        log "BusFactor_Latency: $bus_factor_latency"
-        log "ResponsiveMaintainer: $responsive_maintainer"
-        log "ResponsiveMaintainer_Latency: $responsive_maintainer_latency"
-        log "License: $license"
-        log "License_Latency: $license_latency"
-
         # Clean up the temporary directory
         rm -rf "$temp_dir"
         log "Removed temporary directory: $temp_dir"
