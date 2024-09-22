@@ -1,0 +1,199 @@
+#!/bin/bash
+
+#set -e  # Exit immediately if a command exits with a non-zero status
+
+# Function to load environment variables
+load_env() {
+    if [ -f .env ]; then
+        export $(grep -v '^#' .env | xargs)
+    else
+        echo "Error: .env file not found" >&2
+        exit 1
+    fi
+}
+
+# Function to check if log file exists and create it if not
+setup_log_file() {
+    if [ -z "$LOG_FILE" ]; then
+        echo "Error: LOG_FILE environment variable not set" >&2
+        exit 1
+    fi
+
+    # Set default log level if LOG_LEVEL is not set
+    if [ -z "$LOG_LEVEL" ]; then
+        LOG_LEVEL="INFO"
+    fi
+    
+    mkdir -p "$(dirname "$LOG_FILE")"
+    touch "$LOG_FILE" || { echo "Error: Unable to create log file at $LOG_FILE" >&2; exit 1; }
+    # Ensure LOG_LEVEL is a valid log level
+    case "$LOG_LEVEL" in
+        0|1|2) ;;
+        *)
+            echo "Error: Invalid LOG_LEVEL value. Must be one of: DEBUG, INFO, WARN, ERROR" >&2
+            exit 1
+            ;;
+    esac
+}
+
+# Function to log messages
+log() {
+    local level="$1"
+    shift
+    local message="$*"
+
+    # Array to define the log level priority
+    declare -A log_priority=( [DEBUG]=1 [INFO]=2 [WARN]=3 [ERROR]=4 )
+
+    # Only log messages that are equal or higher than the current LOG_LEVEL
+    if [ ${log_priority[$level]} -ge ${log_priority[$LOG_LEVEL]} ]; then
+        echo "$(date +"%Y-%m-%d %H:%M:%S") [$level]: $message" >> "$LOG_FILE"
+    fi
+}
+
+# Function to install dependencies
+install_dependencies() {
+    log "Starting installation of dependencies"
+    if ! npm install; then
+        log "Error: npm install failed"
+        exit 1
+    fi
+    local installed_count=$(npm ls --json | jq '.dependencies | length')
+    echo "$installed_count dependencies installed..."
+    log "Finished installation of dependencies"
+}
+
+# Function to rank modules
+rank_modules() {
+    local url_file="$1"
+    log "Starting module ranking for URLs in $url_file"
+
+    while IFS= read -r url || [[ -n "$url" ]]; do
+        log "Processing URL: $url"
+
+        # Create a temporary directory for cloning the repository
+        temp_dir=$(mktemp -d)
+        log "Created temporary directory: $temp_dir"
+
+        log "Calculating metrics for $url"
+
+        # Run the calculateNetScore.js script via Node.js
+        result=$(node -e "
+            (async () => {
+                try {
+                    // Print a test message to stderr for debugging purposes
+                    // process.stderr.write('Starting async function...\\n');
+
+                    // Dynamically import modules
+                    const { calculateNetScore } = await import('./dist/src/metrics/netScore.js');
+                    const { dirname } = await import('path');
+                    const { fileURLToPath } = await import('url');
+                    const path = await import('path');
+
+                    // Test if imports were successful
+                    // process.stderr.write('Modules imported successfully...\\n');
+
+                    // Variables and paths
+                    const __filename = fileURLToPath(import.meta.url);
+                    const __dirname = dirname(__filename);
+
+                    const tempDir = '${temp_dir}';
+                    const repoURL = '${url}';
+
+                    // Log repository cloning to stderr
+                    // process.stderr.write('Starting clone operation for ' + repoURL + ' into ' + tempDir + '\\n');
+
+                    // Calculate the net score asynchronously
+                    const result = await calculateNetScore(repoURL, tempDir);
+
+                    // Output the result as a JSON string to stdout
+                    console.log(JSON.stringify(result));
+                } catch (error) {
+                    // Log any errors to stderr
+                    process.stderr.write('Error in processing: ' + error.message + '\\n');
+                }
+            })();
+        " 2>&1)
+
+        log "Result: $result"
+        # Check if result is empty
+        if [[ -z "$result" ]]; then
+            log "Error calculating scores for URL: $url"
+            exit 1
+        fi
+
+        # Parse the JSON result and extract individual fields
+        net_score=$(echo "$result" | jq -r '.NetScore // -1')
+        net_score_latency=$(echo "$result" | jq -r '.NetScore_Latency // -1')
+        ramp_up=$(echo "$result" | jq -r '.RampUp // -1')
+        ramp_up_latency=$(echo "$result" | jq -r '.RampUp_Latency // -1')
+        correctness=$(echo "$result" | jq -r '.Correctness // -1')
+        correctness_latency=$(echo "$result" | jq -r '.Correctness_Latency // -1')
+        bus_factor=$(echo "$result" | jq -r '.BusFactor // -1')
+        bus_factor_latency=$(echo "$result" | jq -r '.BusFactor_Latency // -1')
+        responsive_maintainer=$(echo "$result" | jq -r '.ResponsiveMaintainer // -1')
+        responsive_maintainer_latency=$(echo "$result" | jq -r '.ResponsiveMaintainer_Latency // -1')
+        license=$(echo "$result" | jq -r '.License // -1')
+        license_latency=$(echo "$result" | jq -r '.License_Latency // -1')
+
+        # Output the extracted values for debugging
+        log "NetScore: $net_score"
+        log "NetScore_Latency: $net_score_latency"
+        log "RampUp: $ramp_up"
+        log "RampUp_Latency: $ramp_up_latency"
+        log "Correctness: $correctness"
+        log "Correctness_Latency: $correctness_latency"
+        log "BusFactor: $bus_factor"
+        log "BusFactor_Latency: $bus_factor_latency"
+        log "ResponsiveMaintainer: $responsive_maintainer"
+        log "ResponsiveMaintainer_Latency: $responsive_maintainer_latency"
+        log "License: $license"
+        log "License_Latency: $license_latency"
+
+        # Clean up the temporary directory
+        rm -rf "$temp_dir"
+        log "Removed temporary directory: $temp_dir"    
+
+    done < "$url_file"
+
+    log "Finished module ranking."
+}
+
+
+
+# Function to run tests
+run_tests() {
+    log "Starting test execution"
+    test_output=$(npm test 2>&1)
+    total_tests=$(echo "$test_output" | grep -oP 'Total: \K\d+' || echo "N/A")
+    passed_tests=$(echo "$test_output" | grep -oP 'Passed: \K\d+' || echo "N/A")
+    coverage=$(echo "$test_output" | grep -oP 'Coverage: \K\d+' || echo "N/A")
+    echo "Total: $total_tests"
+    echo "Passed: $passed_tests"
+    echo "Coverage: $coverage%"
+    echo "$passed_tests/$total_tests test cases passed. $coverage% line coverage achieved."
+    log "Finished test execution"
+}
+
+# Main execution
+load_env
+setup_log_file
+
+case "$1" in
+    install)
+        install_dependencies
+        ;;
+    test)
+        run_tests
+        ;;
+    *)
+        if [ -f "$1" ]; then
+            rank_modules "$1"
+        else
+            echo "Usage: $0 {install|test|<path_to_url_file>}" >&2
+            exit 1
+        fi
+        ;;
+esac
+
+exit 0
