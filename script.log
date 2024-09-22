@@ -1,0 +1,61 @@
+2024-09-22 00:59:41: Starting installation of dependencies
+2024-09-22 00:59:42: Finished installation of dependencies
+2024-09-22 00:59:56: Starting module ranking for URLs in sample_urls.txt
+2024-09-22 00:59:56: Processing URL: https://www.google.com/
+2024-09-22 00:59:56: Created temporary directory: /var/folders/j0/l5js5ybx1qbc9r6v04ywbl4c0000gn/T/tmp.ZlHViZPE
+2024-09-22 00:59:56: Calculating metrics for https://www.google.com/
+2024-09-22 00:59:57: Error calculating scores: (node:87348) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:87348) [DEP0180] DeprecationWarning: fs.Stats constructor is deprecated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:87349) [DEP0180] DeprecationWarning: fs.Stats constructor is deprecated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+/Users/akankshrao/461project/[eval].ts:1
+import { calculateNetScore } from './src/metrics/netScore.ts';
+^^^^^^
+
+SyntaxError: Cannot use import statement outside a module
+    at new Script (node:vm:116:7)
+    at runInContext (/Users/akankshrao/.npm-global/lib/node_modules/ts-node/src/repl.ts:670:18)
+    at Object.execCommand (/Users/akankshrao/.npm-global/lib/node_modules/ts-node/src/repl.ts:639:28)
+    at /Users/akankshrao/.npm-global/lib/node_modules/ts-node/src/repl.ts:661:47
+    at Array.reduce (<anonymous>)
+    at appendCompileAndEvalInput (/Users/akankshrao/.npm-global/lib/node_modules/ts-node/src/repl.ts:661:23)
+    at Object.evalCode (/Users/akankshrao/.npm-global/lib/node_modules/ts-node/src/repl.ts:205:20)
+    at evalAndExitOnTsError (/Users/akankshrao/.npm-global/lib/node_modules/ts-node/src/bin.ts:780:26)
+    at phase4 (/Users/akankshrao/.npm-global/lib/node_modules/ts-node/src/bin.ts:656:7)
+    at bootstrap (/Users/akankshrao/.npm-global/lib/node_modules/ts-node/src/bin.ts:95:10)
+2024-09-22 00:59:57: Attempting to write results to output.ndjson
+2024-09-22 00:59:57: Successfully wrote results for https://www.google.com/ to output.ndjson
+2024-09-22 00:59:57: Removed temporary directory: /var/folders/j0/l5js5ybx1qbc9r6v04ywbl4c0000gn/T/tmp.ZlHViZPE
+2024-09-22 00:59:57: Processing URL: https://www.yahoo.com/?guccounter=1
+2024-09-22 00:59:57: Created temporary directory: /var/folders/j0/l5js5ybx1qbc9r6v04ywbl4c0000gn/T/tmp.6r7Svsfv
+2024-09-22 00:59:57: Calculating metrics for https://www.yahoo.com/?guccounter=1
+2024-09-22 00:59:57: Error calculating scores: (node:87378) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:87378) [DEP0180] DeprecationWarning: fs.Stats constructor is deprecated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:87381) [DEP0180] DeprecationWarning: fs.Stats constructor is deprecated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+/Users/akankshrao/461project/[eval].ts:1
+import { calculateNetScore } from './src/metrics/netScore.ts';
+^^^^^^
+
+SyntaxError: Cannot use import statement outside a module
+    at new Script (node:vm:116:7)
+    at runInContext (/Users/akankshrao/.npm-global/lib/node_modules/ts-node/src/repl.ts:670:18)
+    at Object.execCommand (/Users/akankshrao/.npm-global/lib/node_modules/ts-node/src/repl.ts:639:28)
+    at /Users/akankshrao/.npm-global/lib/node_modules/ts-node/src/repl.ts:661:47
+    at Array.reduce (<anonymous>)
+    at appendCompileAndEvalInput (/Users/akankshrao/.npm-global/lib/node_modules/ts-node/src/repl.ts:661:23)
+    at Object.evalCode (/Users/akankshrao/.npm-global/lib/node_modules/ts-node/src/repl.ts:205:20)
+    at evalAndExitOnTsError (/Users/akankshrao/.npm-global/lib/node_modules/ts-node/src/bin.ts:780:26)
+    at phase4 (/Users/akankshrao/.npm-global/lib/node_modules/ts-node/src/bin.ts:656:7)
+    at bootstrap (/Users/akankshrao/.npm-global/lib/node_modules/ts-node/src/bin.ts:95:10)
+2024-09-22 00:59:57: Attempting to write results to output.ndjson
+2024-09-22 00:59:57: Successfully wrote results for https://www.yahoo.com/?guccounter=1 to output.ndjson
+2024-09-22 00:59:57: Removed temporary directory: /var/folders/j0/l5js5ybx1qbc9r6v04ywbl4c0000gn/T/tmp.6r7Svsfv
+2024-09-22 00:59:57: Finished module ranking. Results saved to output.ndjson.
+2024-09-22 00:59:57: Output file output.ndjson is not empty

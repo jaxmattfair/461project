@@ -1,71 +1,64 @@
-import { cloneRepository, getReadmeContent, parseGitHubRepoURL, parseMarkdown, measureExecutionTime, cleanUpDirectory } from "../utils/gitUtils";
-import { getMetricScore } from "./busFactorScore";
-import { computeCorrectnessMetric } from "./correctnessScore";
-import { extractLicenseInfo } from "./license";
-import { calculateRampUpScore, analyzeReadme } from "./rampUpScore";
-import { calculateResponsiveness } from "./responsiveMaintainer";
-import { Root } from 'mdast';
-import { fileURLToPath } from 'url';
-import * as path from 'path';
-import { dirname } from 'path';
-import fs from 'fs';
+interface MetricScores {
+    weightedScore: number;
+    rampUpScore: number; // Include rampUpScore in the return type
+    // Add other scores as needed
+}
 
-
-export async function calculateNetScore(repoURL: string, tempDir: string): Promise<number> {
-    //Clone repo
+export async function calculateNetScore(repoURL: string, tempDir: string): Promise<MetricScores> {
+    // Clone repo
+    let cloneDuration: number;
     try {
-        const cloneDuration = await cloneRepository(repoURL, tempDir);
-        console.log(`Duration: ${cloneDuration} seconds`); // Outputs: Duration: 2.00 seconds
+        cloneDuration = await cloneRepository(repoURL, tempDir);
+        console.log(`Duration: ${cloneDuration} seconds`);
     } catch (error) {
-        console.error("An error occurred:", error);
-    } //Result is undefined in this case
+        console.error("An error occurred while cloning:", error);
+        return { weightedScore: -500, rampUpScore: 0 }; // Handle cloning error
+    }
 
-    //Read the ReadMe content
+    // Read the ReadMe content
     const readmeContent = getReadmeContent(tempDir);
-    if (readmeContent == 'null') {
-        //handle exceptions
-        //try other tasks
-        return -500;
+    if (readmeContent === 'null') {
+        return { weightedScore: -500, rampUpScore: 0 }; // Handle readme error
     }
 
     const ast: Root = parseMarkdown(readmeContent);
     const metrics = analyzeReadme(ast);
 
-
     const parsed = parseGitHubRepoURL(repoURL);
     const owner = parsed.owner;
     const repo = parsed.repo;
 
-    //const busFactorScore = await getMetricScore(owner, repo);
-    const [busFactorScore, licenseScore, responsiveMaintainerScore, rampUpScore, correctnessScore] = await Promise.all([getMetricScore(owner, repo), 
-                                                                                                      extractLicenseInfo(tempDir, readmeContent),
-                                                                                                      calculateResponsiveness(repoURL),
-                                                                                                      calculateRampUpScore(metrics),
-                                                                                                      computeCorrectnessMetric(tempDir)]);
-    
-    const weighted_score = busFactorScore * 0.2 + licenseScore * 0.2 + responsiveMaintainerScore * 0.2  + rampUpScore * 0.2 + correctnessScore * 0.2;
+    const [busFactorScore, licenseScore, responsiveMaintainerScore, rampUpScore, correctnessScore] = await Promise.all([
+        getMetricScore(owner, repo),
+        extractLicenseInfo(tempDir, readmeContent),
+        calculateResponsiveness(repoURL),
+        calculateRampUpScore(metrics),
+        computeCorrectnessMetric(tempDir)
+    ]);
+
+    const weightedScore = busFactorScore * 0.2 + licenseScore * 0.2 + responsiveMaintainerScore * 0.2 + rampUpScore * 0.2 + correctnessScore * 0.2;
 
     try {
         await cleanUpDirectory(tempDir);
         console.log(`Cleaned up temporary directory: ${tempDir}`);
-    } catch (cleanupError: any) {
+    } catch (cleanupError) {
         console.error(`Error during cleanup: ${cleanupError.message}`);
     }
 
-    if (weighted_score < 0) {
-        return 0;
+    if (weightedScore < 0) {
+        return { weightedScore: 0, rampUpScore }; // Return rampUpScore as well
     }
-    if (weighted_score > 1) {
-        return 1;
+    if (weightedScore > 1) {
+        return { weightedScore: 1, rampUpScore };
     }
-    return weighted_score;
-    
-    //return -1;
+    return { weightedScore, rampUpScore }; // Return both scores
 }
 
+// Usage
 const repoURL = 'https://github.com/voideditor/void';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const tempDir = path.join(process.cwd(), '/temp-repos', '461project')
+const tempDir = path.join(process.cwd(), '/temp-repos', '461project');
 
-console.log(await calculateNetScore(repoURL, tempDir));
+const result = await calculateNetScore(repoURL, tempDir);
+console.log('Net Score Result:', result);
