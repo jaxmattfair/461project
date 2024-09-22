@@ -64,7 +64,6 @@ install_dependencies() {
 }
 
 # Function to rank modules
-# Function to rank modules
 rank_modules() {
     local url_file="$1"
     log "Starting module ranking for URLs in $url_file"
@@ -74,44 +73,48 @@ rank_modules() {
 
         # Check if the URL is a valid GitHub or npm URL
         result=$(node -e "
-            //process.stdout.write('Hello');
             (async () => {
                 try {
                     const { getGitHubUrlFromNpm, isGitHubUrl } = await import('./dist/src/utils/npmUtils.js');
                     const { URL } = await import('url');
 
                     const inputUrl = '$url';
-                    let repoUrl = inputUrl;
+                    let repoUrl = inputUrl;  // Ensure we start fresh with each URL
+
+                    if (isGitHubUrl(repoUrl)) {
+                        console.log(repoUrl);
+                    }
                     // Check if it's an npm URL (assumes npm URLs contain 'npmjs.com/package')
-                    if (inputUrl.includes('npmjs.com/package')) {
+                    else if (inputUrl.includes('npmjs.com/package')) {
                         const gitHubUrl = await getGitHubUrlFromNpm(inputUrl);
-                        if (!gitHubUrl || gitHubUrl == 'null') {
+                        if (gitHubUrl == 'null') {
                             console.error('Invalid npm package or no GitHub repository found');
                             process.exit(1);
                         }
                         repoUrl = gitHubUrl;
+                        console.log(repoUrl);
                     } else {
-                        // If the URL is not from npm, check if it’s a valid GitHub URL
+                        // If the URL is not from npm, check if it's a valid GitHub URL
                         if (!isGitHubUrl(repoUrl)) {
-                            console.error('Not a valid github url?')
-                            console.error('Error: Invalid URL. Must be a valid npm package URL or GitHub repository URL.');
+                            //console.error('Not a valid github url?')
+                            //console.error('Error: Invalid URL. Must be a valid npm package URL or GitHub repository URL.');
+                            console.log('');
                             process.exit(1);
                         }
                     }
 
                     // Output the valid GitHub URL for further processing
-                    console.error(repoUrl);
                 } catch (error) {
-                    console.error('Error processing URL:', error.message);
+                    //console.error('Error processing URL:', error.message);
                     process.exit(1);
                 }
             })();
         " 2>&1)
 
-        #if [[ $? -ne 0 ]]; then
-        #    log "Error: Invalid URL or no GitHub repository found for $url"
-        #    exit 1
-        #fi
+        if [[ $? -ne 0 ]]; then
+            log "Error: Invalid URL or no GitHub repository found for $url"
+            exit 1
+        fi
 
         log "Valid GitHub URL: $result"
 

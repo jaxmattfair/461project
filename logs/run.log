@@ -1517,3 +1517,666 @@ Node.js v22.8.0]:
 2024-09-22 12:10:50 [License_Latency: ]: 
 2024-09-22 12:10:50 [Removed temporary directory: /tmp/tmp.z9wmB0NAhh]: 
 2024-09-22 12:10:50 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 12:15:47 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 12:15:47 [Processing URL: https://www.npmjs.com/package/browserify]: 
+2024-09-22 12:15:49 [Valid GitHub URL: ]: 
+2024-09-22 12:15:49 [Created temporary directory: /tmp/tmp.2269SUOkcS]: 
+2024-09-22 12:15:49 [Calculating metrics for ]: 
+2024-09-22 12:15:50 [Result: Failed to clone repository: fatal: The empty string is not a valid path
+
+An error occurred during cloning: GitError: fatal: The empty string is not a valid path
+
+    at Object.action (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:4462:25)
+    at PluginStore.exec (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:4501:25)
+    at file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1369:43
+    at new Promise (<anonymous>)
+    at GitExecutorChain.handleTaskData (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1367:16)
+    at GitExecutorChain.<anonymous> (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1351:44)
+    at Generator.next (<anonymous>)
+    at fulfilled (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:45:24) {
+  task: {
+    commands: [
+      'clone',
+      '--single-branch',
+      '--depth',
+      '1',
+      '',
+      '/tmp/tmp.2269SUOkcS'
+    ],
+    format: 'utf-8',
+    parser: [Function: parser]
+  }
+}
+null]: 
+2024-09-22 12:15:52 [NetScore: ]: 
+2024-09-22 12:15:52 [NetScore_Latency: ]: 
+2024-09-22 12:15:52 [RampUp: ]: 
+2024-09-22 12:15:52 [RampUp_Latency: ]: 
+2024-09-22 12:15:52 [Correctness: ]: 
+2024-09-22 12:15:52 [Correctness_Latency: ]: 
+2024-09-22 12:15:52 [BusFactor: ]: 
+2024-09-22 12:15:52 [BusFactor_Latency: ]: 
+2024-09-22 12:15:52 [ResponsiveMaintainer: ]: 
+2024-09-22 12:19:44 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 12:19:44 [Processing URL: https://www.npmjs.com/package/browserify]: 
+2024-09-22 12:19:45 [Valid GitHub URL: ]: 
+2024-09-22 12:19:45 [Created temporary directory: /tmp/tmp.AqkYWCpkXb]: 
+2024-09-22 12:19:45 [Calculating metrics for ]: 
+2024-09-22 12:19:46 [Result: Failed to clone repository: fatal: The empty string is not a valid path
+
+An error occurred during cloning: GitError: fatal: The empty string is not a valid path
+
+    at Object.action (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:4462:25)
+    at PluginStore.exec (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:4501:25)
+    at file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1369:43
+    at new Promise (<anonymous>)
+    at GitExecutorChain.handleTaskData (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1367:16)
+    at GitExecutorChain.<anonymous> (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1351:44)
+    at Generator.next (<anonymous>)
+    at fulfilled (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:45:24)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
+  task: {
+    commands: [
+      'clone',
+      '--single-branch',
+      '--depth',
+      '1',
+      '',
+      '/tmp/tmp.AqkYWCpkXb'
+    ],
+    format: 'utf-8',
+    parser: [Function: parser]
+  }
+}
+null]: 
+2024-09-22 12:19:48 [NetScore: ]: 
+2024-09-22 12:19:48 [NetScore_Latency: ]: 
+2024-09-22 12:19:48 [RampUp: ]: 
+2024-09-22 12:19:48 [RampUp_Latency: ]: 
+2024-09-22 12:19:49 [Correctness: ]: 
+2024-09-22 12:19:49 [Correctness_Latency: ]: 
+2024-09-22 12:19:49 [BusFactor: ]: 
+2024-09-22 12:19:49 [BusFactor_Latency: ]: 
+2024-09-22 12:19:49 [ResponsiveMaintainer: ]: 
+2024-09-22 12:19:49 [ResponsiveMaintainer_Latency: ]: 
+2024-09-22 12:19:49 [License: ]: 
+2024-09-22 12:19:49 [License_Latency: ]: 
+2024-09-22 12:19:49 [Removed temporary directory: /tmp/tmp.AqkYWCpkXb]: 
+2024-09-22 12:19:49 [Processing URL: https://github.com/voideditor/void]: 
+2024-09-22 12:19:50 [Valid GitHub URL: ]: 
+2024-09-22 12:19:50 [Created temporary directory: /tmp/tmp.9vIv6Ho7f2]: 
+2024-09-22 12:19:50 [Calculating metrics for ]: 
+2024-09-22 12:19:51 [Result: Failed to clone repository: fatal: The empty string is not a valid path
+
+An error occurred during cloning: GitError: fatal: The empty string is not a valid path
+
+    at Object.action (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:4462:25)
+    at PluginStore.exec (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:4501:25)
+    at file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1369:43
+    at new Promise (<anonymous>)
+    at GitExecutorChain.handleTaskData (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1367:16)
+    at GitExecutorChain.<anonymous> (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1351:44)
+    at Generator.next (<anonymous>)
+    at fulfilled (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:45:24)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
+  task: {
+    commands: [
+      'clone',
+      '--single-branch',
+      '--depth',
+      '1',
+      '',
+      '/tmp/tmp.9vIv6Ho7f2'
+    ],
+    format: 'utf-8',
+    parser: [Function: parser]
+  }
+}
+null]: 
+2024-09-22 12:19:53 [NetScore: ]: 
+2024-09-22 12:19:53 [NetScore_Latency: ]: 
+2024-09-22 12:19:53 [RampUp: ]: 
+2024-09-22 12:19:53 [RampUp_Latency: ]: 
+2024-09-22 12:19:53 [Correctness: ]: 
+2024-09-22 12:19:53 [Correctness_Latency: ]: 
+2024-09-22 12:19:53 [BusFactor: ]: 
+2024-09-22 12:19:53 [BusFactor_Latency: ]: 
+2024-09-22 12:19:53 [ResponsiveMaintainer: ]: 
+2024-09-22 12:19:54 [ResponsiveMaintainer_Latency: ]: 
+2024-09-22 12:19:54 [License: ]: 
+2024-09-22 12:19:54 [License_Latency: ]: 
+2024-09-22 12:19:54 [Removed temporary directory: /tmp/tmp.9vIv6Ho7f2]: 
+2024-09-22 12:19:54 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 12:19:54 [Valid GitHub URL: ]: 
+2024-09-22 12:19:55 [Created temporary directory: /tmp/tmp.cEHqCmHB37]: 
+2024-09-22 12:19:55 [Calculating metrics for ]: 
+2024-09-22 12:19:56 [Result: Failed to clone repository: fatal: The empty string is not a valid path
+
+An error occurred during cloning: GitError: fatal: The empty string is not a valid path
+
+    at Object.action (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:4462:25)
+    at PluginStore.exec (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:4501:25)
+    at file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1369:43
+    at new Promise (<anonymous>)
+    at GitExecutorChain.handleTaskData (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1367:16)
+    at GitExecutorChain.<anonymous> (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1351:44)
+    at Generator.next (<anonymous>)
+    at fulfilled (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:45:24)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
+  task: {
+    commands: [
+      'clone',
+      '--single-branch',
+      '--depth',
+      '1',
+      '',
+      '/tmp/tmp.cEHqCmHB37'
+    ],
+    format: 'utf-8',
+    parser: [Function: parser]
+  }
+}
+null]: 
+2024-09-22 12:19:58 [NetScore: ]: 
+2024-09-22 12:19:58 [NetScore_Latency: ]: 
+2024-09-22 12:19:58 [RampUp: ]: 
+2024-09-22 12:19:58 [RampUp_Latency: ]: 
+2024-09-22 12:19:58 [Correctness: ]: 
+2024-09-22 12:19:58 [Correctness_Latency: ]: 
+2024-09-22 12:19:58 [BusFactor: ]: 
+2024-09-22 12:19:58 [BusFactor_Latency: ]: 
+2024-09-22 12:19:58 [ResponsiveMaintainer: ]: 
+2024-09-22 12:19:58 [ResponsiveMaintainer_Latency: ]: 
+2024-09-22 12:19:58 [License: ]: 
+2024-09-22 12:19:58 [License_Latency: ]: 
+2024-09-22 12:19:58 [Removed temporary directory: /tmp/tmp.cEHqCmHB37]: 
+2024-09-22 12:19:58 [Finished module ranking.]: 
+2024-09-22 12:22:21 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 12:22:21 [Processing URL: https://www.npmjs.com/package/browserify]: 
+2024-09-22 12:22:22 [Valid GitHub URL: ]: 
+2024-09-22 12:22:22 [Created temporary directory: /tmp/tmp.QmRu3QhthH]: 
+2024-09-22 12:22:22 [Calculating metrics for ]: 
+2024-09-22 12:22:23 [Result: Failed to clone repository: fatal: The empty string is not a valid path
+
+An error occurred during cloning: GitError: fatal: The empty string is not a valid path
+
+    at Object.action (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:4462:25)
+    at PluginStore.exec (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:4501:25)
+    at file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1369:43
+    at new Promise (<anonymous>)
+    at GitExecutorChain.handleTaskData (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1367:16)
+    at GitExecutorChain.<anonymous> (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1351:44)
+    at Generator.next (<anonymous>)
+    at fulfilled (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:45:24) {
+  task: {
+    commands: [
+      'clone',
+      '--single-branch',
+      '--depth',
+      '1',
+      '',
+      '/tmp/tmp.QmRu3QhthH'
+    ],
+    format: 'utf-8',
+    parser: [Function: parser]
+  }
+}
+null]: 
+2024-09-22 12:22:25 [NetScore: ]: 
+2024-09-22 12:22:26 [NetScore_Latency: ]: 
+2024-09-22 12:22:26 [RampUp: ]: 
+2024-09-22 12:22:26 [RampUp_Latency: ]: 
+2024-09-22 12:22:26 [Correctness: ]: 
+2024-09-22 12:22:26 [Correctness_Latency: ]: 
+2024-09-22 12:22:26 [BusFactor: ]: 
+2024-09-22 12:22:26 [BusFactor_Latency: ]: 
+2024-09-22 12:22:26 [ResponsiveMaintainer: ]: 
+2024-09-22 12:22:26 [ResponsiveMaintainer_Latency: ]: 
+2024-09-22 12:22:26 [License: ]: 
+2024-09-22 12:22:26 [License_Latency: ]: 
+2024-09-22 12:22:26 [Removed temporary directory: /tmp/tmp.QmRu3QhthH]: 
+2024-09-22 12:22:26 [Processing URL: https://github.com/voideditor/void]: 
+2024-09-22 12:23:52 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 12:23:52 [Processing URL: https://www.npmjs.com/package/browserif]: 
+2024-09-22 12:23:53 [Valid GitHub URL: Error: Error fetching repository URL: Failed to fetch package data: 404 Not Found
+Invalid npm package or no GitHub repository found]: 
+2024-09-22 12:23:53 [Created temporary directory: /tmp/tmp.xr862zM1V5]: 
+2024-09-22 12:23:53 [Calculating metrics for Error: Error fetching repository URL: Failed to fetch package data: 404 Not Found
+Invalid npm package or no GitHub repository found]: 
+2024-09-22 12:23:53 [Result: [eval]:6
+                    const repoURL = 'Error: Error fetching repository URL: Failed to fetch package data: 404 Not Found
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+SyntaxError: Invalid or unexpected token
+    at makeContextifyScript (node:internal/vm:185:14)
+    at node:internal/process/execution:107:22
+    at [eval]-wrapper:6:24
+    at runScript (node:internal/process/execution:101:62)
+    at evalScript (node:internal/process/execution:136:3)
+    at node:internal/main/eval_string:55:3
+
+Node.js v22.8.0]: 
+2024-09-22 12:23:55 [NetScore: ]: 
+2024-09-22 12:23:55 [NetScore_Latency: ]: 
+2024-09-22 12:23:55 [RampUp: ]: 
+2024-09-22 12:23:55 [RampUp_Latency: ]: 
+2024-09-22 12:23:55 [Correctness: ]: 
+2024-09-22 12:23:55 [Correctness_Latency: ]: 
+2024-09-22 12:23:56 [BusFactor: ]: 
+2024-09-22 12:23:56 [BusFactor_Latency: ]: 
+2024-09-22 12:23:56 [ResponsiveMaintainer: ]: 
+2024-09-22 12:23:56 [ResponsiveMaintainer_Latency: ]: 
+2024-09-22 12:23:56 [License: ]: 
+2024-09-22 12:23:56 [License_Latency: ]: 
+2024-09-22 12:23:56 [Removed temporary directory: /tmp/tmp.xr862zM1V5]: 
+2024-09-22 12:23:56 [Processing URL: https://github.com/voideditor/void]: 
+2024-09-22 12:23:57 [Valid GitHub URL: ]: 
+2024-09-22 12:23:57 [Created temporary directory: /tmp/tmp.rcLYKY0O0k]: 
+2024-09-22 12:23:57 [Calculating metrics for ]: 
+2024-09-22 12:23:58 [Result: Failed to clone repository: fatal: The empty string is not a valid path
+
+An error occurred during cloning: GitError: fatal: The empty string is not a valid path
+
+    at Object.action (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:4462:25)
+    at PluginStore.exec (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:4501:25)
+    at file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1369:43
+    at new Promise (<anonymous>)
+    at GitExecutorChain.handleTaskData (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1367:16)
+    at GitExecutorChain.<anonymous> (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1351:44)
+    at Generator.next (<anonymous>)
+    at fulfilled (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:45:24) {
+  task: {
+    commands: [
+      'clone',
+      '--single-branch',
+      '--depth',
+      '1',
+      '',
+      '/tmp/tmp.rcLYKY0O0k'
+    ],
+    format: 'utf-8',
+    parser: [Function: parser]
+  }
+}
+null]: 
+2024-09-22 12:26:20 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 12:26:20 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 12:26:21 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 12:26:21 [Created temporary directory: /tmp/tmp.GPs3Mk30tO]: 
+2024-09-22 12:26:21 [Calculating metrics for https://github.com/browserify/browserify]: 
+2024-09-22 12:26:59 [Result: {"NetScore":0.17002,"NetScore_Latency":36.703,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.002,"BusFactor":0.7001999999999999,"BusFactor_Latency":35.112,"ResponsiveMaintainer":0,"ResponsiveMaintainer_Latency":15.254,"License":0,"License_Latency":0}]: 
+2024-09-22 12:27:01 [NetScore: 0.17002]: 
+2024-09-22 12:27:01 [NetScore_Latency: 36.703]: 
+2024-09-22 12:27:01 [RampUp: 0]: 
+2024-09-22 12:27:01 [RampUp_Latency: 0]: 
+2024-09-22 12:27:01 [Correctness: 1]: 
+2024-09-22 12:27:01 [Correctness_Latency: 0.002]: 
+2024-09-22 12:27:01 [BusFactor: 0.7001999999999999]: 
+2024-09-22 12:27:01 [BusFactor_Latency: 35.112]: 
+2024-09-22 12:27:01 [ResponsiveMaintainer: 0]: 
+2024-09-22 12:27:01 [ResponsiveMaintainer_Latency: 15.254]: 
+2024-09-22 12:27:01 [License: 0]: 
+2024-09-22 12:27:01 [License_Latency: 0]: 
+2024-09-22 12:27:01 [Removed temporary directory: /tmp/tmp.GPs3Mk30tO]: 
+2024-09-22 12:27:02 [Finished module ranking.]: 
+2024-09-22 12:27:54 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 12:27:54 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 12:27:55 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 12:27:55 [Created temporary directory: /tmp/tmp.gGR9Ldw1WB]: 
+2024-09-22 12:27:55 [Calculating metrics for https://github.com/browserify/browserify]: 
+2024-09-22 12:28:23 [Result: {"NetScore":0.17002,"NetScore_Latency":27.204,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.002,"BusFactor":0.7001999999999999,"BusFactor_Latency":25.211,"ResponsiveMaintainer":0,"ResponsiveMaintainer_Latency":20.344,"License":0,"License_Latency":0}]: 
+2024-09-22 12:28:25 [NetScore: 0.17002]: 
+2024-09-22 12:28:25 [NetScore_Latency: 27.204]: 
+2024-09-22 12:28:26 [RampUp: 0]: 
+2024-09-22 12:28:26 [RampUp_Latency: 0]: 
+2024-09-22 12:28:26 [Correctness: 1]: 
+2024-09-22 12:28:26 [Correctness_Latency: 0.002]: 
+2024-09-22 12:28:26 [BusFactor: 0.7001999999999999]: 
+2024-09-22 12:28:26 [BusFactor_Latency: 25.211]: 
+2024-09-22 12:28:26 [ResponsiveMaintainer: 0]: 
+2024-09-22 12:28:26 [ResponsiveMaintainer_Latency: 20.344]: 
+2024-09-22 12:28:26 [License: 0]: 
+2024-09-22 12:28:26 [License_Latency: 0]: 
+2024-09-22 12:28:26 [Removed temporary directory: /tmp/tmp.gGR9Ldw1WB]: 
+2024-09-22 12:28:26 [Finished module ranking.]: 
+2024-09-22 12:28:58 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 12:28:58 [Processing URL: https://github.com/browserify/browserify]: 
+2024-09-22 12:28:59 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 12:28:59 [Created temporary directory: /tmp/tmp.GV5ss0Kvcu]: 
+2024-09-22 12:28:59 [Calculating metrics for https://github.com/browserify/browserify]: 
+2024-09-22 12:29:29 [Result: {"NetScore":0.17002,"NetScore_Latency":29.188,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.002,"BusFactor":0.7001999999999999,"BusFactor_Latency":27.465,"ResponsiveMaintainer":0,"ResponsiveMaintainer_Latency":14.968,"License":0,"License_Latency":0.001}]: 
+2024-09-22 12:29:31 [NetScore: 0.17002]: 
+2024-09-22 12:29:31 [NetScore_Latency: 29.188]: 
+2024-09-22 12:29:31 [RampUp: 0]: 
+2024-09-22 12:29:31 [RampUp_Latency: 0]: 
+2024-09-22 12:29:31 [Correctness: 1]: 
+2024-09-22 12:29:31 [Correctness_Latency: 0.002]: 
+2024-09-22 12:29:31 [BusFactor: 0.7001999999999999]: 
+2024-09-22 12:29:31 [BusFactor_Latency: 27.465]: 
+2024-09-22 12:29:31 [ResponsiveMaintainer: 0]: 
+2024-09-22 12:29:31 [ResponsiveMaintainer_Latency: 14.968]: 
+2024-09-22 12:29:31 [License: 0]: 
+2024-09-22 12:29:31 [License_Latency: 0.001]: 
+2024-09-22 12:29:31 [Removed temporary directory: /tmp/tmp.GV5ss0Kvcu]: 
+2024-09-22 12:29:32 [Finished module ranking.]: 
+2024-09-22 12:29:48 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 12:29:48 [Processing URL: https://github.com/browserify/browserify]: 
+2024-09-22 12:29:49 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 12:29:49 [Created temporary directory: /tmp/tmp.3bT4PUFVn5]: 
+2024-09-22 12:29:49 [Calculating metrics for https://github.com/browserify/browserify]: 
+2024-09-22 12:30:31 [Result: {"NetScore":0.17002,"NetScore_Latency":40.999,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.002,"BusFactor":0.7001999999999999,"BusFactor_Latency":39.205,"ResponsiveMaintainer":0,"ResponsiveMaintainer_Latency":14.244,"License":0,"License_Latency":0}]: 
+2024-09-22 12:30:33 [NetScore: 0.17002]: 
+2024-09-22 12:30:33 [NetScore_Latency: 40.999]: 
+2024-09-22 12:30:33 [RampUp: 0]: 
+2024-09-22 12:30:33 [RampUp_Latency: 0]: 
+2024-09-22 12:30:33 [Correctness: 1]: 
+2024-09-22 12:30:33 [Correctness_Latency: 0.002]: 
+2024-09-22 12:30:33 [BusFactor: 0.7001999999999999]: 
+2024-09-22 12:30:34 [BusFactor_Latency: 39.205]: 
+2024-09-22 12:30:34 [ResponsiveMaintainer: 0]: 
+2024-09-22 12:30:34 [ResponsiveMaintainer_Latency: 14.244]: 
+2024-09-22 12:30:34 [License: 0]: 
+2024-09-22 12:30:34 [License_Latency: 0]: 
+2024-09-22 12:30:34 [Removed temporary directory: /tmp/tmp.3bT4PUFVn5]: 
+2024-09-22 12:30:34 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 12:30:35 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 12:30:35 [Created temporary directory: /tmp/tmp.Baq9duE0DQ]: 
+2024-09-22 12:30:35 [Calculating metrics for https://github.com/browserify/browserify]: 
+2024-09-22 12:31:02 [Result: {"NetScore":0.17002,"NetScore_Latency":26.004,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.002,"BusFactor":0.7001999999999999,"BusFactor_Latency":24.21,"ResponsiveMaintainer":0,"ResponsiveMaintainer_Latency":14.414,"License":0,"License_Latency":0}]: 
+2024-09-22 12:31:04 [NetScore: 0.17002]: 
+2024-09-22 12:31:04 [NetScore_Latency: 26.004]: 
+2024-09-22 12:31:04 [RampUp: 0]: 
+2024-09-22 12:31:04 [RampUp_Latency: 0]: 
+2024-09-22 12:31:04 [Correctness: 1]: 
+2024-09-22 12:31:04 [Correctness_Latency: 0.002]: 
+2024-09-22 12:31:04 [BusFactor: 0.7001999999999999]: 
+2024-09-22 12:31:04 [BusFactor_Latency: 24.21]: 
+2024-09-22 12:31:04 [ResponsiveMaintainer: 0]: 
+2024-09-22 12:31:04 [ResponsiveMaintainer_Latency: 14.414]: 
+2024-09-22 12:31:04 [License: 0]: 
+2024-09-22 12:31:04 [License_Latency: 0]: 
+2024-09-22 12:31:05 [Removed temporary directory: /tmp/tmp.Baq9duE0DQ]: 
+2024-09-22 12:31:05 [Finished module ranking.]: 
+2024-09-22 12:33:22 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 12:33:22 [Processing URL: https://github.com/browserify/browserify]: 
+2024-09-22 12:33:23 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 12:33:23 [Created temporary directory: /tmp/tmp.pRJym9ZiFp]: 
+2024-09-22 12:33:23 [Calculating metrics for https://github.com/browserify/browserify]: 
+2024-09-22 12:33:49 [Result: {"NetScore":0.17002,"NetScore_Latency":25.722,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.004,"BusFactor":0.7001999999999999,"BusFactor_Latency":24.134,"ResponsiveMaintainer":0,"ResponsiveMaintainer_Latency":16.784,"License":0,"License_Latency":0.001}]: 
+2024-09-22 12:33:51 [NetScore: 0.17002]: 
+2024-09-22 12:33:51 [NetScore_Latency: 25.722]: 
+2024-09-22 12:33:51 [RampUp: 0]: 
+2024-09-22 12:33:51 [RampUp_Latency: 0]: 
+2024-09-22 12:33:52 [Correctness: 1]: 
+2024-09-22 12:33:52 [Correctness_Latency: 0.004]: 
+2024-09-22 12:33:52 [BusFactor: 0.7001999999999999]: 
+2024-09-22 12:33:52 [BusFactor_Latency: 24.134]: 
+2024-09-22 12:33:52 [ResponsiveMaintainer: 0]: 
+2024-09-22 12:33:52 [ResponsiveMaintainer_Latency: 16.784]: 
+2024-09-22 12:33:52 [License: 0]: 
+2024-09-22 12:33:52 [License_Latency: 0.001]: 
+2024-09-22 12:33:52 [Removed temporary directory: /tmp/tmp.pRJym9ZiFp]: 
+2024-09-22 12:33:52 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 12:33:53 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 12:33:53 [Created temporary directory: /tmp/tmp.9rwiW5YPNY]: 
+2024-09-22 12:33:53 [Calculating metrics for https://github.com/browserify/browserify]: 
+2024-09-22 12:34:21 [Result: {"NetScore":0.17002,"NetScore_Latency":27.265,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.003,"BusFactor":0.7001999999999999,"BusFactor_Latency":25.186,"ResponsiveMaintainer":0,"ResponsiveMaintainer_Latency":16.187,"License":0,"License_Latency":0.001}]: 
+2024-09-22 12:34:24 [NetScore: 0.17002]: 
+2024-09-22 12:34:24 [NetScore_Latency: 27.265]: 
+2024-09-22 12:34:24 [RampUp: 0]: 
+2024-09-22 12:34:24 [RampUp_Latency: 0]: 
+2024-09-22 12:34:24 [Correctness: 1]: 
+2024-09-22 12:34:24 [Correctness_Latency: 0.003]: 
+2024-09-22 12:34:24 [BusFactor: 0.7001999999999999]: 
+2024-09-22 12:34:24 [BusFactor_Latency: 25.186]: 
+2024-09-22 12:34:24 [ResponsiveMaintainer: 0]: 
+2024-09-22 12:34:24 [ResponsiveMaintainer_Latency: 16.187]: 
+2024-09-22 12:34:24 [License: 0]: 
+2024-09-22 12:34:24 [License_Latency: 0.001]: 
+2024-09-22 12:34:24 [Removed temporary directory: /tmp/tmp.9rwiW5YPNY]: 
+2024-09-22 12:34:25 [Finished module ranking.]: 
+2024-09-22 12:34:48 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 12:34:48 [Processing URL: https://github.com/browserify/browserify]: 
+2024-09-22 12:34:49 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 12:34:49 [Created temporary directory: /tmp/tmp.SmAGVNjLgs]: 
+2024-09-22 12:34:49 [Calculating metrics for https://github.com/browserify/browserify]: 
+2024-09-22 12:35:17 [Result: {"NetScore":0.17002,"NetScore_Latency":27.328,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.003,"BusFactor":0.7001999999999999,"BusFactor_Latency":24.643,"ResponsiveMaintainer":0,"ResponsiveMaintainer_Latency":14.814,"License":0,"License_Latency":0}]: 
+2024-09-22 12:35:19 [NetScore: 0.17002]: 
+2024-09-22 12:35:19 [NetScore_Latency: 27.328]: 
+2024-09-22 12:35:19 [RampUp: 0]: 
+2024-09-22 12:35:19 [RampUp_Latency: 0]: 
+2024-09-22 12:35:19 [Correctness: 1]: 
+2024-09-22 12:35:19 [Correctness_Latency: 0.003]: 
+2024-09-22 12:35:19 [BusFactor: 0.7001999999999999]: 
+2024-09-22 12:35:19 [BusFactor_Latency: 24.643]: 
+2024-09-22 12:35:19 [ResponsiveMaintainer: 0]: 
+2024-09-22 12:35:19 [ResponsiveMaintainer_Latency: 14.814]: 
+2024-09-22 12:35:19 [License: 0]: 
+2024-09-22 12:35:19 [License_Latency: 0]: 
+2024-09-22 12:35:20 [Removed temporary directory: /tmp/tmp.SmAGVNjLgs]: 
+2024-09-22 12:35:20 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 12:35:20 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 12:35:21 [Created temporary directory: /tmp/tmp.nzYM2HPjXb]: 
+2024-09-22 12:35:21 [Calculating metrics for https://github.com/browserify/browserify]: 
+2024-09-22 12:35:52 [Result: {"NetScore":0.17002,"NetScore_Latency":30.492,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.003,"BusFactor":0.7001999999999999,"BusFactor_Latency":29.005,"ResponsiveMaintainer":0,"ResponsiveMaintainer_Latency":20.588,"License":0,"License_Latency":0.001}]: 
+2024-09-22 12:35:54 [NetScore: 0.17002]: 
+2024-09-22 12:35:54 [NetScore_Latency: 30.492]: 
+2024-09-22 12:35:54 [RampUp: 0]: 
+2024-09-22 12:35:54 [RampUp_Latency: 0]: 
+2024-09-22 12:35:54 [Correctness: 1]: 
+2024-09-22 12:35:54 [Correctness_Latency: 0.003]: 
+2024-09-22 12:35:54 [BusFactor: 0.7001999999999999]: 
+2024-09-22 12:35:54 [BusFactor_Latency: 29.005]: 
+2024-09-22 12:35:54 [ResponsiveMaintainer: 0]: 
+2024-09-22 12:35:54 [ResponsiveMaintainer_Latency: 20.588]: 
+2024-09-22 12:35:54 [License: 0]: 
+2024-09-22 12:35:54 [License_Latency: 0.001]: 
+2024-09-22 12:35:55 [Removed temporary directory: /tmp/tmp.nzYM2HPjXb]: 
+2024-09-22 12:35:55 [Finished module ranking.]: 
+2024-09-22 12:39:14 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 12:39:14 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 12:39:15 [Valid GitHub URL: ]: 
+2024-09-22 12:39:15 [Created temporary directory: /tmp/tmp.Aoi8m484Pd]: 
+2024-09-22 12:39:15 [Calculating metrics for ]: 
+2024-09-22 12:39:16 [Result: Failed to clone repository: fatal: The empty string is not a valid path
+
+An error occurred during cloning: GitError: fatal: The empty string is not a valid path
+
+    at Object.action (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:4462:25)
+    at PluginStore.exec (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:4501:25)
+    at file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1369:43
+    at new Promise (<anonymous>)
+    at GitExecutorChain.handleTaskData (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1367:16)
+    at GitExecutorChain.<anonymous> (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1351:44)
+    at Generator.next (<anonymous>)
+    at fulfilled (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:45:24)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
+  task: {
+    commands: [
+      'clone',
+      '--single-branch',
+      '--depth',
+      '1',
+      '',
+      '/tmp/tmp.Aoi8m484Pd'
+    ],
+    format: 'utf-8',
+    parser: [Function: parser]
+  }
+}
+null]: 
+2024-09-22 12:39:18 [NetScore: ]: 
+2024-09-22 12:39:18 [NetScore_Latency: ]: 
+2024-09-22 12:39:18 [RampUp: ]: 
+2024-09-22 12:39:18 [RampUp_Latency: ]: 
+2024-09-22 12:39:18 [Correctness: ]: 
+2024-09-22 12:39:19 [Correctness_Latency: ]: 
+2024-09-22 12:39:19 [BusFactor: ]: 
+2024-09-22 12:39:19 [BusFactor_Latency: ]: 
+2024-09-22 12:39:19 [ResponsiveMaintainer: ]: 
+2024-09-22 12:39:19 [ResponsiveMaintainer_Latency: ]: 
+2024-09-22 12:39:19 [License: ]: 
+2024-09-22 12:39:19 [License_Latency: ]: 
+2024-09-22 12:39:19 [Removed temporary directory: /tmp/tmp.Aoi8m484Pd]: 
+2024-09-22 12:39:19 [Processing URL: https://github.com/browserify/browserify]: 
+2024-09-22 12:39:20 [Valid GitHub URL: ]: 
+2024-09-22 12:39:20 [Created temporary directory: /tmp/tmp.jFce1mRsHI]: 
+2024-09-22 12:39:20 [Calculating metrics for ]: 
+2024-09-22 12:39:21 [Result: Failed to clone repository: fatal: The empty string is not a valid path
+
+An error occurred during cloning: GitError: fatal: The empty string is not a valid path
+
+    at Object.action (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:4462:25)
+    at PluginStore.exec (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:4501:25)
+    at file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1369:43
+    at new Promise (<anonymous>)
+    at GitExecutorChain.handleTaskData (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1367:16)
+    at GitExecutorChain.<anonymous> (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:1351:44)
+    at Generator.next (<anonymous>)
+    at fulfilled (file:///C:/Users/Arnav%20Naval/Downloads/461project/node_modules/simple-git/dist/esm/index.js:45:24) {
+  task: {
+    commands: [
+      'clone',
+      '--single-branch',
+      '--depth',
+      '1',
+      '',
+      '/tmp/tmp.jFce1mRsHI'
+    ],
+    format: 'utf-8',
+    parser: [Function: parser]
+  }
+}
+null]: 
+2024-09-22 12:39:23 [NetScore: ]: 
+2024-09-22 12:39:23 [NetScore_Latency: ]: 
+2024-09-22 12:39:23 [RampUp: ]: 
+2024-09-22 12:39:23 [RampUp_Latency: ]: 
+2024-09-22 12:39:23 [Correctness: ]: 
+2024-09-22 12:39:23 [Correctness_Latency: ]: 
+2024-09-22 12:39:23 [BusFactor: ]: 
+2024-09-22 12:39:23 [BusFactor_Latency: ]: 
+2024-09-22 12:39:23 [ResponsiveMaintainer: ]: 
+2024-09-22 12:39:24 [ResponsiveMaintainer_Latency: ]: 
+2024-09-22 12:39:24 [License: ]: 
+2024-09-22 12:39:24 [License_Latency: ]: 
+2024-09-22 12:39:24 [Removed temporary directory: /tmp/tmp.jFce1mRsHI]: 
+2024-09-22 12:39:24 [Finished module ranking.]: 
+2024-09-22 12:44:04 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 12:44:04 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 12:44:05 [Valid GitHub URL: https://github.com/raoakanksh/461project
+https://github.com/raoakanksh/461project]: 
+2024-09-22 12:44:05 [Created temporary directory: /tmp/tmp.ELrzeHJpZI]: 
+2024-09-22 12:44:05 [Calculating metrics for https://github.com/raoakanksh/461project
+https://github.com/raoakanksh/461project]: 
+2024-09-22 12:44:05 [Result: [eval]:6
+                    const repoURL = 'https://github.com/raoakanksh/461project
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+SyntaxError: Invalid or unexpected token
+    at makeContextifyScript (node:internal/vm:185:14)
+    at node:internal/process/execution:107:22
+    at [eval]-wrapper:6:24
+    at runScript (node:internal/process/execution:101:62)
+    at evalScript (node:internal/process/execution:136:3)
+    at node:internal/main/eval_string:55:3
+
+Node.js v22.8.0]: 
+2024-09-22 12:44:07 [NetScore: ]: 
+2024-09-22 12:44:07 [NetScore_Latency: ]: 
+2024-09-22 12:44:07 [RampUp: ]: 
+2024-09-22 12:44:08 [RampUp_Latency: ]: 
+2024-09-22 12:44:08 [Correctness: ]: 
+2024-09-22 12:44:08 [Correctness_Latency: ]: 
+2024-09-22 12:44:08 [BusFactor: ]: 
+2024-09-22 12:44:08 [BusFactor_Latency: ]: 
+2024-09-22 12:44:08 [ResponsiveMaintainer: ]: 
+2024-09-22 12:44:08 [ResponsiveMaintainer_Latency: ]: 
+2024-09-22 12:44:08 [License: ]: 
+2024-09-22 12:44:08 [License_Latency: ]: 
+2024-09-22 12:44:08 [Removed temporary directory: /tmp/tmp.ELrzeHJpZI]: 
+2024-09-22 12:44:08 [Processing URL: https://github.com/browserify/browserify]: 
+2024-09-22 12:44:09 [Valid GitHub URL: https://github.com/browserify/browserify
+https://github.com/browserify/browserify]: 
+2024-09-22 12:44:09 [Created temporary directory: /tmp/tmp.3RSfRNBZu9]: 
+2024-09-22 12:44:09 [Calculating metrics for https://github.com/browserify/browserify
+https://github.com/browserify/browserify]: 
+2024-09-22 12:44:10 [Result: [eval]:6
+                    const repoURL = 'https://github.com/browserify/browserify
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+SyntaxError: Invalid or unexpected token
+    at makeContextifyScript (node:internal/vm:185:14)
+    at node:internal/process/execution:107:22
+    at [eval]-wrapper:6:24
+    at runScript (node:internal/process/execution:101:62)
+    at evalScript (node:internal/process/execution:136:3)
+    at node:internal/main/eval_string:55:3
+
+Node.js v22.8.0]: 
+2024-09-22 12:44:12 [NetScore: ]: 
+2024-09-22 12:44:12 [NetScore_Latency: ]: 
+2024-09-22 12:44:12 [RampUp: ]: 
+2024-09-22 12:44:12 [RampUp_Latency: ]: 
+2024-09-22 12:44:12 [Correctness: ]: 
+2024-09-22 12:45:44 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 12:45:44 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 12:45:45 [Valid GitHub URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 12:45:45 [Created temporary directory: /tmp/tmp.MlLNEVEvnN]: 
+2024-09-22 12:45:45 [Calculating metrics for https://github.com/raoakanksh/461project]: 
+2024-09-22 12:46:06 [Result: {"NetScore":0.30138,"NetScore_Latency":19.558,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.002,"BusFactor":0.0138,"BusFactor_Latency":1.738,"ResponsiveMaintainer":0.5,"ResponsiveMaintainer_Latency":0.39,"License":0,"License_Latency":0}]: 
+2024-09-22 12:46:08 [NetScore: 0.30138]: 
+2024-09-22 12:46:08 [NetScore_Latency: 19.558]: 
+2024-09-22 12:46:08 [RampUp: 0]: 
+2024-09-22 12:46:08 [RampUp_Latency: 0]: 
+2024-09-22 12:46:08 [Correctness: 1]: 
+2024-09-22 12:46:08 [Correctness_Latency: 0.002]: 
+2024-09-22 12:46:08 [BusFactor: 0.0138]: 
+2024-09-22 12:46:08 [BusFactor_Latency: 1.738]: 
+2024-09-22 12:46:08 [ResponsiveMaintainer: 0.5]: 
+2024-09-22 12:46:08 [ResponsiveMaintainer_Latency: 0.39]: 
+2024-09-22 12:46:08 [License: 0]: 
+2024-09-22 12:46:08 [License_Latency: 0]: 
+2024-09-22 12:46:08 [Removed temporary directory: /tmp/tmp.MlLNEVEvnN]: 
+2024-09-22 12:46:08 [Processing URL: https://github.com/browserify/browserify]: 
+2024-09-22 12:46:09 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 12:46:09 [Created temporary directory: /tmp/tmp.kQkwOWHxeu]: 
+2024-09-22 12:46:09 [Calculating metrics for https://github.com/browserify/browserify]: 
+2024-09-22 12:46:19 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 12:46:19 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 12:46:19 [Valid GitHub URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 12:46:20 [Created temporary directory: /tmp/tmp.ti2EbwhCfS]: 
+2024-09-22 12:46:20 [Calculating metrics for https://github.com/raoakanksh/461project]: 
+2024-09-22 12:46:44 [Result: {"NetScore":0.30138,"NetScore_Latency":23.577,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.002,"BusFactor":0.0138,"BusFactor_Latency":1.715,"ResponsiveMaintainer":0.5,"ResponsiveMaintainer_Latency":0.509,"License":0,"License_Latency":0}]: 
+2024-09-22 12:46:46 [NetScore: 0.30138]: 
+2024-09-22 12:46:46 [NetScore_Latency: 23.577]: 
+2024-09-22 12:46:46 [RampUp: 0]: 
+2024-09-22 12:46:46 [RampUp_Latency: 0]: 
+2024-09-22 12:46:46 [Correctness: 1]: 
+2024-09-22 12:46:46 [Correctness_Latency: 0.002]: 
+2024-09-22 12:46:46 [BusFactor: 0.0138]: 
+2024-09-22 12:46:46 [BusFactor_Latency: 1.715]: 
+2024-09-22 12:46:46 [ResponsiveMaintainer: 0.5]: 
+2024-09-22 12:46:47 [ResponsiveMaintainer_Latency: 0.509]: 
+2024-09-22 12:46:47 [License: 0]: 
+2024-09-22 12:46:47 [License_Latency: 0]: 
+2024-09-22 12:46:47 [Removed temporary directory: /tmp/tmp.ti2EbwhCfS]: 
+2024-09-22 12:46:47 [Processing URL: https://github.com/browserify/browserify]: 
+2024-09-22 12:46:47 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 12:46:48 [Created temporary directory: /tmp/tmp.KrJv6qKSgs]: 
+2024-09-22 12:46:48 [Calculating metrics for https://github.com/browserify/browserify]: 
+2024-09-22 12:47:18 [Result: {"NetScore":0.17002,"NetScore_Latency":29.941,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.002,"BusFactor":0.7001999999999999,"BusFactor_Latency":28.329,"ResponsiveMaintainer":0,"ResponsiveMaintainer_Latency":14.264,"License":0,"License_Latency":0.001}]: 
+2024-09-22 12:47:20 [NetScore: 0.17002]: 
+2024-09-22 12:47:20 [NetScore_Latency: 29.941]: 
+2024-09-22 12:47:20 [RampUp: 0]: 
+2024-09-22 12:47:21 [RampUp_Latency: 0]: 
+2024-09-22 12:47:21 [Correctness: 1]: 
+2024-09-22 12:47:21 [Correctness_Latency: 0.002]: 
+2024-09-22 12:47:21 [BusFactor: 0.7001999999999999]: 
+2024-09-22 12:47:21 [BusFactor_Latency: 28.329]: 
+2024-09-22 12:47:21 [ResponsiveMaintainer: 0]: 
+2024-09-22 12:47:21 [ResponsiveMaintainer_Latency: 14.264]: 
+2024-09-22 12:47:21 [License: 0]: 
+2024-09-22 12:47:21 [License_Latency: 0.001]: 
+2024-09-22 12:47:21 [Removed temporary directory: /tmp/tmp.KrJv6qKSgs]: 
+2024-09-22 12:47:21 [Finished module ranking.]: 
