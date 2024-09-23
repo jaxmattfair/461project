@@ -1,9 +1,227 @@
 #!/bin/bash
 
-if [ "$1" == "install" ]; then
-  echo "Running node with install command..."
-  node ../461project/dist/index.js install
-else
-  echo "Invalid command! Use 'install'."
-fi
+#set -e  # Exit immediately if a command exits with a non-zero status
 
+# Function to load environment variables
+load_env() {
+    if [ -f .env ]; then
+        export $(grep -v '^#' .env | xargs)
+    fi
+}
+
+# Function to check if log file exists and create it if not
+setup_log_file() {
+    if [ -z "$LOG_FILE" ]; then
+        echo "Error: LOG_FILE environment variable not set" >&2
+        exit 1
+    fi
+
+    # Set default log level if LOG_LEVEL is not set
+    if [ -z "$LOG_LEVEL" ]; then
+        LOG_LEVEL="INFO"
+    fi
+    
+    mkdir -p "$(dirname "$LOG_FILE")"
+    touch "$LOG_FILE" || { echo "Error: Unable to create log file at $LOG_FILE" >&2; exit 1; }
+}
+
+# Function to log messages
+log() {
+    local level="$1"
+    shift
+    local message="$*"
+
+    # Array to define the log level priority
+    declare -A log_priority=( [DEBUG]=1 [INFO]=2 [WARN]=3 [ERROR]=4 )
+
+    # Only log messages that are equal or higher than the current LOG_LEVEL
+    if [ ${log_priority[$level]} -ge ${log_priority[$LOG_LEVEL]} ]; then
+        echo "$(date +"%Y-%m-%d %H:%M:%S") [$level]: $message" >> "$LOG_FILE"
+    fi
+}
+
+# Function to install dependencies
+install_dependencies() {
+    log "Starting installation of dependencies"
+    if ! npm install; then
+        log "Error: npm install failed"
+        exit 1
+    fi
+    local installed_count=$(npm ls --json | jq '.dependencies | length')
+    echo "$installed_count dependencies installed..."
+    log "Finished installation of dependencies"
+}
+
+# Function to rank modules
+# Function to rank modules
+rank_modules() {
+    local url_file="$1"
+    log "Starting module ranking for URLs in $url_file"
+
+    while IFS= read -r url || [[ -n "$url" ]]; do
+        # Skip empty lines
+        [[ -z "$url" ]] && continue
+
+        log "Processing URL: $url"
+
+        # Create temporary files for capturing stdout and stderr
+        temp_stdout=$(mktemp)
+        temp_stderr=$(mktemp)
+
+        # Check if the URL is a valid GitHub or npm URL
+        node -e "
+            import { getGitHubUrlFromNpm, isGitHubUrl } from './dist/src/utils/npmUtils.js'; // Ensure correct path
+            import { URL } from 'url';
+
+            (async () => {
+                try {
+                    const inputUrl = '$url';
+                    let repoUrl = inputUrl; // Ensure we start fresh with each URL
+
+                    if (isGitHubUrl(repoUrl)) {
+                        console.log(repoUrl); // Valid GitHub URL
+                    }
+                    // Check if it's an npm URL (assumes npm URLs contain 'npmjs.com/package')
+                    else if (inputUrl.includes('npmjs.com/package')) {
+                        const gitHubUrl = await getGitHubUrlFromNpm(inputUrl);
+                        if (!gitHubUrl || gitHubUrl === 'null') {
+                            console.error('Invalid npm package or no GitHub repository found');
+                            process.exit(1);
+                        }
+                        repoUrl = gitHubUrl;
+                        console.log(repoUrl); // GitHub URL fetched from npm
+                    } else {
+                        console.error('Error: Invalid URL. Must be a valid npm package URL or GitHub repository URL.');
+                        process.exit(1);
+                    }
+
+                    // Output the valid GitHub URL for further processing
+                } catch (error) {
+                    console.error('Error processing URL:', error.message);
+                    process.exit(1);
+                }
+            })();
+        " > "$temp_stdout" 2> "$temp_stderr"
+
+        # Capture the exit status
+        status=$?
+
+        if [[ $status -ne 0 ]]; then
+            # Log the error message from stderr
+            error_message=$(cat "$temp_stderr")
+            log "Error: Invalid URL or no GitHub repository found for $url"
+            log "Node.js error: $error_message"
+            # Clean up temporary files
+            rm -f "$temp_stdout" "$temp_stderr"
+            continue
+        fi
+
+        # Capture the GitHub URL from stdout
+        github_url=$(cat "$temp_stdout")
+        log "Valid GitHub URL: $github_url"
+
+        # Clean up temporary files
+        rm -f "$temp_stdout" "$temp_stderr"
+
+        # Create a temporary directory for cloning the repository
+        temp_dir=$(mktemp -d)
+        log "Created temporary directory: $temp_dir"
+
+        log "Calculating metrics for $github_url"
+
+        # Create temporary files for capturing metrics stdout and stderr
+        metrics_stdout=$(mktemp)
+        metrics_stderr=$(mktemp)
+
+        # Run the calculateNetScore.js script via Node.js
+        node -e "
+            (async () => {
+                try {
+                    const { calculateNetScore } = await import('./dist/src/metrics/netScore.js'); // Ensure correct path
+                    const tempDir = '${temp_dir}';
+                    const repoURL = '$github_url';
+                    const tempUrl = '$url';
+                    const result = await calculateNetScore(repoURL, tempDir, tempUrl);
+                    console.log(JSON.stringify(result)); // Output JSON to stdout
+                } catch (error) {
+                    console.error('Error calculating metrics:', error.message);
+                    process.exit(1);
+                }
+            })();
+        " > "$metrics_stdout" 2> "$metrics_stderr"
+
+        # Capture the exit status for metrics calculation
+        metrics_status=$?
+
+        if [[ $metrics_status -ne 0 ]]; then
+            # Log the error message from metrics stderr
+            metrics_error=$(cat "$metrics_stderr")
+            log "Error calculating scores for URL: $url"
+            log "Node.js error: $metrics_error"
+            # Clean up temporary files and directory
+            rm -f "$metrics_stdout" "$metrics_stderr"
+            rm -rf "$temp_dir"
+            log "Removed temporary directory: $temp_dir"
+            continue
+        fi
+
+        # Capture the metrics JSON from stdout
+        metrics_json=$(cat "$metrics_stdout")
+        log "Result: $metrics_json"
+        echo "$metrics_json"
+
+        # Clean up temporary files
+        rm -f "$metrics_stdout" "$metrics_stderr"
+
+        # Clean up the temporary directory
+        rm -rf "$temp_dir"
+        log "Removed temporary directory: $temp_dir"
+
+    done < "$url_file"
+
+    log "Finished module ranking."
+}
+
+
+# Function to run tests
+run_tests() {
+    log "Starting test execution"
+    #npm test 2>&1 | tee test_output.log
+    # Read the output from the log file
+    #test_output=$(cat test_output.log)
+    test_output=$(npm test 2>&1)
+    # Extract total tests
+    total_tests=$(echo "$test_output" | grep -oP 'Tests:\s+\d+\s+failed,\s+\d+\s+passed,\s+\K\d+' || echo "N/A")
+    # Extract passed tests
+    passed_tests=$(echo "$test_output" | grep -oP 'Tests:\s+\d+\s+failed,\s+\K\d+' || echo "N/A")
+    # Extract coverage percentage
+    coverage=$(echo "$test_output" | grep -oP 'Coverage:\s+\K\d+%' || echo "N/A")
+    echo "Total: $total_tests"
+    echo "Passed: $passed_tests"
+    echo "Coverage: $coverage%"
+    echo "$passed_tests/$total_tests test cases passed. $coverage% line coverage achieved."
+    log "Finished test execution"
+}
+
+# Main execution
+load_env
+setup_log_file
+
+case "$1" in
+    install)
+        install_dependencies
+        ;;
+    test)
+        run_tests
+        ;;
+    *)
+        if [ -f "$1" ]; then
+            rank_modules "$1"
+        else
+            echo "Usage: $0 {install|test|<path_to_url_file>}" >&2
+            exit 1
+        fi
+        ;;
+esac
+
+exit 0

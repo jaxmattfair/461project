@@ -1,7 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 import * as dotenv from 'dotenv';
 import { differenceInHours } from 'date-fns';
-import { parseGitHubRepoURL } from '../utils/gitUtils';
+import { parseGitHubRepoURL } from '../utils/gitUtils.js';
+import { info, debug, error } from '../logger.js'; // Import the logging functions
 
 // Load environment variables from .env
 dotenv.config();
@@ -18,8 +19,8 @@ const repoURL: string = 'https://github.com/raoakanksh/461project.git'
 
 // Define the GitHub repo details
 const parsed = parseGitHubRepoURL(repoURL);
-const owner: string = parsed.owner;
-const repo: string = parsed.repo;
+//const owner: string = parsed.owner;
+// const repo: string = parsed.repo;
 //const owner: string = 'raoakanksh'; // Replace with the GitHub username
 //const repo: string = '461project'; // Replace with the repository name
 
@@ -64,7 +65,7 @@ interface FetchParams {
 }
 
 // Helper function to fetch paginated data
-export async function fetchPaginatedData<T>(url: string, params: FetchParams = {}): Promise<T[]> {
+async function fetchPaginatedData<T>(url: string, params: FetchParams = {}): Promise<T[]> {
   let results: T[] = [];
   let page: number = 1;
   let hasMorePages: boolean = true;
@@ -94,21 +95,22 @@ export async function fetchPaginatedData<T>(url: string, params: FetchParams = {
 }
 
 // Function to fetch metrics and calculate the metric score
-export async function getMetricScore(): Promise<void> {
+export async function getMetricScore(owner: string, repo: string): Promise<[number, number]> {
+  const start = Date.now(); 
   try {
     // Fetch contributors (with pagination)
     const contributors: Contributor[] = await fetchPaginatedData<Contributor>(
       `https://api.github.com/repos/${owner}/${repo}/contributors`
     );
     const uniqueContributors: number = contributors.length;
-    console.log(`Total Unique Contributors: ${uniqueContributors}`);
+    //console.log(`Total Unique Contributors: ${uniqueContributors}`);
 
     // Fetch CI/CD workflow runs (with pagination)
     const workflowRuns: WorkflowRun[] = await fetchPaginatedData<WorkflowRun>(
       `https://api.github.com/repos/${owner}/${repo}/actions/runs`
     );
     const totalTests: number = workflowRuns.length;
-    console.log(`Total CI/CD Tests: ${totalTests}`);
+    //console.log(`Total CI/CD Tests: ${totalTests}`);
 
     // Fetch pull requests (with pagination)
     const pullRequests: PullRequest[] = await fetchPaginatedData<PullRequest>(
@@ -118,7 +120,7 @@ export async function getMetricScore(): Promise<void> {
       }
     );
     const totalPRs: number = pullRequests.length;
-    console.log(`Total Pull Requests: ${totalPRs}`);
+    //console.log(`Total Pull Requests: ${totalPRs}`);
 
     // Fetch issues (with pagination)
     const issues: Issue[] = await fetchPaginatedData<Issue>(
@@ -129,25 +131,8 @@ export async function getMetricScore(): Promise<void> {
     );
     const openIssues: number = issues.filter((issue) => issue.state === 'open').length;
     const closedIssues: number = issues.filter((issue) => issue.state === 'closed').length;
-    console.log(`Open Issues: ${openIssues}`);
-    console.log(`Closed Issues: ${closedIssues}`);
-
-    // Calculate average response time for issues and PRs (in hours)
-    let totalResponseTime: number = 0;
-    let totalResponses: number = 0;
-
-    // Combine issues and pull requests for response time calculation
-    const combinedItems: Array<Issue | PullRequest> = [...issues, ...pullRequests];
-
-    combinedItems.forEach((item) => {
-      if (item.created_at && item.updated_at) {
-        const createdAt: Date = new Date(item.created_at);
-        const updatedAt: Date = new Date(item.updated_at);
-        const responseTime: number = differenceInHours(updatedAt, createdAt);
-        totalResponseTime += responseTime;
-        totalResponses++;
-      }
-    });
+    //console.log(`Open Issues: ${openIssues}`);
+    //console.log(`Closed Issues: ${closedIssues}`);
 
     const activityScore: number =
         uniqueContributors > MAX_UNIQUE_CONTRIBUTORS ? 0.4 : (uniqueContributors / MAX_UNIQUE_CONTRIBUTORS) * 0.4; // 40% weight for contributors
@@ -165,11 +150,13 @@ export async function getMetricScore(): Promise<void> {
     if (metricScore > 1) {
       metricScore = 1;
     }
-    console.log(`Metric Score: ${metricScore.toFixed(2)}`);
+    const end = Date.now();
+    const duration = (end - start) / 1000; // Calculate duration in seconds
+    //console.log(`Metric Score: ${metricScore.toFixed(2)}`);
+    return [metricScore, duration];
   } catch (error) {
     console.error('Error fetching data from GitHub:', error);
+    return [-1, -1];
   }
 }
 
-// Call the function to fetch and calculate the metric score
-getMetricScore();

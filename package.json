@@ -10,7 +10,8 @@
     "start": "node dist/index.js",
     "dev": "ts-node src/index.ts",
     "lint": "eslint .",
-    "lint:fix": "eslint . --ext .ts --fix"
+    "lint:fix": "eslint . --ext .ts --fix",
+    "test": "jest --config jest.config.cjs"
   },
   "repository": {
     "type": "git",
@@ -25,14 +26,25 @@
   "homepage": "https://github.com/raoakanksh/461project#readme",
   "devDependencies": {
     "@eslint/js": "^9.10.0",
+    "@types/chai": "^4.3.19",
+    "@types/fs-extra": "^11.0.4",
+    "@types/jest": "^29.5.13",
     "@types/mdast": "^4.0.4",
+    "@types/mocha": "^10.0.8",
     "@types/node": "^22.5.3",
+    "@types/p-limit": "^2.1.0",
+    "@types/sinon": "^17.0.3",
     "@types/unist": "^3.0.3",
     "@typescript-eslint/eslint-plugin": "^8.4.0",
     "@typescript-eslint/parser": "^8.4.0",
+    "chai": "^5.1.1",
     "eslint": "^9.10.0",
     "eslint-plugin-react": "^7.35.2",
     "globals": "^15.9.0",
+    "jest": "^29.7.0",
+    "mocha": "^10.7.3",
+    "sinon": "^19.0.2",
+    "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.1",
     "typescript": "^5.6.2",
@@ -43,14 +55,17 @@
     "commander": "^12.1.0",
     "date-fns": "^4.1.0",
     "dotenv": "^16.4.5",
+    "fs-extra": "^11.2.0",
     "inquirer": "^10.2.2",
     "isomorphic-git": "^1.27.1",
     "mdast-util-to-string": "^4.0.0",
     "node-fetch": "^3.3.2",
     "nodemon": "^3.1.4",
+    "p-limit": "^6.1.0",
     "remark": "^15.0.1",
     "remark-gfm": "^4.0.0",
     "remark-parse": "^11.0.0",
+    "simple-git": "^3.27.0",
     "unified": "^11.0.5"
   }
 }
