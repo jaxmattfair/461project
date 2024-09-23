@@ -40,7 +40,6 @@ export const debug = (message: string) => {
 };
 
 
-
 export const error = (message: string | Error, err?: Error) => {
     const errorMessage = err ? `${message}: ${err.message}` : message;
     writeLog(`ERROR: ${errorMessage}`);
