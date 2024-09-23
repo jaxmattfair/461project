@@ -23,14 +23,6 @@ setup_log_file() {
     
     mkdir -p "$(dirname "$LOG_FILE")"
     touch "$LOG_FILE" || { echo "Error: Unable to create log file at $LOG_FILE" >&2; exit 1; }
-    # Ensure LOG_LEVEL is a valid log level
-    case "$LOG_LEVEL" in
-        0|1|2) ;;
-        *)
-            echo "Error: Invalid LOG_LEVEL value. Must be one of: DEBUG, INFO, WARN, ERROR" >&2
-            exit 1
-            ;;
-    esac
 }
 
 # Function to log messages
