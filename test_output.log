@@ -1,0 +1,41 @@
+
+> 461project@1.0.0 test
+> jest
+
+FAIL tests/license.test.ts
+  ● Test suite failed to run
+
+    Cannot find module '../utils/gitUtils.js' from 'src/metrics/license.ts'
+
+    Require stack:
+      src/metrics/license.ts
+      tests/license.test.ts
+
+    [0m[31m[1m>[22m[39m[90m 1 |[39m [36mimport[39m { cloneRepository[33m,[39m getReadmeContent[33m,[39m parseGitHubRepoURL[33m,[39m getLicenseFileContent } [36mfrom[39m [32m'../utils/gitUtils.js'[39m[33m;[39m
+     [90m   |[39m [31m[1m^[22m[39m
+     [90m 2 |[39m
+     [90m 3 |[39m [90m// Function to extract license section from README using regex[39m
+     [90m 4 |[39m [36mexport[39m [36mfunction[39m extractLicenseFromReadme(content[33m:[39m string)[33m:[39m string [33m|[39m [36mnull[39m {[0m
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/resolver.js:427:11)
+      at Object.require (src/metrics/license.ts:1:1)
+      at Object.<anonymous> (tests/license.test.ts:3:1)
+
+FAIL tests/busFactor.test.ts
+  ● Test suite failed to run
+
+    [96msrc/utils/gitUtils.ts[0m:[93m5[0m:[93m32[0m - [91merror[0m[90m TS1343: [0mThe 'import.meta' meta-property is only allowed when the '--module' option is 'es2020', 'es2022', 'esnext', 'system', 'node16', or 'nodenext'.
+
+    [7m5[0m const requires = createRequire(import.meta.url);
+    [7m [0m [91m                               ~~~~~~~~~~~[0m
+
+----------|---------|----------|---------|---------|-------------------
+File      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+----------|---------|----------|---------|---------|-------------------
+All files |       0 |        0 |       0 |       0 |                   
+----------|---------|----------|---------|---------|-------------------
+Test Suites: 2 failed, 2 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        10.42 s
+Ran all test suites.

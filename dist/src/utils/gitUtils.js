@@ -1,8 +1,8 @@
 //import git from 'isomorphic-git';
 import fs from 'fs';
 import fsPromises from 'fs/promises';
-import { createRequire } from 'module';
-const requires = createRequire(import.meta.url);
+//import { createRequire } from 'module';
+//const requires = createRequire(import.meta.url);
 //const http = requires('isomorphic-git/http/node'); // Import CommonJS module
 import * as path from 'path';
 import simpleGit from 'simple-git';

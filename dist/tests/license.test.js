@@ -1,8 +1,8 @@
 // tests/license.test.ts
 import { extractLicenseInfo } from '../src/metrics/license';
-import { getLicenseFileContent } from '../src/utils/gitUtils.js'; // Ensure correct path with .js extension
+import { getLicenseFileContent } from '../src/utils/gitUtils';
 // Mock the 'getLicenseFileContent' function from 'gitUtils.js'
-jest.mock('../src/utils/gitUtils.js', () => ({
+jest.mock('../src/utils/gitUtils', () => ({
     getLicenseFileContent: jest.fn(),
 }));
 // Type casting for TypeScript

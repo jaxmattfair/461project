@@ -186,6 +186,9 @@ rank_modules() {
 # Function to run tests
 run_tests() {
     log "Starting test execution"
+    #npm test 2>&1 | tee test_output.log
+    # Read the output from the log file
+    #test_output=$(cat test_output.log)
     test_output=$(npm test 2>&1)
     # Extract total tests
     total_tests=$(echo "$test_output" | grep -oP 'Tests:\s+\d+\s+failed,\s+\d+\s+passed,\s+\K\d+' || echo "N/A")

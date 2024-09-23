@@ -2698,3 +2698,46 @@ Node.js v22.8.0]:
 2024-09-22 20:04:41 [Finished installation of dependencies]: 
 2024-09-22 20:04:44 [Starting test execution]: 
 2024-09-22 20:04:54 [Finished test execution]: 
+2024-09-22 20:11:54 [Starting test execution]: 
+2024-09-22 20:12:10 [Finished test execution]: 
+2024-09-22 20:14:15 [Starting test execution]: 
+2024-09-22 20:14:28 [Finished test execution]: 
+2024-09-22 20:18:11 [Starting test execution]: 
+2024-09-22 20:18:24 [Finished test execution]: 
+2024-09-22 20:21:30 [Starting test execution]: 
+2024-09-22 20:21:46 [Finished test execution]: 
+2024-09-22 20:23:07 [Starting test execution]: 
+2024-09-22 20:23:23 [Finished test execution]: 
+2024-09-22 20:23:58 [Starting test execution]: 
+2024-09-22 20:24:01 [Finished test execution]: 
+2024-09-22 20:24:09 [Starting test execution]: 
+2024-09-22 20:24:22 [Finished test execution]: 
+2024-09-22 20:25:12 [Starting test execution]: 
+2024-09-22 20:25:29 [Finished test execution]: 
+2024-09-22 20:28:03 [Starting test execution]: 
+2024-09-22 20:28:19 [Finished test execution]: 
+2024-09-22 20:31:49 [Starting test execution]: 
+2024-09-22 20:32:03 [Finished test execution]: 
+2024-09-22 20:32:33 [Starting test execution]: 
+2024-09-22 20:32:47 [Finished test execution]: 
+2024-09-22 20:34:27 [Starting test execution]: 
+2024-09-22 20:34:43 [Finished test execution]: 
+2024-09-22 20:35:28 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 20:35:28 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 20:35:29 [Valid GitHub URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 20:35:29 [Created temporary directory: /tmp/tmp.PLis2tFPhl]: 
+2024-09-22 20:35:29 [Calculating metrics for https://github.com/raoakanksh/461project]: 
+2024-09-22 20:35:30 [Error calculating scores for URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 20:35:30 [Node.js error: Error calculating metrics: Cannot find module 'C:\Users\Arnav Naval\Downloads\461project\dist\src\utils\gitUtils' imported from C:\Users\Arnav Naval\Downloads\461project\dist\src\metrics\busFactorScore.js]: 
+2024-09-22 20:35:30 [Removed temporary directory: /tmp/tmp.PLis2tFPhl]: 
+2024-09-22 20:35:30 [Processing URL: https://github.com/browserify/browserify]: 
+2024-09-22 20:35:31 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 20:35:31 [Created temporary directory: /tmp/tmp.kTQID6OOyw]: 
+2024-09-22 20:35:31 [Calculating metrics for https://github.com/browserify/browserify]: 
+2024-09-22 20:35:32 [Error calculating scores for URL: https://github.com/browserify/browserify]: 
+2024-09-22 20:35:32 [Node.js error: Error calculating metrics: Cannot find module 'C:\Users\Arnav Naval\Downloads\461project\dist\src\utils\gitUtils' imported from C:\Users\Arnav Naval\Downloads\461project\dist\src\metrics\busFactorScore.js]: 
+2024-09-22 20:35:32 [Removed temporary directory: /tmp/tmp.kTQID6OOyw]: 
+2024-09-22 20:35:32 [Processing URL: https://invalidrepo.com/invalidrepo]: 
+2024-09-22 20:35:33 [Error: Invalid URL or no GitHub repository found for https://invalidrepo.com/invalidrepo]: 
+2024-09-22 20:35:33 [Node.js error: Error: Invalid URL. Must be a valid npm package URL or GitHub repository URL.]: 
+2024-09-22 20:35:33 [Finished module ranking.]: 

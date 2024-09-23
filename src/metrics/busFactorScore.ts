@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import * as dotenv from 'dotenv';
 import { differenceInHours } from 'date-fns';
-import { parseGitHubRepoURL } from '../utils/gitUtils.js';
+import { parseGitHubRepoURL } from '../utils/gitUtils';
 
 // Load environment variables from .env
 dotenv.config();

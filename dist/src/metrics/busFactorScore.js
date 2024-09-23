@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as dotenv from 'dotenv';
-import { parseGitHubRepoURL } from '../utils/gitUtils.js';
+import { parseGitHubRepoURL } from '../utils/gitUtils';
 // Load environment variables from .env
 dotenv.config();
 // Access the GITHUB_TOKEN without the '$' prefix
