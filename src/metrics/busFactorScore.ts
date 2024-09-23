@@ -2,6 +2,8 @@ import axios, { AxiosResponse } from 'axios';
 import * as dotenv from 'dotenv';
 import { differenceInHours } from 'date-fns';
 import { parseGitHubRepoURL } from '../utils/gitUtils.js';
+import { info, debug} from '../logger.js';
+import { error as logError } from '../logger.js';
 
 // Load environment variables from .env
 dotenv.config();
@@ -10,7 +12,7 @@ dotenv.config();
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
 if (!GITHUB_TOKEN) {
-  console.error('Missing GitHub API token in environment variables');
+  logError('Missing GitHub API token in environment variables');
   process.exit(1);
 }
 
@@ -85,8 +87,10 @@ async function fetchPaginatedData<T>(url: string, params: FetchParams = {}): Pro
       page += 1;
       hasMorePages = data.length > 0; // If we get an empty array, we're done
     }
-  } catch (error) {
-    console.error(`Error fetching paginated data from ${url}:`, error);
+  } catch (error: unknown) {
+      if (error instanceof Error) {
+        logError(`Error fetching paginated data from ${url}:`, error);
+      }
     throw error; // Re-throw the error after logging
   }
 

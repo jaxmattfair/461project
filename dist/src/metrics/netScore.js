@@ -4,6 +4,7 @@ import { computeCorrectnessMetric } from "./correctnessScore.js";
 import { extractLicenseInfo } from "./license.js";
 import { calculateRampUpScore, analyzeReadme } from "./rampUpScore.js";
 import { calculateResponsiveness } from "./responsiveMaintainer.js";
+import { error as logError } from '../logger.js';
 const roundToThree = (num) => {
     return Math.round(num * 1000) / 1000;
 };
@@ -21,7 +22,9 @@ export async function calculateNetScore(repoURL, tempDir, tempURL) {
         await cloneRepository(repoURL, tempDir);
     }
     catch (error) {
-        console.error("An error occurred during cloning:", error);
+        if (error instanceof Error) {
+            logError("An error occurred during cloning:", error);
+        }
         // Return null if cloning fails
         return null;
     }
@@ -55,7 +58,9 @@ export async function calculateNetScore(repoURL, tempDir, tempURL) {
         ]);
     }
     catch (error) {
-        console.error("Error calculating other metrics:", error);
+        if (error instanceof Error) {
+            logError("Error calculating other metrics:", error);
+        }
     }
     // Calculate the weighted net score
     weighted_score = busFactorScore * 0.1 + licenseScore * 0.3 + responsiveMaintainerScore * 0.4 + rampUpScore * 0.1 + correctnessScore * 0.1;

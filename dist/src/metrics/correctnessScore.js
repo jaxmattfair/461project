@@ -1,5 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
+import { error as logError } from '../logger.js';
 /**
  * Checks for the presence of a test suite.
  * @param repoPath - Path to the local repository
@@ -20,7 +21,7 @@ const hasTestSuite = async (repoPath) => {
             }
             catch (error) {
                 if (error.code !== 'ENOENT') { // Ignore "file not found" errors
-                    console.error(`Error accessing ${fullPath}:`, error);
+                    logError(`Error accessing ${fullPath}:`, error);
                 }
                 // If the directory doesn't exist, continue to the next
             }
@@ -39,7 +40,7 @@ const hasTestSuite = async (repoPath) => {
         }
         catch (error) {
             if (error.code !== 'ENOENT') {
-                console.error(`Error accessing ${packageJsonPath}:`, error);
+                logError(`Error accessing ${packageJsonPath}:`, error);
             }
             // If package.json doesn't exist, continue
         }
@@ -47,8 +48,10 @@ const hasTestSuite = async (repoPath) => {
         return 0.0;
     }
     catch (error) {
-        console.error('Unexpected error in hasTestSuite:', error);
-        return 0.0;
+        if (error instanceof Error) {
+            logError('Unexpected error in hasTestSuite:', error);
+        }
+        return 0;
     }
 };
 export const computeCorrectnessMetric = async (repoPath) => {

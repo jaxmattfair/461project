@@ -11,6 +11,8 @@ import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
 import { Root } from 'mdast';
+import { info, debug} from '../logger.js';
+import { error as logError } from '../logger.js';
 
 const git = simpleGit();
 
@@ -48,7 +50,7 @@ async function createDirectory(dir: string): Promise<void> {
           // On Windows, chmod might not have the desired effect
       }*/
   } catch (error: any) {
-      console.error(`Error creating directory ${dir}: ${error.message}`);
+      logError(`Error creating directory ${dir}: ${error.message}`);
       throw error;
   }
 }
@@ -64,7 +66,7 @@ export async function cleanUpDirectory(dir: string): Promise<void> {
           await fsPromises.rm(dir, { recursive: true, force: true });
           //console.log(`Removed existing directory: ${dir}`);
       } catch (error: any) {
-          console.error(`Error removing directory ${dir}: ${error.message}`);
+          logError(`Error removing directory ${dir}: ${error.message}`);
           throw error;
       }
   }
@@ -117,7 +119,7 @@ export async function cloneRepository(repoUrl: string, dir: string): Promise<voi
     //});
     //console.log(`Repository cloned to ${dir}`);
   } catch (error) {
-    console.error(`Failed to clone repository: ${(error as Error).message}`);
+    logError(`Failed to clone repository: ${(error as Error).message}`);
     throw error;
   }
 }
@@ -140,7 +142,7 @@ export function getReadmeContent(repoDir: string): string {
           try {
               return fs.readFileSync(readmePath, 'utf-8');
           } catch (error) {
-              console.error(`Error reading ${filename}: ${(error as Error).message}`);
+              logError(`Error reading ${filename}: ${(error as Error).message}`);
               return "null";
           }
       }
@@ -196,7 +198,7 @@ export function getLicenseFileContent(repoDir: string): string | null {
           try {
               return fs.readFileSync(licensePath, 'utf-8');
           } catch (error) {
-              console.error(`Error reading ${filename}: ${(error as Error).message}`);
+              logError(`Error reading ${filename}: ${(error as Error).message}`);
               return null;
           }
       }

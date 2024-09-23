@@ -2745,3 +2745,30 @@ Node.js v22.8.0]:
 2024-09-22 21:04:19 [Finished installation of dependencies]: 
 2024-09-22 21:04:25 [Starting test execution]: 
 2024-09-22 21:04:41 [Finished test execution]: 
+2024-09-22 21:17:31 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 21:17:31 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 21:17:31 [Valid GitHub URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 21:17:32 [Created temporary directory: /tmp/tmp.FM5Jm2jhDw]: 
+2024-09-22 21:17:32 [Calculating metrics for https://github.com/raoakanksh/461project]: 
+2024-09-22 21:18:10 [Result: {"URL":"https://github.com/raoakanksh/461project","NetScore":0.303,"NetScore_Latency":37.271,"RampUp":0.013,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.002,"BusFactor":0.015,"BusFactor_Latency":1.806,"ResponsiveMaintainer":0.5,"ResponsiveMaintainer_Latency":0.571,"License":0,"License_Latency":0}]: 
+2024-09-22 21:18:10 [Removed temporary directory: /tmp/tmp.FM5Jm2jhDw]: 
+2024-09-22 21:18:10 [Processing URL: https://github.com/browserify/browserify]: 
+2024-09-22 21:18:11 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 21:18:11 [Created temporary directory: /tmp/tmp.EkUNEcjqXJ]: 
+2024-09-22 21:18:11 [Calculating metrics for https://github.com/browserify/browserify]: 
+2024-09-22 21:18:42 [Result: {"URL":"https://github.com/browserify/browserify","NetScore":0.17,"NetScore_Latency":30.217,"RampUp":0,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.002,"BusFactor":0.7,"BusFactor_Latency":27.728,"ResponsiveMaintainer":0,"ResponsiveMaintainer_Latency":17.992,"License":0,"License_Latency":0.001}]: 
+2024-09-22 21:22:32 [Starting installation of dependencies]: 
+2024-09-22 21:22:38 [Finished installation of dependencies]: 
+2024-09-22 21:22:40 [Starting test execution]: 
+2024-09-22 21:22:57 [Finished test execution]: 
+2024-09-22 21:23:17 [Starting module ranking for URLs in sample_urls.txt]: 
+2024-09-22 21:23:17 [Processing URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 21:23:18 [Valid GitHub URL: https://github.com/raoakanksh/461project]: 
+2024-09-22 21:23:18 [Created temporary directory: /tmp/tmp.plW0IiSzJj]: 
+2024-09-22 21:23:18 [Calculating metrics for https://github.com/raoakanksh/461project]: 
+2024-09-22 21:23:49 [Result: {"URL":"https://github.com/raoakanksh/461project","NetScore":0.303,"NetScore_Latency":30.003,"RampUp":0.013,"RampUp_Latency":0,"Correctness":1,"Correctness_Latency":0.002,"BusFactor":0.015,"BusFactor_Latency":1.752,"ResponsiveMaintainer":0.5,"ResponsiveMaintainer_Latency":0.516,"License":0,"License_Latency":0}]: 
+2024-09-22 21:23:49 [Removed temporary directory: /tmp/tmp.plW0IiSzJj]: 
+2024-09-22 21:23:49 [Processing URL: https://github.com/browserify/browserify]: 
+2024-09-22 21:23:50 [Valid GitHub URL: https://github.com/browserify/browserify]: 
+2024-09-22 21:23:50 [Created temporary directory: /tmp/tmp.njTRQRCsGx]: 
+2024-09-22 21:23:50 [Calculating metrics for https://github.com/browserify/browserify]: 

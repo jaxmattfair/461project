@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as dotenv from 'dotenv';
 import { parseGitHubRepoURL } from '../utils/gitUtils.js';
+import { error as logError } from '../logger.js';
 dotenv.config();
 // Configuration
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
@@ -121,7 +122,9 @@ export const calculateResponsiveness = async (repoURL) => {
         return [responsiveScore, duration];
     }
     catch (error) {
-        console.error('Error calculating responsiveness:', error);
+        if (error instanceof Error) {
+            logError('Error calculating responsiveness:', error);
+        }
     }
     return [-1, -1];
 };
