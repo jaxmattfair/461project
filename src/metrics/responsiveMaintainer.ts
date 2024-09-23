@@ -1,6 +1,8 @@
 import axios from 'axios';
 import * as dotenv from 'dotenv';
 import { parseGitHubRepoURL } from '../utils/gitUtils.js';
+import { info, debug} from '../logger.js';
+import { error as logError } from '../logger.js';
 
 dotenv.config();
 
@@ -156,7 +158,9 @@ export const calculateResponsiveness = async (repoURL: string): Promise<[number,
         const duration = (end - start) / 1000;
         return [responsiveScore, duration];
     } catch (error) {
-        console.error('Error calculating responsiveness:', error);
+        if (error instanceof Error) {
+            logError('Error calculating responsiveness:', error);
+        }
     }
     return [-1, -1];
 };

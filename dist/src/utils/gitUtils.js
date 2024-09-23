@@ -9,6 +9,7 @@ import simpleGit from 'simple-git';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
+import { error as logError } from '../logger.js';
 const git = simpleGit();
 // Subfunction to measure how long an async function takes
 export async function measureExecutionTime(asyncFunction, functionName) {
@@ -44,7 +45,7 @@ async function createDirectory(dir) {
         }*/
     }
     catch (error) {
-        console.error(`Error creating directory ${dir}: ${error.message}`);
+        logError(`Error creating directory ${dir}: ${error.message}`);
         throw error;
     }
 }
@@ -60,7 +61,7 @@ export async function cleanUpDirectory(dir) {
             //console.log(`Removed existing directory: ${dir}`);
         }
         catch (error) {
-            console.error(`Error removing directory ${dir}: ${error.message}`);
+            logError(`Error removing directory ${dir}: ${error.message}`);
             throw error;
         }
     }
@@ -108,7 +109,7 @@ export async function cloneRepository(repoUrl, dir) {
         //console.log(`Repository cloned to ${dir}`);
     }
     catch (error) {
-        console.error(`Failed to clone repository: ${error.message}`);
+        logError(`Failed to clone repository: ${error.message}`);
         throw error;
     }
 }
@@ -131,7 +132,7 @@ export function getReadmeContent(repoDir) {
                 return fs.readFileSync(readmePath, 'utf-8');
             }
             catch (error) {
-                console.error(`Error reading ${filename}: ${error.message}`);
+                logError(`Error reading ${filename}: ${error.message}`);
                 return "null";
             }
         }
@@ -180,7 +181,7 @@ export function getLicenseFileContent(repoDir) {
                 return fs.readFileSync(licensePath, 'utf-8');
             }
             catch (error) {
-                console.error(`Error reading ${filename}: ${error.message}`);
+                logError(`Error reading ${filename}: ${error.message}`);
                 return null;
             }
         }

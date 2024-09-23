@@ -3,6 +3,8 @@ import * as path from 'path';      // Node.js Path module for handling file path
 import { Root } from 'mdast';      // Type representing the root of an MDAST (Markdown Abstract Syntax Tree)
 import { Node, Parent } from 'unist';      // Type representing a generic Unist and parent node
 import { toString } from 'mdast-util-to-string'; // Utility to convert MDAST nodes to plain text
+import { info, debug} from '../logger.js';
+import { error as logError } from '../logger.js';
 
 // Define interfaces for metrics
 interface Metrics {

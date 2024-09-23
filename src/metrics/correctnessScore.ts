@@ -1,5 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
+import { info, debug} from '../logger.js';
+import { error as logError } from '../logger.js';
 
 /**
  * Checks for the presence of a test suite.
@@ -20,7 +22,7 @@ const hasTestSuite = async (repoPath: string): Promise<number> => {
                 }
             } catch (error: any) {
                 if (error.code !== 'ENOENT') { // Ignore "file not found" errors
-                    console.error(`Error accessing ${fullPath}:`, error);
+                    logError(`Error accessing ${fullPath}:`, error);
                 }
                 // If the directory doesn't exist, continue to the next
             }
@@ -39,7 +41,7 @@ const hasTestSuite = async (repoPath: string): Promise<number> => {
             }
         } catch (error: any) {
             if (error.code !== 'ENOENT') {
-                console.error(`Error accessing ${packageJsonPath}:`, error);
+                logError(`Error accessing ${packageJsonPath}:`, error);
             }
             // If package.json doesn't exist, continue
         }
@@ -47,8 +49,10 @@ const hasTestSuite = async (repoPath: string): Promise<number> => {
         //console.log('No test suite found.');
         return 0.0;
     } catch (error) {
-        console.error('Unexpected error in hasTestSuite:', error);
-        return 0.0;
+        if (error instanceof Error) {
+            logError('Unexpected error in hasTestSuite:', error);
+        }
+        return 0
     }
 };
 

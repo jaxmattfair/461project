@@ -1,12 +1,13 @@
 import axios from 'axios';
 import * as dotenv from 'dotenv';
 import { parseGitHubRepoURL } from '../utils/gitUtils.js';
+import { error as logError } from '../logger.js';
 // Load environment variables from .env
 dotenv.config();
 // Access the GITHUB_TOKEN without the '$' prefix
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 if (!GITHUB_TOKEN) {
-    console.error('Missing GitHub API token in environment variables');
+    logError('Missing GitHub API token in environment variables');
     process.exit(1);
 }
 const repoURL = 'https://github.com/raoakanksh/461project.git';
@@ -43,7 +44,9 @@ async function fetchPaginatedData(url, params = {}) {
         }
     }
     catch (error) {
-        console.error(`Error fetching paginated data from ${url}:`, error);
+        if (error instanceof Error) {
+            logError(`Error fetching paginated data from ${url}:`, error);
+        }
         throw error; // Re-throw the error after logging
     }
     return results;

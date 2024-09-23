@@ -1,4 +1,6 @@
 import { cloneRepository, getReadmeContent, parseGitHubRepoURL, getLicenseFileContent } from '../utils/gitUtils.js';
+import { info, debug} from '../logger.js';
+import { error as logError } from '../logger.js';
 
 // Function to extract license section from README using regex
 export function extractLicenseFromReadme(content: string): string | null {

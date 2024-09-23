@@ -9,6 +9,8 @@ import { fileURLToPath } from 'url';
 import * as path from 'path';
 import { dirname } from 'path';
 import fs from 'fs';
+import { info, debug} from '../logger.js';
+import { error as logError } from '../logger.js';
 
 const roundToThree = (num: number): number => {
     return Math.round(num * 1000) / 1000;
@@ -31,7 +33,9 @@ export async function calculateNetScore(repoURL: string, tempDir: string, tempUR
     try {
         await cloneRepository(repoURL, tempDir);
     } catch (error) {
-        console.error("An error occurred during cloning:", error);
+        if (error instanceof Error) {
+            logError("An error occurred during cloning:", error);
+        }
         // Return null if cloning fails
         return null;
     }
@@ -67,7 +71,9 @@ export async function calculateNetScore(repoURL: string, tempDir: string, tempUR
             computeCorrectnessMetric(tempDir)
         ]);
     } catch (error) {
-        console.error("Error calculating other metrics:", error);
+        if (error instanceof Error) {
+            logError("Error calculating other metrics:", error);
+        }
     }
 
     // Calculate the weighted net score

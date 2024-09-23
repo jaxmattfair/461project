@@ -1,5 +1,7 @@
 import fetch from 'node-fetch';
 import * as url from 'url';
+import { info, debug} from '../logger.js';
+import { error as logError } from '../logger.js';
 
 /**
  * Extracts the npm package name from a given npm package URL.
@@ -132,7 +134,7 @@ export async function getGitHubUrlFromNpm(packageUrl: string): Promise<string> {
     const repositoryUrl = await fetchRepositoryUrl(packageName);
 
     if (!repositoryUrl) {
-      console.error('No repository information found for this package.');
+      logError('No repository information found for this package.');
       return "null";
     }
 
@@ -143,11 +145,11 @@ export async function getGitHubUrlFromNpm(packageUrl: string): Promise<string> {
       return cleanedUrl;
       //console.log(`GitHub URL: ${cleanedUrl}`);
     } else {
-      console.error('The repository URL is not a GitHub URL.');
+      logError('The repository URL is not a GitHub URL.');
       process.exit(1);
     }
   } catch (error: any) {
-    console.error(`Error: ${error.message}`);
+    logError(`Error: ${error.message}`);
   }
   return 'null';
 };
